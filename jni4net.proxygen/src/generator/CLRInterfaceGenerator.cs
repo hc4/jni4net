@@ -57,7 +57,7 @@ namespace net.sf.jni4net.proxygen.generator
             tgtType.TypeAttributes = TypeAttributes.Public;
             tgtType.IsInterface = true;
             tgtType.IsPartial = true;
-            Utils.AddAttribute(tgtType, "net.sf.jni4net.attributes.JavaInterfaceAttribute");
+            Utils.AddAttribute(tgtType, "net.sf.jni4net.attributes.JavaInterfaceAttribute", type.JVMFullName);
 
             foreach (GType ifc in type.Interfaces)
             {

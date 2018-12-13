@@ -30,11 +30,12 @@ using java.io;
 using java.lang;
 using java.util.zip;
 using net.sf.jni4net.adaptors;
+using net.sf.jni4net.attributes;
 using net.sf.jni4net.jni;
 using net.sf.jni4net.proxygen.config;
 using Exception = java.lang.Exception;
-using File=System.IO.File;
-using String=java.lang.String;
+using File = System.IO.File;
+using String = java.lang.String;
 
 namespace net.sf.jni4net.proxygen.model
 {
@@ -211,7 +212,7 @@ namespace net.sf.jni4net.proxygen.model
                 {
                     if (type.IsPublic)
                     {
-                        TypeRegistration registration=new TypeRegistration();
+                        TypeRegistration registration = new TypeRegistration();
                         registration.TypeName = type.FullName;
                         GType reg = RegisterType(type, registration);
                         reg.IsJVMGenerate = true;
@@ -230,20 +231,20 @@ namespace net.sf.jni4net.proxygen.model
                     {
                         if (!classFile.Contains("$"))
                         {
-                            string name = classFile.Substring(path.Length+1);
+                            string name = classFile.Substring(path.Length + 1);
                             string clazzName = name.Substring(0, name.Length - (".class".Length)).Replace('\\', '/');
                             RegisterClass(clazzName);
                         }
                     }
                 }
-                else if (File.Exists(classPath) && Path.GetExtension(classPath)==".jar")
+                else if (File.Exists(classPath) && Path.GetExtension(classPath) == ".jar")
                 {
                     using (var fis = Adapt.Disposable(new FileInputStream(classPath)))
                     {
                         using (var zis = Adapt.Disposable(new ZipInputStream(fis.Real)))
                         {
                             ZipEntry entry = zis.Real.getNextEntry();
-                            while (entry!=null)
+                            while (entry != null)
                             {
                                 string name = entry.getName();
                                 if (!entry.isDirectory() && name.EndsWith(".class") && !name.Contains("$"))
@@ -304,14 +305,14 @@ namespace net.sf.jni4net.proxygen.model
         private static Class loadClass(string clazzName, bool logDetails)
         {
             Class clazz = JNIEnv.ThreadEnv.FindClassNoThrow(clazzName);
-            if (clazz == null && systemClassLoader!=null)
+            if (clazz == null && systemClassLoader != null)
             {
                 try
                 {
-                    string replace = clazzName.Replace('/','.');
+                    string replace = clazzName.Replace('/', '.');
                     clazz = systemClassLoader.loadClass(replace);
                 }
-                catch(Throwable ex)
+                catch (Throwable ex)
                 {
                     Console.Error.WriteLine("Can't load class " + clazzName);
                     if (config.Verbose)

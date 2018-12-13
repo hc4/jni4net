@@ -38,6 +38,9 @@ This content is released under the (http://opensource.org/licenses/MIT) MIT Lice
   <JavaClass TypeName="java.util.Iterator"/>
   <JavaClass TypeName="java.util.Enumeration"/>
   <JavaClass TypeName="java.util.Collection"/>
+  <JavaClass TypeName="java.util/ArrayList"/> 
+  <JavaClass TypeName="java.util/AbstractList"/> 
+  <JavaClass TypeName="java.util/AbstractCollection"/> 
   
   <!-- interfaces -->
   <JavaClass TypeName="java.lang.Iterable"/>
@@ -134,6 +137,7 @@ This content is released under the (http://opensource.org/licenses/MIT) MIT Lice
   <JavaClass TypeName="java.lang.reflect.AccessibleObject"/>
   <JavaClass TypeName="java.lang.reflect.GenericDeclaration"/>
   <JavaClass TypeName="java.lang.reflect.AnnotatedElement"/>
+  <JavaClass TypeName="java.lang.reflect.Parameter"/>
   
   <JavaClass TypeName="net.sf.jni4net.Ref"/>
   <JavaClass TypeName="net.sf.jni4net.Out"/>

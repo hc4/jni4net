@@ -1,6 +1,7 @@
 @echo off
 
 rem set JAVA_HOME=C:\Program Files\Java\jdk1.5.0_20
+set JAVA_HOME=C:\Program Files\Java\jdk1.8.0_181
 
 if not exist jni4net.n\target\build-sources\generated-sources\META-INF\ mkdir jni4net.n\target\build-sources\generated-sources\META-INF\
 echo [assembly: System.Reflection.AssemblyVersion("0.8.9.0")] > jni4net.n\target\build-sources\generated-sources\META-INF\AssemblyInfo.cs 

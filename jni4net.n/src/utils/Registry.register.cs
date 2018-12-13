@@ -17,11 +17,11 @@ using java.lang;
 using net.sf.jni4net.attributes;
 using net.sf.jni4net.inj;
 using net.sf.jni4net.jni;
-using Boolean=java.lang.Boolean;
-using Byte=java.lang.Byte;
-using Double=java.lang.Double;
-using Object=java.lang.Object;
-using String=java.lang.String;
+using Boolean = java.lang.Boolean;
+using Byte = java.lang.Byte;
+using Double = java.lang.Double;
+using Object = java.lang.Object;
+using String = java.lang.String;
 
 namespace net.sf.jni4net.utils
 {
@@ -52,41 +52,41 @@ namespace net.sf.jni4net.utils
         static Registry()
         {
             JNIEnv env = JNIEnv.ThreadEnv;
-            RegisterType(typeof (Class), true, env);
-            RegisterType(typeof (Object), true, env);
-            RegisterType(typeof (String), true, env);
-            RegisterType(typeof (__Type), true, env);
-            RegisterType(typeof (__Object), true, env);
-            RegisterType(typeof (__String), true, env);
-            RegisterType(typeof (__IClrProxy), true, env);
+            RegisterType(typeof(Class), true, env);
+            RegisterType(typeof(Object), true, env);
+            RegisterType(typeof(String), true, env);
+            RegisterType(typeof(__Type), true, env);
+            RegisterType(typeof(__Object), true, env);
+            RegisterType(typeof(__String), true, env);
+            RegisterType(typeof(__IClrProxy), true, env);
             initialized = true;
 
-            BindJvm(knownCLR[typeof (Class)], env);
-            BindJvm(knownCLR[typeof (Object)], env);
-            BindJvm(knownCLR[typeof (String)], env);
-            BindJvm(knownCLR[typeof (__Type)], env);
-            BindJvm(knownCLR[typeof (__Object)], env);
-            BindJvm(knownCLR[typeof (__String)], env);
-            BindJvm(knownCLR[typeof (__IClrProxy)], env);
+            BindJvm(knownCLR[typeof(Class)], env);
+            BindJvm(knownCLR[typeof(Object)], env);
+            BindJvm(knownCLR[typeof(String)], env);
+            BindJvm(knownCLR[typeof(__Type)], env);
+            BindJvm(knownCLR[typeof(__Object)], env);
+            BindJvm(knownCLR[typeof(__String)], env);
+            BindJvm(knownCLR[typeof(__IClrProxy)], env);
 
-            RegisterType(typeof (Boolean), true, env);
-            RegisterType(typeof (Byte), true, env);
-            RegisterType(typeof (Character), true, env);
-            RegisterType(typeof (Short), true, env);
-            RegisterType(typeof (Integer), true, env);
-            RegisterType(typeof (Long), true, env);
-            RegisterType(typeof (Float), true, env);
-            RegisterType(typeof (Double), true, env);
+            RegisterType(typeof(Boolean), true, env);
+            RegisterType(typeof(Byte), true, env);
+            RegisterType(typeof(Character), true, env);
+            RegisterType(typeof(Short), true, env);
+            RegisterType(typeof(Integer), true, env);
+            RegisterType(typeof(Long), true, env);
+            RegisterType(typeof(Float), true, env);
+            RegisterType(typeof(Double), true, env);
 
-            RegisterPrimitiveType("boolean", typeof (bool), typeof (Boolean));
-            RegisterPrimitiveType("byte", typeof (byte), typeof (Byte));
-            RegisterPrimitiveType("char", typeof (char), typeof (Character));
-            RegisterPrimitiveType("short", typeof (short), typeof (Short));
-            RegisterPrimitiveType("int", typeof (int), typeof (Integer));
-            RegisterPrimitiveType("long", typeof (long), typeof (Long));
-            RegisterPrimitiveType("float", typeof (float), typeof (Float));
-            RegisterPrimitiveType("double", typeof (double), typeof (Double));
-            RegisterPrimitiveType("void", typeof (void), null);
+            RegisterPrimitiveType("boolean", typeof(bool), typeof(Boolean));
+            RegisterPrimitiveType("byte", typeof(byte), typeof(Byte));
+            RegisterPrimitiveType("char", typeof(char), typeof(Character));
+            RegisterPrimitiveType("short", typeof(short), typeof(Short));
+            RegisterPrimitiveType("int", typeof(int), typeof(Integer));
+            RegisterPrimitiveType("long", typeof(long), typeof(Long));
+            RegisterPrimitiveType("float", typeof(float), typeof(Float));
+            RegisterPrimitiveType("double", typeof(double), typeof(Double));
+            RegisterPrimitiveType("void", typeof(void), null);
 
             Convertor.boolObject = env.GetStaticMethodID(Boolean.staticClass, "valueOf", "(Z)Ljava/lang/Boolean;");
             Convertor.byteObject = env.GetStaticMethodID(Byte.staticClass, "valueOf", "(B)Ljava/lang/Byte;");
@@ -117,7 +117,7 @@ namespace net.sf.jni4net.utils
 
         public static void RegisterAssembly(Assembly assembly, bool bindJVM, ClassLoader classLoader)
         {
-            lock (typeof (Registry))
+            lock (typeof(Registry))
             {
                 JNIEnv env = JNIEnv.ThreadEnv;
                 try
@@ -128,7 +128,7 @@ namespace net.sf.jni4net.utils
                         RegisterType(type, bindJVM, classLoader, env);
                     }
                 }
-                catch(ReflectionTypeLoadException ex)
+                catch (ReflectionTypeLoadException ex)
                 {
                     if (Bridge.Setup.Debug)
                     {
@@ -202,21 +202,21 @@ namespace net.sf.jni4net.utils
 
         private static void RegisterType(Type type, bool bindJVM, ClassLoader classLoader, JNIEnv env)
         {
-          if (Bridge.Setup.VeryVerbose)
-          {
-            Console.WriteLine("Registration : " + type.FullName);
-          }
-          RegistryRecord record = null;
-          RegisterWrapper(type, ref record);
-          RegisterInterfaceProxy(type, ref record);
-          RegisterClassProxy(type, ref record);
-          if (record != null)
-          {
-            if (bindJVM && !record.JVMBound)
+            if (Bridge.Setup.VeryVerbose)
             {
-              BindJvm(record, classLoader, env);
+                Console.WriteLine("Registration : " + type.FullName);
             }
-          }
+            RegistryRecord record = null;
+            RegisterWrapper(type, ref record);
+            RegisterInterfaceProxy(type, ref record);
+            RegisterClassProxy(type, ref record);
+            if (record != null)
+            {
+                if (bindJVM && !record.JVMBound)
+                {
+                    BindJvm(record, classLoader, env);
+                }
+            }
         }
 
         public static void RegisterType(Type type, bool bindJVM, JNIEnv env)
@@ -250,7 +250,7 @@ namespace net.sf.jni4net.utils
                     {
                         MethodInfo methodInfo = record.CLRInterface.GetMethod("Invoke");
                         ParameterInfo[] parameterInfo = methodInfo.GetParameters();
-                        Type[] param=new Type[parameterInfo.Length];
+                        Type[] param = new Type[parameterInfo.Length];
                         for (int i = 0; i < param.Length; i++)
                         {
                             param[i] = parameterInfo[i].ParameterType;
@@ -284,6 +284,7 @@ namespace net.sf.jni4net.utils
             string package = record.CLRInterface.Namespace;
             string className = record.CLRInterface.Name;
             string interfaceName = record.JVMName;
+
             string proxyName;
             string staticName;
             if (record.IsJVMClass)
@@ -332,7 +333,7 @@ namespace net.sf.jni4net.utils
                 string rn = name.Replace('.', '/');
                 res = env.FindClassNoThrow(rn);
             }
-            if (classLoader != null && res==null)
+            if (classLoader != null && res == null)
             {
                 try
                 {
@@ -343,7 +344,7 @@ namespace net.sf.jni4net.utils
                     throw new JNIException("Can't load java class for " + name + " from classLoader " + classLoader, th);
                 }
             }
-            
+
             return res;
         }
 
@@ -401,10 +402,10 @@ namespace net.sf.jni4net.utils
                     if (!knownCLRInterfaces.TryGetValue(interfaceType, out record))
                     {
                         record = new RegistryRecord
-                                     {
-                                         CLRAssembly = proxyType.Assembly,
-                                         IsInterface = interfaceType.IsInterface
-                                     };
+                        {
+                            CLRAssembly = proxyType.Assembly,
+                            IsInterface = interfaceType.IsInterface
+                        };
                     }
                 }
             }
@@ -413,12 +414,29 @@ namespace net.sf.jni4net.utils
             record.CLRConstructor = GetConstructor(proxyType);
             record.CLRProxyInitMethod = GetProxyInitializer(proxyType);
             record.CLRName = interfaceType.FullName;
-            record.JVMName = interfaceType.Namespace.ToLowerInvariant() + "." + interfaceType.Name;
+            record.JVMName = GetInterfaceName(interfaceType);
 
             knownCLRProxies[proxyType] = record;
             knownCLRInterfaces[interfaceType] = record;
             knownCLR[interfaceType] = record;
             knownCLR[proxyType] = record;
+        }
+
+        private static string GetInterfaceName(Type interfaceType)
+        {
+            var javaInterfaceAttribute = interfaceType.GetCustomAttribute<JavaInterfaceAttribute>();
+            if (javaInterfaceAttribute != null && javaInterfaceAttribute.ClassName != null)
+            {
+                return javaInterfaceAttribute.ClassName;
+            }
+
+            var javaClassAttribute = interfaceType.GetCustomAttribute<JavaClassAttribute>();
+            if (javaClassAttribute != null && javaClassAttribute.ClassName != null)
+            {
+                return javaClassAttribute.ClassName;
+            }
+
+            return interfaceType.Namespace.ToLowerInvariant() + "." + interfaceType.Name;
         }
 
         private static void RegisterWrapper(Type wrapperType, ref RegistryRecord record)
@@ -437,15 +455,15 @@ namespace net.sf.jni4net.utils
                     if (!knownCLRInterfaces.TryGetValue(interfaceType, out record))
                     {
                         record = new RegistryRecord
-                                     {
-                                         CLRAssembly = wrapperType.Assembly,
-                                         IsInterface = interfaceType.IsInterface,
-                                         IsCLRType = !interfaceType.IsInterface,
-                                         IsDelegate =
-                                             typeof (Delegate).IsAssignableFrom(interfaceType) &&
-                                             typeof (Delegate) != interfaceType &&
-                                             typeof (MulticastDelegate) != interfaceType,
-                                     };
+                        {
+                            CLRAssembly = wrapperType.Assembly,
+                            IsInterface = interfaceType.IsInterface,
+                            IsCLRType = !interfaceType.IsInterface,
+                            IsDelegate =
+                                             typeof(Delegate).IsAssignableFrom(interfaceType) &&
+                                             typeof(Delegate) != interfaceType &&
+                                             typeof(MulticastDelegate) != interfaceType,
+                        };
                     }
                 }
             }
@@ -453,7 +471,8 @@ namespace net.sf.jni4net.utils
             record.CLRWrapper = wrapperType;
             record.CLRWrapperInitMethod = GetWrapperInitializer(wrapperType, "__Init");
             record.CLRName = interfaceType.FullName;
-            record.JVMName = interfaceType.Namespace.ToLowerInvariant() + "." + interfaceType.Name;
+            record.JVMName = GetInterfaceName(interfaceType);
+
             record.CLRStatic = wrapperAttribute.StaticType;
 
             knownCLRWrappers[wrapperType] = record;

@@ -78,15 +78,15 @@ namespace net.sf.jni4net.proxygen.model
                     array += "[]";
                     comp = comp.getComponentType();
                 }
-                res.LowerName = ((string) comp.getName()).ToLowerInvariant() + array;
+                res.LowerName = ((string)comp.getName()).ToLowerInvariant() + array;
             }
             else
             {
-                res.LowerName = ((string) clazz.getName()).ToLowerInvariant();
+                res.LowerName = ((string)clazz.getName()).ToLowerInvariant();
             }
 
             res.Attributes = 0;
-            var classModifiers = (ModifierFlags) clazz.getModifiers();
+            var classModifiers = (ModifierFlags)clazz.getModifiers();
             if ((classModifiers & ModifierFlags.Abstract) != 0)
             {
                 res.IsAbstract = true;
@@ -194,7 +194,7 @@ namespace net.sf.jni4net.proxygen.model
             {
                 methods = clazz.getMethods();
             }
-            catch(Throwable th)
+            catch (Throwable th)
             {
                 if (config.Verbose)
                 {
@@ -205,7 +205,7 @@ namespace net.sf.jni4net.proxygen.model
                 return;
             }
             var superclass = clazz.getSuperclass();
-            var isBaseClassPublic = superclass==null || ((ModifierFlags)superclass.getModifiers() & ModifierFlags.Public) != 0;
+            var isBaseClassPublic = superclass == null || ((ModifierFlags)superclass.getModifiers() & ModifierFlags.Public) != 0;
             foreach (Method method in methods)
             {
                 var declaringClass = method.getDeclaringClass();
@@ -217,7 +217,7 @@ namespace net.sf.jni4net.proxygen.model
                     {
                         RegisterJVMMethod(type, method, register);
                     }
-                    catch(Throwable th)
+                    catch (Throwable th)
                     {
                         if (config.Verbose)
                         {
@@ -227,6 +227,11 @@ namespace net.sf.jni4net.proxygen.model
                 }
                 else if (config.Verbose)
                 {
+                    if(method.ToString().Contains("void java.util.ArrayList.add(int,java.lang.Object)"))
+                    {
+
+                    }
+
                     Console.WriteLine("Skip " + type + "." + method);
                 }
             }
@@ -258,7 +263,7 @@ namespace net.sf.jni4net.proxygen.model
 
         private static bool testVirtual(GType type, Class clazz, Method method, bool create, bool isBaseClassPublic)
         {
-            var modifiers = (ModifierFlags) method.getModifiers();
+            var modifiers = (ModifierFlags)method.getModifiers();
             bool isStatic = (modifiers & ModifierFlags.Static) != ModifierFlags.None;
             bool isVirtual = (modifiers & ModifierFlags.Final) == ModifierFlags.None;
             if (!clazz.isInterface())
@@ -287,7 +292,7 @@ namespace net.sf.jni4net.proxygen.model
 
         private static void RegisterJVMField(GType type, Field field, bool register)
         {
-            var modifiers = (ModifierFlags) field.getModifiers();
+            var modifiers = (ModifierFlags)field.getModifiers();
             if ((modifiers & (ModifierFlags.Private | ModifierFlags.Synthetic)) != ModifierFlags.None)
             {
                 if (config.Verbose)
@@ -371,7 +376,7 @@ namespace net.sf.jni4net.proxygen.model
 
         private static void RegisterJVMConstructor(GType type, Constructor ctor, bool register)
         {
-            var modifiers = (ModifierFlags) ctor.getModifiers();
+            var modifiers = (ModifierFlags)ctor.getModifiers();
             if ((modifiers & (ModifierFlags.Private | ModifierFlags.Synthetic)) != ModifierFlags.None)
             {
                 return;
@@ -417,6 +422,15 @@ namespace net.sf.jni4net.proxygen.model
                 return names;
             }
 
+            if (member is Method m)
+            {
+                names = paranamer.getParameterNames(m);
+                if (names.Length >= parametersCount)
+                {
+                    return names;
+                }
+            }
+
             names = new java.lang.String[parametersCount];
             for (var i = 0; i < names.Length; i++)
             {
@@ -441,7 +455,7 @@ namespace net.sf.jni4net.proxygen.model
 
         private static void ConvertJVMAttributes(GType type, GMethod res, Member member)
         {
-            var modifiers = (ModifierFlags) member.getModifiers();
+            var modifiers = (ModifierFlags)member.getModifiers();
             res.Attributes = 0;
             if ((modifiers & (ModifierFlags.Public)) != ModifierFlags.None || type.IsInterface)
             {

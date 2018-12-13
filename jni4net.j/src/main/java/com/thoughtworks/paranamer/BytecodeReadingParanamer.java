@@ -33,10 +33,7 @@ package com.thoughtworks.paranamer;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.lang.reflect.AccessibleObject;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
+import java.lang.reflect.*;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -67,6 +64,16 @@ public class BytecodeReadingParanamer {
 
     public String[] lookupParameterNames(AccessibleObject methodOrConstructor) throws Exception {
         return lookupParameterNames(methodOrConstructor, true);
+    }
+
+    public String[] getParameterNames(Method method) throws Exception {    
+        Parameter[] p = method.getParameters();
+        String[] names = new String[p.length];
+        for(int i=0;i<names.length;i++)
+        {
+            names[i]=p[i].getName();
+        }
+        return names;
     }
 
     public String[] lookupParameterNames(AccessibleObject methodOrCtor, boolean throwExceptionIfMissing) throws Exception {

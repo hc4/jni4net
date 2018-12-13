@@ -345,7 +345,8 @@ namespace net.sf.jni4net.proxygen.model
                     }
                     else
                     {
-                        CLRFullName = JVMType.FullName;
+                        Name = Name.Replace('$', '_');
+                        CLRFullName = JVMType.FullName.Replace('$', '_');
                     }
                 }
             }
