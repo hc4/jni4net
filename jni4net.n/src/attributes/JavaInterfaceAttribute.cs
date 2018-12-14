@@ -20,11 +20,11 @@ namespace net.sf.jni4net.attributes
         {
         }
 
-        public JavaInterfaceAttribute(string className)
+        public JavaInterfaceAttribute(string jvmFullName)
         {
-            ClassName = className;
+            JVMFullName = jvmFullName;
         }
 
-        public string ClassName { get; private set; }
+        public string JVMFullName { get; private set; }
     }
 }

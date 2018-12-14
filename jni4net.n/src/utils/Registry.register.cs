@@ -375,7 +375,11 @@ namespace net.sf.jni4net.utils
                 throw new JNIException("Can't initialize " + proxyType);
             }
 
+            JavaInterfaceAttribute javaInterfaceAttribute = GetJavaInterfaceAttribute(interfaceType);
+
             RegisterProxy(proxyType, interfaceType, ref record);
+
+            record.JVMName = javaInterfaceAttribute?.JVMFullName ?? GetDefaultJavaName(interfaceType);
             record.CLRStatic = javaProxyAttribute.StaticType;
             knownCLR[record.CLRStatic] = record;
         }
@@ -389,7 +393,9 @@ namespace net.sf.jni4net.utils
             }
 
             RegisterProxy(proxyType, proxyType, ref record);
+
             record.IsJVMClass = true;
+            record.JVMName = javaClassAttribute.JVMFullName ?? GetDefaultJavaName(proxyType);
             record.CLRStatic = proxyType;
         }
 
@@ -414,7 +420,6 @@ namespace net.sf.jni4net.utils
             record.CLRConstructor = GetConstructor(proxyType);
             record.CLRProxyInitMethod = GetProxyInitializer(proxyType);
             record.CLRName = interfaceType.FullName;
-            record.JVMName = GetInterfaceName(interfaceType);
 
             knownCLRProxies[proxyType] = record;
             knownCLRInterfaces[interfaceType] = record;
@@ -422,21 +427,9 @@ namespace net.sf.jni4net.utils
             knownCLR[proxyType] = record;
         }
 
-        private static string GetInterfaceName(Type interfaceType)
+        private static string GetDefaultJavaName(Type type)
         {
-            var javaInterfaceAttribute = interfaceType.GetCustomAttribute<JavaInterfaceAttribute>();
-            if (javaInterfaceAttribute != null && javaInterfaceAttribute.ClassName != null)
-            {
-                return javaInterfaceAttribute.ClassName;
-            }
-
-            var javaClassAttribute = interfaceType.GetCustomAttribute<JavaClassAttribute>();
-            if (javaClassAttribute != null && javaClassAttribute.ClassName != null)
-            {
-                return javaClassAttribute.ClassName;
-            }
-
-            return interfaceType.Namespace.ToLowerInvariant() + "." + interfaceType.Name;
+            return type.Namespace.ToLowerInvariant() + "." + type.Name;
         }
 
         private static void RegisterWrapper(Type wrapperType, ref RegistryRecord record)
@@ -471,7 +464,7 @@ namespace net.sf.jni4net.utils
             record.CLRWrapper = wrapperType;
             record.CLRWrapperInitMethod = GetWrapperInitializer(wrapperType, "__Init");
             record.CLRName = interfaceType.FullName;
-            record.JVMName = GetInterfaceName(interfaceType);
+            record.JVMName = GetDefaultJavaName(interfaceType);
 
             record.CLRStatic = wrapperAttribute.StaticType;
 

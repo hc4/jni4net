@@ -46,7 +46,7 @@ namespace net.sf.jni4net.proxygen.generator
             nameSpace.Types.Add(tgtType);
             tgtType.TypeAttributes = type.Attributes & TypeAttributes.VisibilityMask;
             tgtType.IsPartial = true;
-            Utils.AddAttribute(tgtType, "net.sf.jni4net.attributes.JavaClassAttribute");
+            Utils.AddAttribute(tgtType, "net.sf.jni4net.attributes.JavaClassAttribute", type.JVMFullName);
             tgtType.StartDirectives.Add(new CodeRegionDirective(CodeRegionMode.Start, cdc));
             tgtType.EndDirectives.Add(new CodeRegionDirective(CodeRegionMode.End, cdc));
             if (type.Base != null)

@@ -44,6 +44,16 @@ namespace net.sf.jni4net.utils
             return null;
         }
 
+        private static JavaInterfaceAttribute GetJavaInterfaceAttribute(Type type)
+        {
+            object[] objects = type.GetCustomAttributes(typeof (JavaInterfaceAttribute), false);
+            if (objects.Length == 1)
+            {
+                return objects[0] as JavaInterfaceAttribute;
+            }
+            return null;
+        }
+
         private static JavaProxyAttribute GetJavaProxyAttribute(Type type)
         {
             object[] objects = type.GetCustomAttributes(typeof (JavaProxyAttribute), false);

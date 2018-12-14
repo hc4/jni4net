@@ -341,7 +341,7 @@ namespace net.sf.jni4net.proxygen.model
 
                     if (IsArray)
                     {
-                        CLRFullName = JVMType.getComponentType().getName() + "[]";
+                        CLRFullName = JVMType.getComponentType().getName().ToString().Replace('$', '_') + "[]";
                     }
                     else
                     {
