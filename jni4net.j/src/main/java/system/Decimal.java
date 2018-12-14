@@ -10,7 +10,7 @@
 package system;
 
 @net.sf.jni4net.attributes.ClrType
-public class Decimal extends system.ValueType implements system.IFormattable, system.IComparable, system.IConvertible , Comparable<Decimal>{
+public class Decimal extends system.ValueType implements system.IFormattable, system.IConvertible, system.IComparable {
     
     //<generated-proxy>
     private static system.Type staticType;
@@ -76,9 +76,6 @@ public class Decimal extends system.ValueType implements system.IFormattable, sy
     @net.sf.jni4net.attributes.ClrMethod("(LSystem/String;LSystem/IFormatProvider;)LSystem/String;")
     public native java.lang.String ToString(java.lang.String format, system.IFormatProvider formatProvider);
     
-    @net.sf.jni4net.attributes.ClrMethod("(LSystem/Object;)I")
-    public native int CompareTo(system.Object obj);
-    
     @net.sf.jni4net.attributes.ClrMethod("()LSystem/TypeCode;")
     public native system.Enum GetTypeCode();
     
@@ -130,11 +127,23 @@ public class Decimal extends system.ValueType implements system.IFormattable, sy
     @net.sf.jni4net.attributes.ClrMethod("(LSystem/Type;LSystem/IFormatProvider;)LSystem/Object;")
     public native system.Object ToType(system.Type conversionType, system.IFormatProvider provider);
     
+    @net.sf.jni4net.attributes.ClrMethod("(LSystem/Object;)I")
+    public native int CompareTo(system.Object obj);
+    
+    @net.sf.jni4net.attributes.ClrMethod("(LSystem/Object;)V")
+    public native void OnDeserialization(system.Object sender);
+    
     @net.sf.jni4net.attributes.ClrMethod("(LSystem/Decimal;)I")
     public native int CompareTo(system.Decimal other);
     
     @net.sf.jni4net.attributes.ClrMethod("(LSystem/Decimal;)Z")
     public native boolean Equals(system.Decimal other);
+    
+    @net.sf.jni4net.attributes.ClrMethod("(LSystem/Decimal;)B")
+    public native static byte ToByte(system.Decimal value);
+    
+    @net.sf.jni4net.attributes.ClrMethod("(LSystem/Decimal;)I")
+    public native static int ToInt32(system.Decimal d);
     
     @net.sf.jni4net.attributes.ClrMethod("(LSystem/Decimal;)J")
     public native static long ToOACurrency(system.Decimal value);
@@ -208,9 +217,6 @@ public class Decimal extends system.ValueType implements system.IFormattable, sy
     @net.sf.jni4net.attributes.ClrMethod("(LSystem/Decimal;LSystem/Decimal;)LSystem/Decimal;")
     public native static system.Decimal Subtract(system.Decimal d1, system.Decimal d2);
     
-    @net.sf.jni4net.attributes.ClrMethod("(LSystem/Decimal;)B")
-    public native static byte ToByte(system.Decimal value);
-    
     @net.sf.jni4net.attributes.ClrMethod("(LSystem/Decimal;)LSystem/SByte;")
     public native static byte ToSByte(system.Decimal value);
     
@@ -219,9 +225,6 @@ public class Decimal extends system.ValueType implements system.IFormattable, sy
     
     @net.sf.jni4net.attributes.ClrMethod("(LSystem/Decimal;)D")
     public native static double ToDouble(system.Decimal d);
-    
-    @net.sf.jni4net.attributes.ClrMethod("(LSystem/Decimal;)I")
-    public native static int ToInt32(system.Decimal d);
     
     @net.sf.jni4net.attributes.ClrMethod("(LSystem/Decimal;)J")
     public native static long ToInt64(system.Decimal d);
@@ -249,12 +252,4 @@ public class Decimal extends system.ValueType implements system.IFormattable, sy
         system.Decimal.staticType = staticType;
     }
     //</generated-proxy>
-
-    public int compareTo(DateTime o) {
-        return CompareTo(o);
-    }
-
-    public int compareTo(Decimal o) {
-        return CompareTo(o);
-    }
 }

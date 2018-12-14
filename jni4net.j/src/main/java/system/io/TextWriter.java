@@ -140,6 +140,36 @@ public class TextWriter extends system.MarshalByRefObject implements system.IDis
     @net.sf.jni4net.attributes.ClrMethod("(LSystem/String;[LSystem/Object;)V")
     public native void WriteLine(java.lang.String format, system.Object[] arg);
     
+    @net.sf.jni4net.attributes.ClrMethod("(C)LSystem/Threading/Tasks/Task;")
+    public native system.threading.tasks.Task WriteAsync(char value);
+    
+    @net.sf.jni4net.attributes.ClrMethod("(LSystem/String;)LSystem/Threading/Tasks/Task;")
+    public native system.threading.tasks.Task WriteAsync(java.lang.String value);
+    
+    @net.sf.jni4net.attributes.ClrMethod("([C)LSystem/Threading/Tasks/Task;")
+    public native system.threading.tasks.Task WriteAsync(char[] buffer);
+    
+    @net.sf.jni4net.attributes.ClrMethod("([CII)LSystem/Threading/Tasks/Task;")
+    public native system.threading.tasks.Task WriteAsync(char[] buffer, int index, int count);
+    
+    @net.sf.jni4net.attributes.ClrMethod("(C)LSystem/Threading/Tasks/Task;")
+    public native system.threading.tasks.Task WriteLineAsync(char value);
+    
+    @net.sf.jni4net.attributes.ClrMethod("(LSystem/String;)LSystem/Threading/Tasks/Task;")
+    public native system.threading.tasks.Task WriteLineAsync(java.lang.String value);
+    
+    @net.sf.jni4net.attributes.ClrMethod("([C)LSystem/Threading/Tasks/Task;")
+    public native system.threading.tasks.Task WriteLineAsync(char[] buffer);
+    
+    @net.sf.jni4net.attributes.ClrMethod("([CII)LSystem/Threading/Tasks/Task;")
+    public native system.threading.tasks.Task WriteLineAsync(char[] buffer, int index, int count);
+    
+    @net.sf.jni4net.attributes.ClrMethod("()LSystem/Threading/Tasks/Task;")
+    public native system.threading.tasks.Task WriteLineAsync();
+    
+    @net.sf.jni4net.attributes.ClrMethod("()LSystem/Threading/Tasks/Task;")
+    public native system.threading.tasks.Task FlushAsync();
+    
     public static system.Type typeof() {
         return system.io.TextWriter.staticType;
     }

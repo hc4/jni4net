@@ -31,16 +31,16 @@ public class Guid extends system.ValueType implements system.IFormattable, syste
         system.Guid.__ctorGuid1(this, a, b, c, d, e, f, g, h, i, j, k);
     }
     
-    @net.sf.jni4net.attributes.ClrConstructor("(LSystem/String;)V")
-    public Guid(java.lang.String g) {
-            super(((net.sf.jni4net.inj.INJEnv)(null)), 0);
-        system.Guid.__ctorGuid2(this, g);
-    }
-    
     @net.sf.jni4net.attributes.ClrConstructor("(ISS[B)V")
     public Guid(int a, short b, short c, byte[] d) {
             super(((net.sf.jni4net.inj.INJEnv)(null)), 0);
-        system.Guid.__ctorGuid3(this, a, b, c, d);
+        system.Guid.__ctorGuid2(this, a, b, c, d);
+    }
+    
+    @net.sf.jni4net.attributes.ClrConstructor("(LSystem/String;)V")
+    public Guid(java.lang.String g) {
+            super(((net.sf.jni4net.inj.INJEnv)(null)), 0);
+        system.Guid.__ctorGuid3(this, g);
     }
     
     @net.sf.jni4net.attributes.ClrMethod("([B)V")
@@ -49,11 +49,11 @@ public class Guid extends system.ValueType implements system.IFormattable, syste
     @net.sf.jni4net.attributes.ClrMethod("(ISSBBBBBBBB)V")
     private native static void __ctorGuid1(net.sf.jni4net.inj.IClrProxy thiz, int a, short b, short c, byte d, byte e, byte f, byte g, byte h, byte i, byte j, byte k);
     
-    @net.sf.jni4net.attributes.ClrMethod("(Ljava/lang/String;)V")
-    private native static void __ctorGuid2(net.sf.jni4net.inj.IClrProxy thiz, java.lang.String g);
-    
     @net.sf.jni4net.attributes.ClrMethod("(ISS[B)V")
-    private native static void __ctorGuid3(net.sf.jni4net.inj.IClrProxy thiz, int a, short b, short c, byte[] d);
+    private native static void __ctorGuid2(net.sf.jni4net.inj.IClrProxy thiz, int a, short b, short c, byte[] d);
+    
+    @net.sf.jni4net.attributes.ClrMethod("(Ljava/lang/String;)V")
+    private native static void __ctorGuid3(net.sf.jni4net.inj.IClrProxy thiz, java.lang.String g);
     
     @net.sf.jni4net.attributes.ClrMethod("(LSystem/String;LSystem/IFormatProvider;)LSystem/String;")
     public native java.lang.String ToString(java.lang.String format, system.IFormatProvider formatProvider);
@@ -66,6 +66,18 @@ public class Guid extends system.ValueType implements system.IFormattable, syste
     
     @net.sf.jni4net.attributes.ClrMethod("(LSystem/Guid;)Z")
     public native boolean Equals(system.Guid other);
+    
+    @net.sf.jni4net.attributes.ClrMethod("(LSystem/String;)LSystem/Guid;")
+    public native static system.Guid Parse(java.lang.String input);
+    
+    @net.sf.jni4net.attributes.ClrMethod("(LSystem/String;LSystem/Guid;)Z")
+    public native static boolean TryParse(java.lang.String input, net.sf.jni4net.Out<system.Guid> result);
+    
+    @net.sf.jni4net.attributes.ClrMethod("(LSystem/String;LSystem/String;)LSystem/Guid;")
+    public native static system.Guid ParseExact(java.lang.String input, java.lang.String format);
+    
+    @net.sf.jni4net.attributes.ClrMethod("(LSystem/String;LSystem/String;LSystem/Guid;)Z")
+    public native static boolean TryParseExact(java.lang.String input, java.lang.String format, net.sf.jni4net.Out<system.Guid> result);
     
     @net.sf.jni4net.attributes.ClrMethod("()[B")
     public native byte[] ToByteArray();

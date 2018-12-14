@@ -10,7 +10,7 @@
 package system;
 
 @net.sf.jni4net.attributes.ClrType
-public class DateTime extends system.ValueType implements system.IComparable, system.IFormattable, system.IConvertible, system.runtime.serialization.ISerializable, Comparable<DateTime> {
+public class DateTime extends system.ValueType implements system.IFormattable, system.IConvertible, system.runtime.serialization.ISerializable, system.IComparable {
     
     //<generated-proxy>
     private static system.Type staticType;
@@ -118,9 +118,6 @@ public class DateTime extends system.ValueType implements system.IComparable, sy
     @net.sf.jni4net.attributes.ClrMethod("(IIIIIIILsystem/Object;Lsystem/Enum;)V")
     private native static void __ctorDateTime10(net.sf.jni4net.inj.IClrProxy thiz, int year, int month, int day, int hour, int minute, int second, int millisecond, system.Object calendar, system.Enum kind);
     
-    @net.sf.jni4net.attributes.ClrMethod("(LSystem/Object;)I")
-    public native int CompareTo(system.Object obj);
-    
     @net.sf.jni4net.attributes.ClrMethod("(LSystem/String;LSystem/IFormatProvider;)LSystem/String;")
     public native java.lang.String ToString(java.lang.String format, system.IFormatProvider formatProvider);
     
@@ -177,6 +174,9 @@ public class DateTime extends system.ValueType implements system.IComparable, sy
     
     @net.sf.jni4net.attributes.ClrMethod("(LSystem/Runtime/Serialization/SerializationInfo;LSystem/Runtime/Serialization/StreamingContext;)V")
     public native void GetObjectData(system.runtime.serialization.SerializationInfo info, system.runtime.serialization.StreamingContext context);
+    
+    @net.sf.jni4net.attributes.ClrMethod("(LSystem/Object;)I")
+    public native int CompareTo(system.Object obj);
     
     @net.sf.jni4net.attributes.ClrMethod("(LSystem/DateTime;)I")
     public native int CompareTo(system.DateTime other);
@@ -378,8 +378,4 @@ public class DateTime extends system.ValueType implements system.IComparable, sy
         system.DateTime.staticType = staticType;
     }
     //</generated-proxy>
-
-    public int compareTo(DateTime o) {
-        return CompareTo(o);
-    }
 }

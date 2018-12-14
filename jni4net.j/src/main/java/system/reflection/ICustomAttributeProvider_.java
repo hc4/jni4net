@@ -33,11 +33,11 @@ class __ICustomAttributeProvider extends system.Object implements system.reflect
             super(__env, __handle);
     }
     
-    @net.sf.jni4net.attributes.ClrMethod("(Z)[LSystem/Object;")
-    public native system.Object[] GetCustomAttributes(boolean inherit);
-    
     @net.sf.jni4net.attributes.ClrMethod("(LSystem/Type;Z)[LSystem/Object;")
     public native system.Object[] GetCustomAttributes(system.Type attributeType, boolean inherit);
+    
+    @net.sf.jni4net.attributes.ClrMethod("(Z)[LSystem/Object;")
+    public native system.Object[] GetCustomAttributes(boolean inherit);
     
     @net.sf.jni4net.attributes.ClrMethod("(LSystem/Type;Z)Z")
     public native boolean IsDefined(system.Type attributeType, boolean inherit);

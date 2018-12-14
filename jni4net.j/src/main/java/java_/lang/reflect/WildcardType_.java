@@ -38,5 +38,8 @@ class __WildcardType extends system.Object implements java.lang.reflect.Wildcard
     
     @net.sf.jni4net.attributes.ClrMethod("()[Ljava/lang/reflect/Type;")
     public native java.lang.reflect.Type[] getUpperBounds();
+    
+    @net.sf.jni4net.attributes.ClrMethod("()Ljava/lang/String;")
+    public native java.lang.String getTypeName();
 }
 //</generated-proxy>

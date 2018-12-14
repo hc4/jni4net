@@ -77,11 +77,23 @@ public class PropertyInfo extends system.reflection.MemberInfo {
     @net.sf.jni4net.attributes.ClrMethod("()LSystem/Object;")
     public native system.Object GetRawConstantValue();
     
+    @net.sf.jni4net.attributes.ClrMethod("(LSystem/Object;)LSystem/Object;")
+    public native system.Object GetValue(system.Object obj);
+    
+    @net.sf.jni4net.attributes.ClrMethod("(LSystem/Object;LSystem/Object;)V")
+    public native void SetValue(system.Object obj, system.Object value);
+    
     @net.sf.jni4net.attributes.ClrMethod("()[LSystem/Type;")
     public native system.Type[] GetRequiredCustomModifiers();
     
     @net.sf.jni4net.attributes.ClrMethod("()[LSystem/Type;")
     public native system.Type[] GetOptionalCustomModifiers();
+    
+    @net.sf.jni4net.attributes.ClrMethod("()LSystem/Reflection/MethodInfo;")
+    public native system.reflection.MethodInfo getGetMethod();
+    
+    @net.sf.jni4net.attributes.ClrMethod("()LSystem/Reflection/MethodInfo;")
+    public native system.reflection.MethodInfo getSetMethod();
     
     public static system.Type typeof() {
         return system.reflection.PropertyInfo.staticType;

@@ -45,5 +45,20 @@ public interface IList extends system.collections.ICollection, system.collection
     
     @net.sf.jni4net.attributes.ClrMethod("(I)V")
     void RemoveAt(int index);
+    
+    @net.sf.jni4net.attributes.ClrMethod("(LSystem/Array;I)V")
+    void CopyTo(system.Array array, int index);
+    
+    @net.sf.jni4net.attributes.ClrMethod("()I")
+    int getCount();
+    
+    @net.sf.jni4net.attributes.ClrMethod("()LSystem/Object;")
+    system.Object getSyncRoot();
+    
+    @net.sf.jni4net.attributes.ClrMethod("()Z")
+    boolean isSynchronized();
+    
+    @net.sf.jni4net.attributes.ClrMethod("()LSystem/Collections/IEnumerator;")
+    system.collections.IEnumerator GetEnumerator();
     //</generated-interface>
 }

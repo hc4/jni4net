@@ -26,11 +26,11 @@ public class Assembly extends system.Object implements system.security.IEvidence
     @net.sf.jni4net.attributes.ClrMethod("()LSystem/Security/Policy/Evidence;")
     public native system.Object getEvidence();
     
-    @net.sf.jni4net.attributes.ClrMethod("(Z)[LSystem/Object;")
-    public native system.Object[] GetCustomAttributes(boolean inherit);
-    
     @net.sf.jni4net.attributes.ClrMethod("(LSystem/Type;Z)[LSystem/Object;")
     public native system.Object[] GetCustomAttributes(system.Type attributeType, boolean inherit);
+    
+    @net.sf.jni4net.attributes.ClrMethod("(Z)[LSystem/Object;")
+    public native system.Object[] GetCustomAttributes(boolean inherit);
     
     @net.sf.jni4net.attributes.ClrMethod("(LSystem/Type;Z)Z")
     public native boolean IsDefined(system.Type attributeType, boolean inherit);
@@ -149,9 +149,6 @@ public class Assembly extends system.Object implements system.security.IEvidence
     @net.sf.jni4net.attributes.ClrMethod("(LSystem/Type;)LSystem/Reflection/Assembly;")
     public native static system.reflection.Assembly GetAssembly(system.Type type);
     
-    @net.sf.jni4net.attributes.ClrMethod("()LSystem/Reflection/Module;")
-    public native system.Object getManifestModule();
-    
     @net.sf.jni4net.attributes.ClrMethod("(LSystem/String;)LSystem/Reflection/Assembly;")
     public native static system.reflection.Assembly LoadFrom(java.lang.String assemblyFile);
     
@@ -163,6 +160,12 @@ public class Assembly extends system.Object implements system.security.IEvidence
     
     @net.sf.jni4net.attributes.ClrMethod("(LSystem/String;LSystem/Security/Policy/Evidence;[BLSystem/Configuration/Assemblies/AssemblyHashAlgorithm;)LSystem/Reflection/Assembly;")
     public native static system.reflection.Assembly LoadFrom(java.lang.String assemblyFile, system.Object securityEvidence, byte[] hashValue, system.Enum hashAlgorithm);
+    
+    @net.sf.jni4net.attributes.ClrMethod("(LSystem/String;[BLSystem/Configuration/Assemblies/AssemblyHashAlgorithm;)LSystem/Reflection/Assembly;")
+    public native static system.reflection.Assembly LoadFrom(java.lang.String assemblyFile, byte[] hashValue, system.Enum hashAlgorithm);
+    
+    @net.sf.jni4net.attributes.ClrMethod("(LSystem/String;)LSystem/Reflection/Assembly;")
+    public native static system.reflection.Assembly UnsafeLoadFrom(java.lang.String assemblyFile);
     
     @net.sf.jni4net.attributes.ClrMethod("(LSystem/String;)LSystem/Reflection/Assembly;")
     public native static system.reflection.Assembly Load(java.lang.String assemblyString);
@@ -185,9 +188,6 @@ public class Assembly extends system.Object implements system.security.IEvidence
     @net.sf.jni4net.attributes.ClrMethod("(LSystem/String;LSystem/Security/Policy/Evidence;)LSystem/Reflection/Assembly;")
     public native static system.reflection.Assembly LoadWithPartialName(java.lang.String partialName, system.Object securityEvidence);
     
-    @net.sf.jni4net.attributes.ClrMethod("()Z")
-    public native boolean getReflectionOnly();
-    
     @net.sf.jni4net.attributes.ClrMethod("([B)LSystem/Reflection/Assembly;")
     public native static system.reflection.Assembly Load(byte[] rawAssembly);
     
@@ -196,6 +196,9 @@ public class Assembly extends system.Object implements system.security.IEvidence
     
     @net.sf.jni4net.attributes.ClrMethod("([B[B)LSystem/Reflection/Assembly;")
     public native static system.reflection.Assembly Load(byte[] rawAssembly, byte[] rawSymbolStore);
+    
+    @net.sf.jni4net.attributes.ClrMethod("([B[BLSystem/Security/SecurityContextSource;)LSystem/Reflection/Assembly;")
+    public native static system.reflection.Assembly Load(byte[] rawAssembly, byte[] rawSymbolStore, system.Enum securityContextSource);
     
     @net.sf.jni4net.attributes.ClrMethod("([B[BLSystem/Security/Policy/Evidence;)LSystem/Reflection/Assembly;")
     public native static system.reflection.Assembly Load(byte[] rawAssembly, byte[] rawSymbolStore, system.Object securityEvidence);
@@ -215,11 +218,44 @@ public class Assembly extends system.Object implements system.security.IEvidence
     @net.sf.jni4net.attributes.ClrMethod("()LSystem/Reflection/Assembly;")
     public native static system.reflection.Assembly GetEntryAssembly();
     
+    @net.sf.jni4net.attributes.ClrMethod("()[[LSystem/Collections/Generic/IEnumerable`1;")
+    public native system.collections.IEnumerable getExportedTypes();
+    
+    @net.sf.jni4net.attributes.ClrMethod("()[[LSystem/Collections/Generic/IEnumerable`1;")
+    public native system.collections.IEnumerable getDefinedTypes();
+    
+    @net.sf.jni4net.attributes.ClrMethod("()LSystem/Security/PermissionSet;")
+    public native system.Object getPermissionSet();
+    
+    @net.sf.jni4net.attributes.ClrMethod("()Z")
+    public native boolean isFullyTrusted();
+    
+    @net.sf.jni4net.attributes.ClrMethod("()LSystem/Security/SecurityRuleSet;")
+    public native system.Enum getSecurityRuleSet();
+    
+    @net.sf.jni4net.attributes.ClrMethod("()LSystem/Reflection/Module;")
+    public native system.Object getManifestModule();
+    
+    @net.sf.jni4net.attributes.ClrMethod("()[[LSystem/Collections/Generic/IEnumerable`1;")
+    public native system.collections.IEnumerable getCustomAttributes();
+    
+    @net.sf.jni4net.attributes.ClrMethod("()[[LSystem/Collections/Generic/IList`1;")
+    public native system.collections.IList GetCustomAttributesData();
+    
+    @net.sf.jni4net.attributes.ClrMethod("()Z")
+    public native boolean getReflectionOnly();
+    
+    @net.sf.jni4net.attributes.ClrMethod("()[[LSystem/Collections/Generic/IEnumerable`1;")
+    public native system.collections.IEnumerable getModules();
+    
     @net.sf.jni4net.attributes.ClrMethod("()LSystem/String;")
     public native java.lang.String getImageRuntimeVersion();
     
     @net.sf.jni4net.attributes.ClrMethod("()J")
     public native long getHostContext();
+    
+    @net.sf.jni4net.attributes.ClrMethod("()Z")
+    public native boolean isDynamic();
     
     public static system.Type typeof() {
         return system.reflection.Assembly.staticType;

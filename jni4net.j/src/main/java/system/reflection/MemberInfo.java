@@ -23,11 +23,11 @@ public class MemberInfo extends system.Object implements system.reflection.ICust
             super(((net.sf.jni4net.inj.INJEnv)(null)), 0);
     }
     
-    @net.sf.jni4net.attributes.ClrMethod("(Z)[LSystem/Object;")
-    public native system.Object[] GetCustomAttributes(boolean inherit);
-    
     @net.sf.jni4net.attributes.ClrMethod("(LSystem/Type;Z)[LSystem/Object;")
     public native system.Object[] GetCustomAttributes(system.Type attributeType, boolean inherit);
+    
+    @net.sf.jni4net.attributes.ClrMethod("(Z)[LSystem/Object;")
+    public native system.Object[] GetCustomAttributes(boolean inherit);
     
     @net.sf.jni4net.attributes.ClrMethod("(LSystem/Type;Z)Z")
     public native boolean IsDefined(system.Type attributeType, boolean inherit);
@@ -55,6 +55,12 @@ public class MemberInfo extends system.Object implements system.reflection.ICust
     
     @net.sf.jni4net.attributes.ClrMethod("()LSystem/Type;")
     public native system.Type getReflectedType();
+    
+    @net.sf.jni4net.attributes.ClrMethod("()[[LSystem/Collections/Generic/IEnumerable`1;")
+    public native system.collections.IEnumerable getCustomAttributes();
+    
+    @net.sf.jni4net.attributes.ClrMethod("()[[LSystem/Collections/Generic/IList`1;")
+    public native system.collections.IList GetCustomAttributesData();
     
     @net.sf.jni4net.attributes.ClrMethod("()I")
     public native int getMetadataToken();

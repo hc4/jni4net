@@ -23,14 +23,23 @@ public class Console extends system.Object {
             super(((net.sf.jni4net.inj.INJEnv)(null)), 0);
     }
     
-    @net.sf.jni4net.attributes.ClrMethod("()LSystem/IO/TextWriter;")
-    public native static system.io.TextWriter getError();
+    @net.sf.jni4net.attributes.ClrMethod("()Z")
+    public native static boolean isInputRedirected();
+    
+    @net.sf.jni4net.attributes.ClrMethod("()Z")
+    public native static boolean isOutputRedirected();
+    
+    @net.sf.jni4net.attributes.ClrMethod("()Z")
+    public native static boolean isErrorRedirected();
     
     @net.sf.jni4net.attributes.ClrMethod("()LSystem/IO/TextReader;")
     public native static system.io.TextReader getIn();
     
     @net.sf.jni4net.attributes.ClrMethod("()LSystem/IO/TextWriter;")
     public native static system.io.TextWriter getOut();
+    
+    @net.sf.jni4net.attributes.ClrMethod("()LSystem/IO/TextWriter;")
+    public native static system.io.TextWriter getError();
     
     @net.sf.jni4net.attributes.ClrMethod("()LSystem/Text/Encoding;")
     public native static system.Object getInputEncoding();

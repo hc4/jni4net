@@ -26,21 +26,6 @@ public class Array extends system.Object implements system.ICloneable, system.co
     @net.sf.jni4net.attributes.ClrMethod("()LSystem/Object;")
     public native system.Object Clone();
     
-    @net.sf.jni4net.attributes.ClrMethod("()LSystem/Collections/IEnumerator;")
-    public native system.collections.IEnumerator GetEnumerator();
-    
-    @net.sf.jni4net.attributes.ClrMethod("(LSystem/Array;I)V")
-    public native void CopyTo(system.Array array, int index);
-    
-    @net.sf.jni4net.attributes.ClrMethod("()I")
-    public native int getCount();
-    
-    @net.sf.jni4net.attributes.ClrMethod("()LSystem/Object;")
-    public native system.Object getSyncRoot();
-    
-    @net.sf.jni4net.attributes.ClrMethod("()Z")
-    public native boolean isSynchronized();
-    
     @net.sf.jni4net.attributes.ClrMethod("(I)LSystem/Object;")
     public native system.Object getItem(int index);
     
@@ -73,6 +58,27 @@ public class Array extends system.Object implements system.ICloneable, system.co
     
     @net.sf.jni4net.attributes.ClrMethod("(I)V")
     public native void RemoveAt(int index);
+    
+    @net.sf.jni4net.attributes.ClrMethod("(LSystem/Array;I)V")
+    public native void CopyTo(system.Array array, int index);
+    
+    @net.sf.jni4net.attributes.ClrMethod("()I")
+    public native int getCount();
+    
+    @net.sf.jni4net.attributes.ClrMethod("()LSystem/Object;")
+    public native system.Object getSyncRoot();
+    
+    @net.sf.jni4net.attributes.ClrMethod("()Z")
+    public native boolean isSynchronized();
+    
+    @net.sf.jni4net.attributes.ClrMethod("()LSystem/Collections/IEnumerator;")
+    public native system.collections.IEnumerator GetEnumerator();
+    
+    @net.sf.jni4net.attributes.ClrMethod("(LSystem/Object;LSystem/Collections/IComparer;)I")
+    public native int CompareTo(system.Object other, system.Object comparer);
+    
+    @net.sf.jni4net.attributes.ClrMethod("(LSystem/Collections/IEqualityComparer;)I")
+    public native int GetHashCode(system.Object comparer);
     
     @net.sf.jni4net.attributes.ClrMethod("(LSystem/Type;I)LSystem/Array;")
     public native static system.Array CreateInstance(system.Type elementType, int length);

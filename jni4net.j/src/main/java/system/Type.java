@@ -323,6 +323,15 @@ public class Type extends system.reflection.MemberInfo {
     @net.sf.jni4net.attributes.ClrMethod("(LSystem/String;)LSystem/Type;")
     public native static system.Type GetType(java.lang.String typeName);
     
+    @net.sf.jni4net.attributes.ClrMethod("(LSystem/String;[[[LSystem/Func`2;[[[[[LSystem/Func`4;)LSystem/Type;")
+    public native static system.Type GetType(java.lang.String typeName, system.MulticastDelegate assemblyResolver, system.MulticastDelegate typeResolver);
+    
+    @net.sf.jni4net.attributes.ClrMethod("(LSystem/String;[[[LSystem/Func`2;[[[[[LSystem/Func`4;Z)LSystem/Type;")
+    public native static system.Type GetType(java.lang.String typeName, system.MulticastDelegate assemblyResolver, system.MulticastDelegate typeResolver, boolean throwOnError);
+    
+    @net.sf.jni4net.attributes.ClrMethod("(LSystem/String;[[[LSystem/Func`2;[[[[[LSystem/Func`4;ZZ)LSystem/Type;")
+    public native static system.Type GetType(java.lang.String typeName, system.MulticastDelegate assemblyResolver, system.MulticastDelegate typeResolver, boolean throwOnError, boolean ignoreCase);
+    
     @net.sf.jni4net.attributes.ClrMethod("(LSystem/String;ZZ)LSystem/Type;")
     public native static system.Type ReflectionOnlyGetType(java.lang.String typeName, boolean throwIfNotFound, boolean ignoreCase);
     
@@ -393,6 +402,9 @@ public class Type extends system.reflection.MemberInfo {
     public native boolean isGenericTypeDefinition();
     
     @net.sf.jni4net.attributes.ClrMethod("()Z")
+    public native boolean isConstructedGenericType();
+    
+    @net.sf.jni4net.attributes.ClrMethod("()Z")
     public native boolean isGenericParameter();
     
     @net.sf.jni4net.attributes.ClrMethod("()I")
@@ -410,8 +422,38 @@ public class Type extends system.reflection.MemberInfo {
     @net.sf.jni4net.attributes.ClrMethod("()[LSystem/Type;")
     public native system.Type[] GetGenericArguments();
     
+    @net.sf.jni4net.attributes.ClrMethod("()[LSystem/Type;")
+    public native system.Type[] getGenericTypeArguments();
+    
     @net.sf.jni4net.attributes.ClrMethod("()LSystem/Type;")
     public native system.Type GetGenericTypeDefinition();
+    
+    @net.sf.jni4net.attributes.ClrMethod("()[LSystem/String;")
+    public native java.lang.String[] GetEnumNames();
+    
+    @net.sf.jni4net.attributes.ClrMethod("()LSystem/Array;")
+    public native system.Array GetEnumValues();
+    
+    @net.sf.jni4net.attributes.ClrMethod("()LSystem/Type;")
+    public native system.Type GetEnumUnderlyingType();
+    
+    @net.sf.jni4net.attributes.ClrMethod("(LSystem/Object;)Z")
+    public native boolean IsEnumDefined(system.Object value);
+    
+    @net.sf.jni4net.attributes.ClrMethod("(LSystem/Object;)LSystem/String;")
+    public native java.lang.String GetEnumName(system.Object value);
+    
+    @net.sf.jni4net.attributes.ClrMethod("()Z")
+    public native boolean isSecurityCritical();
+    
+    @net.sf.jni4net.attributes.ClrMethod("()Z")
+    public native boolean isSecuritySafeCritical();
+    
+    @net.sf.jni4net.attributes.ClrMethod("()Z")
+    public native boolean isSecurityTransparent();
+    
+    @net.sf.jni4net.attributes.ClrMethod("(LSystem/Type;)Z")
+    public native boolean IsEquivalentTo(system.Type other);
     
     @net.sf.jni4net.attributes.ClrMethod("([LSystem/Object;)[LSystem/Type;")
     public native static system.Type[] GetTypeArray(system.Object[] args);

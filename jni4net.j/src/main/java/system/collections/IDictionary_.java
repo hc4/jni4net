@@ -33,18 +33,6 @@ class __IDictionary extends system.Object implements system.collections.IDiction
             super(__env, __handle);
     }
     
-    @net.sf.jni4net.attributes.ClrMethod("(LSystem/Array;I)V")
-    public native void CopyTo(system.Array array, int index);
-    
-    @net.sf.jni4net.attributes.ClrMethod("()I")
-    public native int getCount();
-    
-    @net.sf.jni4net.attributes.ClrMethod("()LSystem/Object;")
-    public native system.Object getSyncRoot();
-    
-    @net.sf.jni4net.attributes.ClrMethod("()Z")
-    public native boolean isSynchronized();
-    
     @net.sf.jni4net.attributes.ClrMethod("(LSystem/Object;)LSystem/Object;")
     public native system.Object getItem(system.Object key);
     
@@ -72,13 +60,25 @@ class __IDictionary extends system.Object implements system.collections.IDiction
     @net.sf.jni4net.attributes.ClrMethod("()Z")
     public native boolean isFixedSize();
     
+    @net.sf.jni4net.attributes.ClrMethod("()LSystem/Collections/IDictionaryEnumerator;")
+    public native system.collections.IDictionaryEnumerator IDictionary_GetEnumerator();
+    
     @net.sf.jni4net.attributes.ClrMethod("(LSystem/Object;)V")
     public native void Remove(system.Object key);
     
-    @net.sf.jni4net.attributes.ClrMethod("()LSystem/Collections/IDictionaryEnumerator;")
-    public native system.collections.IDictionaryEnumerator GetEnumerator();
+    @net.sf.jni4net.attributes.ClrMethod("(LSystem/Array;I)V")
+    public native void CopyTo(system.Array array, int index);
+    
+    @net.sf.jni4net.attributes.ClrMethod("()I")
+    public native int getCount();
+    
+    @net.sf.jni4net.attributes.ClrMethod("()LSystem/Object;")
+    public native system.Object getSyncRoot();
+    
+    @net.sf.jni4net.attributes.ClrMethod("()Z")
+    public native boolean isSynchronized();
     
     @net.sf.jni4net.attributes.ClrMethod("()LSystem/Collections/IEnumerator;")
-    public native system.collections.IEnumerator IEnumerable_GetEnumerator();
+    public native system.collections.IEnumerator GetEnumerator();
 }
 //</generated-proxy>

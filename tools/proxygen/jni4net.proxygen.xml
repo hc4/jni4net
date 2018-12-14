@@ -117,11 +117,12 @@ This content is released under the (http://opensource.org/licenses/MIT) MIT Lice
  
 
   <!-- reflection -->
+  <JavaClass TypeName="java.lang.reflect.Executable"/>
   <JavaClass TypeName="java.lang.reflect.Constructor">
 	  <MethodModifier MethodName="getParameterAnnotations" Signature="()[[Ljava/lang/annotation/Annotation;" Skip="true"/>
   </JavaClass>
   <JavaClass TypeName="java.lang.reflect.Field"/>
-  <JavaClass TypeName="java.lang.reflect.Method">
+  <JavaClass TypeName="java.lang.reflect.Method">  
   	<!-- 
 	  <MethodModifier MethodName="getParameterAnnotations" Signature="()[[Ljava/lang/annotation/Annotation;" Skip="true"/>
 	  -->
@@ -156,8 +157,12 @@ This content is released under the (http://opensource.org/licenses/MIT) MIT Lice
   <ClrType TypeName="System.MarshalByRefObject"/>
 
   <!-- primitive -->
-  <ClrType TypeName="System.DateTime"/>
-  <ClrType TypeName="System.Decimal"/>
+  <ClrType TypeName="System.DateTime">      
+	  <IgnoreInterface TypeName="java.lang.Comparable"/>
+  </ClrType>
+  <ClrType TypeName="System.Decimal">      
+	  <IgnoreInterface TypeName="java.lang.Comparable"/>
+  </ClrType>
   <ClrType TypeName="System.Guid"/>
   <ClrType TypeName="System.Enum"/>
   <ClrType TypeName="System.Array"/>
@@ -197,6 +202,9 @@ This content is released under the (http://opensource.org/licenses/MIT) MIT Lice
   <ClrType TypeName="System.Environment"/>
   <ClrType TypeName="System.IO.TextWriter"/>
   <ClrType TypeName="System.IO.TextReader"/>
+    
+  <!-- tasks -->
+  <ClrType TypeName="System.Threading.Tasks.Task" />
 
   <!-- colections -->
   <ClrType TypeName="System.Collections.IList"/>
@@ -204,8 +212,8 @@ This content is released under the (http://opensource.org/licenses/MIT) MIT Lice
   <ClrType TypeName="System.Collections.IDictionaryEnumerator"/>
   <ClrType TypeName="System.Collections.ICollection"/>
   <ClrType TypeName="System.Collections.IEnumerable"/>
-  <ClrType TypeName="System.Collections.IDictionary">
-	  <MethodModifier MethodName="GetEnumerator" Signature="()LSystem/Collections/IEnumerator;" Interface="System.Collections.IEnumerable" RenameJVM="IEnumerable_GetEnumerator"/>
+  <ClrType TypeName="System.Collections.IDictionary">	  
+	  <MethodModifier MethodName="GetEnumerator" Signature="()LSystem/Collections/IDictionaryEnumerator;" Interface="System.Collections.IDictionary" RenameJVM="IDictionary_GetEnumerator"/>
   </ClrType>
 
   <!-- interfaces -->

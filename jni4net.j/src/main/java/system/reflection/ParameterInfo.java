@@ -23,11 +23,11 @@ public class ParameterInfo extends system.Object implements system.reflection.IC
             super(((net.sf.jni4net.inj.INJEnv)(null)), 0);
     }
     
-    @net.sf.jni4net.attributes.ClrMethod("(Z)[LSystem/Object;")
-    public native system.Object[] GetCustomAttributes(boolean inherit);
-    
     @net.sf.jni4net.attributes.ClrMethod("(LSystem/Type;Z)[LSystem/Object;")
     public native system.Object[] GetCustomAttributes(system.Type attributeType, boolean inherit);
+    
+    @net.sf.jni4net.attributes.ClrMethod("(Z)[LSystem/Object;")
+    public native system.Object[] GetCustomAttributes(boolean inherit);
     
     @net.sf.jni4net.attributes.ClrMethod("(LSystem/Type;Z)Z")
     public native boolean IsDefined(system.Type attributeType, boolean inherit);
@@ -44,11 +44,17 @@ public class ParameterInfo extends system.Object implements system.reflection.IC
     @net.sf.jni4net.attributes.ClrMethod("(LSystem/UInt32;LSystem/Guid;LSystem/UInt32;SLSystem/IntPtr;LSystem/IntPtr;LSystem/IntPtr;LSystem/IntPtr;)V")
     public native void Invoke(int dispIdMember, net.sf.jni4net.Ref<system.Guid> riid, int lcid, short wFlags, long pDispParams, long pVarResult, long pExcepInfo, long puArgErr);
     
+    @net.sf.jni4net.attributes.ClrMethod("(LSystem/Runtime/Serialization/StreamingContext;)LSystem/Object;")
+    public native system.Object GetRealObject(system.runtime.serialization.StreamingContext context);
+    
     @net.sf.jni4net.attributes.ClrMethod("()LSystem/Type;")
     public native system.Type getParameterType();
     
     @net.sf.jni4net.attributes.ClrMethod("()LSystem/String;")
     public native java.lang.String getName();
+    
+    @net.sf.jni4net.attributes.ClrMethod("()Z")
+    public native boolean getHasDefaultValue();
     
     @net.sf.jni4net.attributes.ClrMethod("()LSystem/Object;")
     public native system.Object getDefaultValue();
@@ -88,6 +94,12 @@ public class ParameterInfo extends system.Object implements system.reflection.IC
     
     @net.sf.jni4net.attributes.ClrMethod("()[LSystem/Type;")
     public native system.Type[] GetOptionalCustomModifiers();
+    
+    @net.sf.jni4net.attributes.ClrMethod("()[[LSystem/Collections/Generic/IEnumerable`1;")
+    public native system.collections.IEnumerable getCustomAttributes();
+    
+    @net.sf.jni4net.attributes.ClrMethod("()[[LSystem/Collections/Generic/IList`1;")
+    public native system.collections.IList GetCustomAttributesData();
     
     public static system.Type typeof() {
         return system.reflection.ParameterInfo.staticType;

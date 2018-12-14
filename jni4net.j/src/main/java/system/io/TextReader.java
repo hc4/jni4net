@@ -47,6 +47,18 @@ public class TextReader extends system.MarshalByRefObject implements system.IDis
     @net.sf.jni4net.attributes.ClrMethod("()LSystem/String;")
     public native java.lang.String ReadLine();
     
+    @net.sf.jni4net.attributes.ClrMethod("()[[LSystem/Threading/Tasks/Task`1;")
+    public native system.threading.tasks.Task ReadLineAsync();
+    
+    @net.sf.jni4net.attributes.ClrMethod("()[[LSystem/Threading/Tasks/Task`1;")
+    public native system.threading.tasks.Task ReadToEndAsync();
+    
+    @net.sf.jni4net.attributes.ClrMethod("([CII)[[LSystem/Threading/Tasks/Task`1;")
+    public native system.threading.tasks.Task ReadAsync(char[] buffer, int index, int count);
+    
+    @net.sf.jni4net.attributes.ClrMethod("([CII)[[LSystem/Threading/Tasks/Task`1;")
+    public native system.threading.tasks.Task ReadBlockAsync(char[] buffer, int index, int count);
+    
     @net.sf.jni4net.attributes.ClrMethod("(LSystem/IO/TextReader;)LSystem/IO/TextReader;")
     public native static system.io.TextReader Synchronized(system.io.TextReader reader);
     

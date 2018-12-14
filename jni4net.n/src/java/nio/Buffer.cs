@@ -25,7 +25,7 @@ namespace java.nio
         public void Position(int par0)
         {
             JNIEnv @__env = Env;
-            @__env.DeleteLocalRef(@__env.CallObjectMethodPtr(this, j4n_position3, Convertor.ParPrimC2J(par0)));
+            @__env.DeleteLocalRef(@__env.CallObjectMethodPtr(this, j4n_position8, Convertor.ParPrimC2J(par0)));
         }
 
     }

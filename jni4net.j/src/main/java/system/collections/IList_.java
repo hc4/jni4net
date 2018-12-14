@@ -33,21 +33,6 @@ class __IList extends system.Object implements system.collections.IList {
             super(__env, __handle);
     }
     
-    @net.sf.jni4net.attributes.ClrMethod("()LSystem/Collections/IEnumerator;")
-    public native system.collections.IEnumerator GetEnumerator();
-    
-    @net.sf.jni4net.attributes.ClrMethod("(LSystem/Array;I)V")
-    public native void CopyTo(system.Array array, int index);
-    
-    @net.sf.jni4net.attributes.ClrMethod("()I")
-    public native int getCount();
-    
-    @net.sf.jni4net.attributes.ClrMethod("()LSystem/Object;")
-    public native system.Object getSyncRoot();
-    
-    @net.sf.jni4net.attributes.ClrMethod("()Z")
-    public native boolean isSynchronized();
-    
     @net.sf.jni4net.attributes.ClrMethod("(I)LSystem/Object;")
     public native system.Object getItem(int index);
     
@@ -80,5 +65,20 @@ class __IList extends system.Object implements system.collections.IList {
     
     @net.sf.jni4net.attributes.ClrMethod("(I)V")
     public native void RemoveAt(int index);
+    
+    @net.sf.jni4net.attributes.ClrMethod("(LSystem/Array;I)V")
+    public native void CopyTo(system.Array array, int index);
+    
+    @net.sf.jni4net.attributes.ClrMethod("()I")
+    public native int getCount();
+    
+    @net.sf.jni4net.attributes.ClrMethod("()LSystem/Object;")
+    public native system.Object getSyncRoot();
+    
+    @net.sf.jni4net.attributes.ClrMethod("()Z")
+    public native boolean isSynchronized();
+    
+    @net.sf.jni4net.attributes.ClrMethod("()LSystem/Collections/IEnumerator;")
+    public native system.collections.IEnumerator GetEnumerator();
 }
 //</generated-proxy>

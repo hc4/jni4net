@@ -92,6 +92,15 @@ public class FieldInfo extends system.reflection.MemberInfo {
     @net.sf.jni4net.attributes.ClrMethod("()LSystem/Object;")
     public native system.Object GetRawConstantValue();
     
+    @net.sf.jni4net.attributes.ClrMethod("()Z")
+    public native boolean isSecurityCritical();
+    
+    @net.sf.jni4net.attributes.ClrMethod("()Z")
+    public native boolean isSecuritySafeCritical();
+    
+    @net.sf.jni4net.attributes.ClrMethod("()Z")
+    public native boolean isSecurityTransparent();
+    
     public static system.Type typeof() {
         return system.reflection.FieldInfo.staticType;
     }

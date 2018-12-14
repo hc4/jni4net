@@ -35,11 +35,11 @@ public class ConstructorInfo extends system.reflection.MethodBase {
     @net.sf.jni4net.attributes.ClrMethod("([LSystem/Object;)LSystem/Object;")
     public native system.Object Invoke_5(system.Object[] parameters);
     
-    @net.sf.jni4net.attributes.ClrMethod("(LSystem/Reflection/BindingFlags;LSystem/Reflection/Binder;[LSystem/Object;LSystem/Globalization/CultureInfo;)LSystem/Object;")
-    public native system.Object Invoke(system.reflection.BindingFlags invokeAttr, system.Object binder, system.Object[] parameters, system.Object culture);
-    
     @net.sf.jni4net.attributes.ClrMethod("([LSystem/Object;)LSystem/Object;")
     public native system.Object Invoke(system.Object[] parameters);
+    
+    @net.sf.jni4net.attributes.ClrMethod("(LSystem/Reflection/BindingFlags;LSystem/Reflection/Binder;[LSystem/Object;LSystem/Globalization/CultureInfo;)LSystem/Object;")
+    public native system.Object Invoke(system.reflection.BindingFlags invokeAttr, system.Object binder, system.Object[] parameters, system.Object culture);
     
     public static system.Type typeof() {
         return system.reflection.ConstructorInfo.staticType;

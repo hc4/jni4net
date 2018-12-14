@@ -41,6 +41,12 @@ public class MethodInfo extends system.reflection.MethodBase {
     @net.sf.jni4net.attributes.ClrMethod("([LSystem/Type;)LSystem/Reflection/MethodInfo;")
     public native system.reflection.MethodInfo MakeGenericMethod(system.Type[] typeArguments);
     
+    @net.sf.jni4net.attributes.ClrMethod("(LSystem/Type;)LSystem/Delegate;")
+    public native system.Delegate CreateDelegate(system.Type delegateType);
+    
+    @net.sf.jni4net.attributes.ClrMethod("(LSystem/Type;LSystem/Object;)LSystem/Delegate;")
+    public native system.Delegate CreateDelegate(system.Type delegateType, system.Object target);
+    
     public static system.Type typeof() {
         return system.reflection.MethodInfo.staticType;
     }

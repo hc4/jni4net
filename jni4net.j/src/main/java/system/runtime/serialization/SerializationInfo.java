@@ -25,8 +25,17 @@ public class SerializationInfo extends system.Object {
         system.runtime.serialization.SerializationInfo.__ctorSerializationInfo0(this, type, converter);
     }
     
+    @net.sf.jni4net.attributes.ClrConstructor("(LSystem/Type;LSystem/Runtime/Serialization/IFormatterConverter;Z)V")
+    public SerializationInfo(system.Type type, system.Object converter, boolean requireSameTokenInPartialTrust) {
+            super(((net.sf.jni4net.inj.INJEnv)(null)), 0);
+        system.runtime.serialization.SerializationInfo.__ctorSerializationInfo1(this, type, converter, requireSameTokenInPartialTrust);
+    }
+    
     @net.sf.jni4net.attributes.ClrMethod("(Lsystem/Type;Lsystem/Object;)V")
     private native static void __ctorSerializationInfo0(net.sf.jni4net.inj.IClrProxy thiz, system.Type type, system.Object converter);
+    
+    @net.sf.jni4net.attributes.ClrMethod("(Lsystem/Type;Lsystem/Object;Z)V")
+    private native static void __ctorSerializationInfo1(net.sf.jni4net.inj.IClrProxy thiz, system.Type type, system.Object converter, boolean requireSameTokenInPartialTrust);
     
     @net.sf.jni4net.attributes.ClrMethod("()LSystem/String;")
     public native java.lang.String getFullTypeName();
@@ -45,6 +54,15 @@ public class SerializationInfo extends system.Object {
     
     @net.sf.jni4net.attributes.ClrMethod("()I")
     public native int getMemberCount();
+    
+    @net.sf.jni4net.attributes.ClrMethod("()LSystem/Type;")
+    public native system.Type getObjectType();
+    
+    @net.sf.jni4net.attributes.ClrMethod("()Z")
+    public native boolean isFullTypeNameSetExplicit();
+    
+    @net.sf.jni4net.attributes.ClrMethod("()Z")
+    public native boolean isAssemblyNameSetExplicit();
     
     @net.sf.jni4net.attributes.ClrMethod("()LSystem/Runtime/Serialization/SerializationInfoEnumerator;")
     public native system.Object GetEnumerator();
@@ -106,6 +124,9 @@ public class SerializationInfo extends system.Object {
     @net.sf.jni4net.attributes.ClrMethod("(LSystem/String;)LSystem/UInt16;")
     public native short GetUInt16(java.lang.String name);
     
+    @net.sf.jni4net.attributes.ClrMethod("(LSystem/String;)I")
+    public native int GetInt32(java.lang.String name);
+    
     @net.sf.jni4net.attributes.ClrMethod("(LSystem/String;)LSystem/UInt32;")
     public native int GetUInt32(java.lang.String name);
     
@@ -126,9 +147,6 @@ public class SerializationInfo extends system.Object {
     
     @net.sf.jni4net.attributes.ClrMethod("(LSystem/String;)LSystem/DateTime;")
     public native system.DateTime GetDateTime(java.lang.String name);
-    
-    @net.sf.jni4net.attributes.ClrMethod("(LSystem/String;)I")
-    public native int GetInt32(java.lang.String name);
     
     @net.sf.jni4net.attributes.ClrMethod("(LSystem/String;)LSystem/String;")
     public native java.lang.String GetString(java.lang.String name);

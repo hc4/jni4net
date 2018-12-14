@@ -37,12 +37,18 @@ class __CharSequence extends system.Object implements java.lang.CharSequence {
     public native java.lang.String toString();
     
     @net.sf.jni4net.attributes.ClrMethod("(I)C")
-    public native char charAt(int par0);
+    public native char charAt(int arg0);
     
     @net.sf.jni4net.attributes.ClrMethod("()I")
     public native int length();
     
     @net.sf.jni4net.attributes.ClrMethod("(II)Ljava/lang/CharSequence;")
-    public native java.lang.CharSequence subSequence(int par0, int par1);
+    public native java.lang.CharSequence subSequence(int arg0, int arg1);
+    
+    @net.sf.jni4net.attributes.ClrMethod("()Ljava/lang/Object;")
+    public native java.util.stream.IntStream chars();
+    
+    @net.sf.jni4net.attributes.ClrMethod("()Ljava/lang/Object;")
+    public native java.util.stream.IntStream codePoints();
 }
 //</generated-proxy>

@@ -38,6 +38,9 @@ public class Environment extends system.Object {
     @net.sf.jni4net.attributes.ClrMethod("(LSystem/String;)V")
     public native static void FailFast(java.lang.String message);
     
+    @net.sf.jni4net.attributes.ClrMethod("(LSystem/String;LSystem/Exception;)V")
+    public native static void FailFast(java.lang.String message, system.Exception exception);
+    
     @net.sf.jni4net.attributes.ClrMethod("()LSystem/String;")
     public native static java.lang.String getCommandLine();
     
@@ -58,6 +61,9 @@ public class Environment extends system.Object {
     
     @net.sf.jni4net.attributes.ClrMethod("()I")
     public native static int getProcessorCount();
+    
+    @net.sf.jni4net.attributes.ClrMethod("()I")
+    public native static int getSystemPageSize();
     
     @net.sf.jni4net.attributes.ClrMethod("()[LSystem/String;")
     public native static java.lang.String[] GetCommandLineArgs();
@@ -99,6 +105,12 @@ public class Environment extends system.Object {
     public native static java.lang.String getStackTrace();
     
     @net.sf.jni4net.attributes.ClrMethod("()Z")
+    public native static boolean is64BitProcess();
+    
+    @net.sf.jni4net.attributes.ClrMethod("()Z")
+    public native static boolean is64BitOperatingSystem();
+    
+    @net.sf.jni4net.attributes.ClrMethod("()Z")
     public native static boolean getHasShutdownStarted();
     
     @net.sf.jni4net.attributes.ClrMethod("()LSystem/String;")
@@ -110,8 +122,14 @@ public class Environment extends system.Object {
     @net.sf.jni4net.attributes.ClrMethod("(LSystem/Environment+SpecialFolder;)LSystem/String;")
     public native static java.lang.String GetFolderPath(system.Enum folder);
     
+    @net.sf.jni4net.attributes.ClrMethod("(LSystem/Environment+SpecialFolder;LSystem/Environment+SpecialFolderOption;)LSystem/String;")
+    public native static java.lang.String GetFolderPath(system.Enum folder, system.Enum option);
+    
     @net.sf.jni4net.attributes.ClrMethod("()LSystem/String;")
     public native static java.lang.String getUserDomainName();
+    
+    @net.sf.jni4net.attributes.ClrMethod("()I")
+    public native static int getCurrentManagedThreadId();
     
     public static system.Type typeof() {
         return system.Environment.staticType;

@@ -40,13 +40,25 @@ public interface IDictionary extends system.collections.ICollection, system.coll
     @net.sf.jni4net.attributes.ClrMethod("()Z")
     boolean isFixedSize();
     
+    @net.sf.jni4net.attributes.ClrMethod("()LSystem/Collections/IDictionaryEnumerator;")
+    system.collections.IDictionaryEnumerator IDictionary_GetEnumerator();
+    
     @net.sf.jni4net.attributes.ClrMethod("(LSystem/Object;)V")
     void Remove(system.Object key);
     
-    @net.sf.jni4net.attributes.ClrMethod("()LSystem/Collections/IDictionaryEnumerator;")
-    system.collections.IDictionaryEnumerator GetEnumerator();
+    @net.sf.jni4net.attributes.ClrMethod("(LSystem/Array;I)V")
+    void CopyTo(system.Array array, int index);
+    
+    @net.sf.jni4net.attributes.ClrMethod("()I")
+    int getCount();
+    
+    @net.sf.jni4net.attributes.ClrMethod("()LSystem/Object;")
+    system.Object getSyncRoot();
+    
+    @net.sf.jni4net.attributes.ClrMethod("()Z")
+    boolean isSynchronized();
     
     @net.sf.jni4net.attributes.ClrMethod("()LSystem/Collections/IEnumerator;")
-    system.collections.IEnumerator IEnumerable_GetEnumerator();
+    system.collections.IEnumerator GetEnumerator();
     //</generated-interface>
 }

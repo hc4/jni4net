@@ -109,6 +109,9 @@ public class BridgeSetup extends system.Object {
     @net.sf.jni4net.attributes.ClrMethod("()V")
     public native void AddBridgeClassPath();
     
+    @net.sf.jni4net.attributes.ClrMethod("(LSystem/String;Z)V")
+    public native void AddClassPath(java.lang.String jarOrClassRoot, boolean expand);
+    
     @net.sf.jni4net.attributes.ClrMethod("(LSystem/String;)V")
     public native void AddClassPath(java.lang.String jarOrClassRoot);
     

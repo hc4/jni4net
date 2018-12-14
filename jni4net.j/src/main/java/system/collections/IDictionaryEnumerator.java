@@ -21,5 +21,14 @@ public interface IDictionaryEnumerator extends system.collections.IEnumerator {
     
     @net.sf.jni4net.attributes.ClrMethod("()LSystem/Collections/DictionaryEntry;")
     system.ValueType getEntry();
+    
+    @net.sf.jni4net.attributes.ClrMethod("()Z")
+    boolean MoveNext();
+    
+    @net.sf.jni4net.attributes.ClrMethod("()LSystem/Object;")
+    system.Object getCurrent();
+    
+    @net.sf.jni4net.attributes.ClrMethod("()V")
+    void Reset();
     //</generated-interface>
 }

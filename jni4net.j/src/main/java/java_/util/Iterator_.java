@@ -33,13 +33,16 @@ class __Iterator extends system.Object implements java.util.Iterator {
             super(__env, __handle);
     }
     
+    @net.sf.jni4net.attributes.ClrMethod("()V")
+    public native void remove();
+    
     @net.sf.jni4net.attributes.ClrMethod("()Z")
     public native boolean hasNext();
     
     @net.sf.jni4net.attributes.ClrMethod("()Ljava/lang/Object;")
     public native java.lang.Object next();
     
-    @net.sf.jni4net.attributes.ClrMethod("()V")
-    public native void remove();
+    @net.sf.jni4net.attributes.ClrMethod("(Ljava/lang/Object;)V")
+    public native void forEachRemaining(java.util.function.Consumer arg0);
 }
 //</generated-proxy>

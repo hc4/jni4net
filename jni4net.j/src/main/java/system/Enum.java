@@ -110,6 +110,9 @@ public class Enum extends system.ValueType implements system.IComparable, system
     @net.sf.jni4net.attributes.ClrMethod("(LSystem/String;)LSystem/String;")
     public native java.lang.String ToString(java.lang.String format);
     
+    @net.sf.jni4net.attributes.ClrMethod("(LSystem/Enum;)Z")
+    public native boolean HasFlag(system.Enum flag);
+    
     @net.sf.jni4net.attributes.ClrMethod("(LSystem/Type;LSystem/SByte;)LSystem/Object;")
     public native static system.Object ToObject(system.Type enumType, byte value);
     

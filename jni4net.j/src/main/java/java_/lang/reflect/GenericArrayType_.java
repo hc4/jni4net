@@ -35,5 +35,8 @@ class __GenericArrayType extends system.Object implements java.lang.reflect.Gene
     
     @net.sf.jni4net.attributes.ClrMethod("()Ljava/lang/reflect/Type;")
     public native java.lang.reflect.Type getGenericComponentType();
+    
+    @net.sf.jni4net.attributes.ClrMethod("()Ljava/lang/String;")
+    public native java.lang.String getTypeName();
 }
 //</generated-proxy>

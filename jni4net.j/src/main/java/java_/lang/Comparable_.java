@@ -34,6 +34,6 @@ class __Comparable extends system.Object implements java.lang.Comparable {
     }
     
     @net.sf.jni4net.attributes.ClrMethod("(Ljava/lang/Object;)I")
-    public native int compareTo(java.lang.Object par0);
+    public native int compareTo(java.lang.Object arg0);
 }
 //</generated-proxy>

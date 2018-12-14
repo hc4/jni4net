@@ -92,6 +92,9 @@ public class MethodBase extends system.reflection.MemberInfo {
     @net.sf.jni4net.attributes.ClrMethod("()LSystem/Reflection/MethodBase;")
     public native static system.reflection.MethodBase GetCurrentMethod();
     
+    @net.sf.jni4net.attributes.ClrMethod("()LSystem/Reflection/MethodImplAttributes;")
+    public native system.Enum getMethodImplementationFlags();
+    
     @net.sf.jni4net.attributes.ClrMethod("()[LSystem/Type;")
     public native system.Type[] GetGenericArguments();
     
@@ -103,6 +106,15 @@ public class MethodBase extends system.reflection.MemberInfo {
     
     @net.sf.jni4net.attributes.ClrMethod("()Z")
     public native boolean isGenericMethod();
+    
+    @net.sf.jni4net.attributes.ClrMethod("()Z")
+    public native boolean isSecurityCritical();
+    
+    @net.sf.jni4net.attributes.ClrMethod("()Z")
+    public native boolean isSecuritySafeCritical();
+    
+    @net.sf.jni4net.attributes.ClrMethod("()Z")
+    public native boolean isSecurityTransparent();
     
     @net.sf.jni4net.attributes.ClrMethod("()LSystem/Reflection/MethodBody;")
     public native system.Object GetMethodBody();

@@ -32,5 +32,8 @@ class __Type extends system.Object implements java.lang.reflect.Type {
     protected __Type(net.sf.jni4net.inj.INJEnv __env, long __handle) {
             super(__env, __handle);
     }
+    
+    @net.sf.jni4net.attributes.ClrMethod("()Ljava/lang/String;")
+    public native java.lang.String getTypeName();
 }
 //</generated-proxy>

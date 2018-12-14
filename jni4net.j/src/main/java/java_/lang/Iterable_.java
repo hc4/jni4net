@@ -35,5 +35,11 @@ class __Iterable extends system.Object implements java.lang.Iterable {
     
     @net.sf.jni4net.attributes.ClrMethod("()Ljava/util/Iterator;")
     public native java.util.Iterator iterator();
+    
+    @net.sf.jni4net.attributes.ClrMethod("()Ljava/lang/Object;")
+    public native java.util.Spliterator spliterator();
+    
+    @net.sf.jni4net.attributes.ClrMethod("(Ljava/lang/Object;)V")
+    public native void forEach(java.util.function.Consumer arg0);
 }
 //</generated-proxy>

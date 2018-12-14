@@ -13,11 +13,11 @@ package system.reflection;
 public interface ICustomAttributeProvider {
     
     //<generated-interface>
-    @net.sf.jni4net.attributes.ClrMethod("(Z)[LSystem/Object;")
-    system.Object[] GetCustomAttributes(boolean inherit);
-    
     @net.sf.jni4net.attributes.ClrMethod("(LSystem/Type;Z)[LSystem/Object;")
     system.Object[] GetCustomAttributes(system.Type attributeType, boolean inherit);
+    
+    @net.sf.jni4net.attributes.ClrMethod("(Z)[LSystem/Object;")
+    system.Object[] GetCustomAttributes(boolean inherit);
     
     @net.sf.jni4net.attributes.ClrMethod("(LSystem/Type;Z)Z")
     boolean IsDefined(system.Type attributeType, boolean inherit);

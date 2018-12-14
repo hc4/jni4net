@@ -157,6 +157,9 @@ public class FileStream extends system.io.Stream {
     @net.sf.jni4net.attributes.ClrMethod("(LSystem/Security/AccessControl/FileSecurity;)V")
     public native void SetAccessControl(system.Object fileSecurity);
     
+    @net.sf.jni4net.attributes.ClrMethod("(Z)V")
+    public native void Flush(boolean flushToDisk);
+    
     @net.sf.jni4net.attributes.ClrMethod("()LSystem/IntPtr;")
     public native long getHandle();
     

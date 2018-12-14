@@ -146,17 +146,17 @@ public class Bridge extends system.Object {
     @net.sf.jni4net.attributes.ClrMethod("(Lnet/sf/jni4net/BridgeSetup;)Lnet/sf/jni4net/jni/JNIEnv;")
     public native static system.Object CreateJVM(net.sf.jni4net.BridgeSetup setup);
     
-    @net.sf.jni4net.attributes.ClrMethod("(Ljava/io/File;)V")
-    public native static void LoadAndRegisterAssemblyFrom(java.io.File assemblyFile);
-    
-    @net.sf.jni4net.attributes.ClrMethod("(Ljava/io/File;Ljava/lang/ClassLoader;)V")
-    public native static void LoadAndRegisterAssemblyFrom(java.io.File assemblyFile, java.lang.ClassLoader classLoader);
-    
     @net.sf.jni4net.attributes.ClrMethod("(LSystem/String;)V")
     public native static void LoadAndRegisterAssemblyByName(java.lang.String strongName);
     
     @net.sf.jni4net.attributes.ClrMethod("(LSystem/Reflection/Assembly;)V")
     public native static void RegisterAssembly(system.reflection.Assembly assembly);
+    
+    @net.sf.jni4net.attributes.ClrMethod("(Ljava/io/File;)V")
+    public native static void LoadAndRegisterAssemblyFrom(java.io.File assemblyFile);
+    
+    @net.sf.jni4net.attributes.ClrMethod("(Ljava/io/File;Ljava/lang/ClassLoader;)V")
+    public native static void LoadAndRegisterAssemblyFrom(java.io.File assemblyFile, java.lang.ClassLoader classLoader);
     
     @net.sf.jni4net.attributes.ClrMethod("(Ljava/lang/ClassLoader;)V")
     public native static void SetSystemClassLoader(java.lang.ClassLoader classLoader);

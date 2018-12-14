@@ -33,9 +33,6 @@ class __ICollection extends system.Object implements system.collections.ICollect
             super(__env, __handle);
     }
     
-    @net.sf.jni4net.attributes.ClrMethod("()LSystem/Collections/IEnumerator;")
-    public native system.collections.IEnumerator GetEnumerator();
-    
     @net.sf.jni4net.attributes.ClrMethod("(LSystem/Array;I)V")
     public native void CopyTo(system.Array array, int index);
     
@@ -47,5 +44,8 @@ class __ICollection extends system.Object implements system.collections.ICollect
     
     @net.sf.jni4net.attributes.ClrMethod("()Z")
     public native boolean isSynchronized();
+    
+    @net.sf.jni4net.attributes.ClrMethod("()LSystem/Collections/IEnumerator;")
+    public native system.collections.IEnumerator GetEnumerator();
 }
 //</generated-proxy>

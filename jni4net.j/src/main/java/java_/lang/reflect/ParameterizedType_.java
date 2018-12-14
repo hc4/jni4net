@@ -37,9 +37,12 @@ class __ParameterizedType extends system.Object implements java.lang.reflect.Par
     public native java.lang.reflect.Type[] getActualTypeArguments();
     
     @net.sf.jni4net.attributes.ClrMethod("()Ljava/lang/reflect/Type;")
-    public native java.lang.reflect.Type getOwnerType();
+    public native java.lang.reflect.Type getRawType();
     
     @net.sf.jni4net.attributes.ClrMethod("()Ljava/lang/reflect/Type;")
-    public native java.lang.reflect.Type getRawType();
+    public native java.lang.reflect.Type getOwnerType();
+    
+    @net.sf.jni4net.attributes.ClrMethod("()Ljava/lang/String;")
+    public native java.lang.String getTypeName();
 }
 //</generated-proxy>

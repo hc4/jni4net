@@ -60,7 +60,13 @@
     <Compile Include="attributes\JavaMethodAttribute.cs" />
     <Compile Include="attributes\JavaProxyAttribute.cs" />
     <Compile Include="generated\com\thoughtworks\paranamer\BytecodeReadingParanamer.generated.cs" />
+    <Compile Include="generated\java\lang\reflect\Executable.generated.cs" />
+    <Compile Include="generated\java\lang\reflect\Parameter.generated.cs" />
+    <Compile Include="generated\java\util\AbstractCollection.generated.cs" />
+    <Compile Include="generated\java\util\AbstractList.generated.cs" />
+    <Compile Include="generated\java\util\ArrayList.generated.cs" />
     <Compile Include="generated\java\util\Date.generated.cs" />
+    <Compile Include="generated\system\threading\tasks\Task.generated.cs" />
     <Compile Include="java\lang\reflect\Member.cs" />
     <Compile Include="jni\JNINativeMethod.cs" />
     <Compile Include="jni\MethodInfoExt.cs" />

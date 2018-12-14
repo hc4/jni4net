@@ -24,5 +24,8 @@ public interface ICollection extends system.collections.IEnumerable {
     
     @net.sf.jni4net.attributes.ClrMethod("()Z")
     boolean isSynchronized();
+    
+    @net.sf.jni4net.attributes.ClrMethod("()LSystem/Collections/IEnumerator;")
+    system.collections.IEnumerator GetEnumerator();
     //</generated-interface>
 }

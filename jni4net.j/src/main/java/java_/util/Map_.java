@@ -33,46 +33,79 @@ class __Map extends system.Object implements java.util.Map {
             super(__env, __handle);
     }
     
-    @net.sf.jni4net.attributes.ClrMethod("()I")
-    public native int hashCode();
+    @net.sf.jni4net.attributes.ClrMethod("(Ljava/lang/Object;)Ljava/lang/Object;")
+    public native java.lang.Object remove(java.lang.Object arg0);
     
-    @net.sf.jni4net.attributes.ClrMethod("(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;")
-    public native java.lang.Object put(java.lang.Object par0, java.lang.Object par1);
-    
-    @net.sf.jni4net.attributes.ClrMethod("()V")
-    public native void clear();
-    
-    @net.sf.jni4net.attributes.ClrMethod("(Ljava/lang/Object;)Z")
-    public native boolean equals(java.lang.Object par0);
-    
-    @net.sf.jni4net.attributes.ClrMethod("()Ljava/util/Set;")
-    public native java.util.Set entrySet();
+    @net.sf.jni4net.attributes.ClrMethod("(Ljava/lang/Object;Ljava/lang/Object;)Z")
+    public native boolean remove(java.lang.Object arg0, java.lang.Object arg1);
     
     @net.sf.jni4net.attributes.ClrMethod("(Ljava/lang/Object;)Ljava/lang/Object;")
-    public native java.lang.Object get(java.lang.Object par0);
+    public native java.lang.Object get(java.lang.Object arg0);
     
-    @net.sf.jni4net.attributes.ClrMethod("(Ljava/util/Map;)V")
-    public native void putAll(java.util.Map par0);
+    @net.sf.jni4net.attributes.ClrMethod("(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;")
+    public native java.lang.Object put(java.lang.Object arg0, java.lang.Object arg1);
     
-    @net.sf.jni4net.attributes.ClrMethod("()I")
-    public native int size();
+    @net.sf.jni4net.attributes.ClrMethod("(Ljava/lang/Object;)Z")
+    public native boolean equals(java.lang.Object arg0);
     
     @net.sf.jni4net.attributes.ClrMethod("()Ljava/util/Collection;")
     public native java.util.Collection values();
     
-    @net.sf.jni4net.attributes.ClrMethod("(Ljava/lang/Object;)Ljava/lang/Object;")
-    public native java.lang.Object remove(java.lang.Object par0);
+    @net.sf.jni4net.attributes.ClrMethod("()I")
+    public native int hashCode();
     
-    @net.sf.jni4net.attributes.ClrMethod("(Ljava/lang/Object;)Z")
-    public native boolean containsKey(java.lang.Object par0);
-    
-    @net.sf.jni4net.attributes.ClrMethod("(Ljava/lang/Object;)Z")
-    public native boolean containsValue(java.lang.Object par0);
+    @net.sf.jni4net.attributes.ClrMethod("()V")
+    public native void clear();
     
     @net.sf.jni4net.attributes.ClrMethod("()Z")
     public native boolean isEmpty();
     
+    @net.sf.jni4net.attributes.ClrMethod("(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;")
+    public native java.lang.Object replace(java.lang.Object arg0, java.lang.Object arg1);
+    
+    @net.sf.jni4net.attributes.ClrMethod("(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Z")
+    public native boolean replace(java.lang.Object arg0, java.lang.Object arg1, java.lang.Object arg2);
+    
+    @net.sf.jni4net.attributes.ClrMethod("(Ljava/lang/Object;)V")
+    public native void replaceAll(java.util.function.BiFunction arg0);
+    
+    @net.sf.jni4net.attributes.ClrMethod("()I")
+    public native int size();
+    
+    @net.sf.jni4net.attributes.ClrMethod("()Ljava/util/Set;")
+    public native java.util.Set entrySet();
+    
+    @net.sf.jni4net.attributes.ClrMethod("(Ljava/util/Map;)V")
+    public native void putAll(java.util.Map arg0);
+    
+    @net.sf.jni4net.attributes.ClrMethod("(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;")
+    public native java.lang.Object putIfAbsent(java.lang.Object arg0, java.lang.Object arg1);
+    
+    @net.sf.jni4net.attributes.ClrMethod("(Ljava/lang/Object;)V")
+    public native void forEach(java.util.function.BiConsumer arg0);
+    
     @net.sf.jni4net.attributes.ClrMethod("()Ljava/util/Set;")
     public native java.util.Set keySet();
+    
+    @net.sf.jni4net.attributes.ClrMethod("(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;")
+    public native java.lang.Object compute(java.lang.Object arg0, java.util.function.BiFunction arg1);
+    
+    @net.sf.jni4net.attributes.ClrMethod("(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;")
+    public native java.lang.Object computeIfAbsent(java.lang.Object arg0, java.util.function.Function arg1);
+    
+    @net.sf.jni4net.attributes.ClrMethod("(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;")
+    public native java.lang.Object computeIfPresent(java.lang.Object arg0, java.util.function.BiFunction arg1);
+    
+    @net.sf.jni4net.attributes.ClrMethod("(Ljava/lang/Object;)Z")
+    public native boolean containsKey(java.lang.Object arg0);
+    
+    @net.sf.jni4net.attributes.ClrMethod("(Ljava/lang/Object;)Z")
+    public native boolean containsValue(java.lang.Object arg0);
+    
+    @net.sf.jni4net.attributes.ClrMethod("(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;")
+    public native java.lang.Object getOrDefault(java.lang.Object arg0, java.lang.Object arg1);
+    
+    @net.sf.jni4net.attributes.ClrMethod("(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;")
+    public native java.lang.Object merge(java.lang.Object arg0, java.lang.Object arg1, java.util.function.BiFunction arg2);
 }
 //</generated-proxy>

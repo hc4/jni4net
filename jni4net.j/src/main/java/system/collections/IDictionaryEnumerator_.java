@@ -33,15 +33,6 @@ class __IDictionaryEnumerator extends system.Object implements system.collection
             super(__env, __handle);
     }
     
-    @net.sf.jni4net.attributes.ClrMethod("()Z")
-    public native boolean MoveNext();
-    
-    @net.sf.jni4net.attributes.ClrMethod("()LSystem/Object;")
-    public native system.Object getCurrent();
-    
-    @net.sf.jni4net.attributes.ClrMethod("()V")
-    public native void Reset();
-    
     @net.sf.jni4net.attributes.ClrMethod("()LSystem/Object;")
     public native system.Object getKey();
     
@@ -50,5 +41,14 @@ class __IDictionaryEnumerator extends system.Object implements system.collection
     
     @net.sf.jni4net.attributes.ClrMethod("()LSystem/Collections/DictionaryEntry;")
     public native system.ValueType getEntry();
+    
+    @net.sf.jni4net.attributes.ClrMethod("()Z")
+    public native boolean MoveNext();
+    
+    @net.sf.jni4net.attributes.ClrMethod("()LSystem/Object;")
+    public native system.Object getCurrent();
+    
+    @net.sf.jni4net.attributes.ClrMethod("()V")
+    public native void Reset();
 }
 //</generated-proxy>

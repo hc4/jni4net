@@ -123,6 +123,12 @@ public class String extends system.Object implements system.IComparable, system.
     @net.sf.jni4net.attributes.ClrMethod("(LSystem/String;[LSystem/String;)LSystem/String;")
     public native static java.lang.String Join(java.lang.String separator, java.lang.String[] value);
     
+    @net.sf.jni4net.attributes.ClrMethod("(LSystem/String;[LSystem/Object;)LSystem/String;")
+    public native static java.lang.String Join(java.lang.String separator, system.Object[] values);
+    
+    @net.sf.jni4net.attributes.ClrMethod("(LSystem/String;[[LSystem/Collections/Generic/IEnumerable`1;)LSystem/String;")
+    public native static java.lang.String Join(java.lang.String separator, system.collections.IEnumerable values);
+    
     @net.sf.jni4net.attributes.ClrMethod("(LSystem/String;[LSystem/String;II)LSystem/String;")
     public native static java.lang.String Join(java.lang.String separator, java.lang.String[] value, int startIndex, int count);
     
@@ -149,6 +155,9 @@ public class String extends system.Object implements system.IComparable, system.
     
     @net.sf.jni4net.attributes.ClrMethod("(LSystem/String;)Z")
     public native static boolean IsNullOrEmpty(java.lang.String value);
+    
+    @net.sf.jni4net.attributes.ClrMethod("(LSystem/String;)Z")
+    public native static boolean IsNullOrWhiteSpace(java.lang.String value);
     
     @net.sf.jni4net.attributes.ClrMethod("()I")
     public native int getLength();
@@ -204,14 +213,11 @@ public class String extends system.Object implements system.IComparable, system.
     @net.sf.jni4net.attributes.ClrMethod("(LSystem/String;LSystem/String;Z)I")
     public native static int Compare(java.lang.String strA, java.lang.String strB, boolean ignoreCase);
     
-    @net.sf.jni4net.attributes.ClrMethod("(LSystem/String;LSystem/String;LSystem/Globalization/CultureInfo;LSystem/Globalization/CompareOptions;)I")
-    public native static int Compare(java.lang.String strA, java.lang.String strB, system.Object culture, system.Enum options);
-    
-    @net.sf.jni4net.attributes.ClrMethod("(LSystem/String;ILSystem/String;IILSystem/Globalization/CultureInfo;LSystem/Globalization/CompareOptions;)I")
-    public native static int Compare(java.lang.String strA, int indexA, java.lang.String strB, int indexB, int length, system.Object culture, system.Enum options);
-    
     @net.sf.jni4net.attributes.ClrMethod("(LSystem/String;LSystem/String;LSystem/StringComparison;)I")
     public native static int Compare(java.lang.String strA, java.lang.String strB, system.Enum comparisonType);
+    
+    @net.sf.jni4net.attributes.ClrMethod("(LSystem/String;LSystem/String;LSystem/Globalization/CultureInfo;LSystem/Globalization/CompareOptions;)I")
+    public native static int Compare(java.lang.String strA, java.lang.String strB, system.Object culture, system.Enum options);
     
     @net.sf.jni4net.attributes.ClrMethod("(LSystem/String;LSystem/String;ZLSystem/Globalization/CultureInfo;)I")
     public native static int Compare(java.lang.String strA, java.lang.String strB, boolean ignoreCase, system.Object culture);
@@ -224,6 +230,9 @@ public class String extends system.Object implements system.IComparable, system.
     
     @net.sf.jni4net.attributes.ClrMethod("(LSystem/String;ILSystem/String;IIZLSystem/Globalization/CultureInfo;)I")
     public native static int Compare(java.lang.String strA, int indexA, java.lang.String strB, int indexB, int length, boolean ignoreCase, system.Object culture);
+    
+    @net.sf.jni4net.attributes.ClrMethod("(LSystem/String;ILSystem/String;IILSystem/Globalization/CultureInfo;LSystem/Globalization/CompareOptions;)I")
+    public native static int Compare(java.lang.String strA, int indexA, java.lang.String strB, int indexB, int length, system.Object culture, system.Enum options);
     
     @net.sf.jni4net.attributes.ClrMethod("(LSystem/String;ILSystem/String;IILSystem/StringComparison;)I")
     public native static int Compare(java.lang.String strA, int indexA, java.lang.String strB, int indexB, int length, system.Enum comparisonType);
@@ -387,6 +396,15 @@ public class String extends system.Object implements system.IComparable, system.
     @net.sf.jni4net.attributes.ClrMethod("(LSystem/String;[LSystem/Object;)LSystem/String;")
     public native static java.lang.String Format(java.lang.String format, system.Object[] args);
     
+    @net.sf.jni4net.attributes.ClrMethod("(LSystem/IFormatProvider;LSystem/String;LSystem/Object;)LSystem/String;")
+    public native static java.lang.String Format(system.IFormatProvider provider, java.lang.String format, system.Object arg0);
+    
+    @net.sf.jni4net.attributes.ClrMethod("(LSystem/IFormatProvider;LSystem/String;LSystem/Object;LSystem/Object;)LSystem/String;")
+    public native static java.lang.String Format(system.IFormatProvider provider, java.lang.String format, system.Object arg0, system.Object arg1);
+    
+    @net.sf.jni4net.attributes.ClrMethod("(LSystem/IFormatProvider;LSystem/String;LSystem/Object;LSystem/Object;LSystem/Object;)LSystem/String;")
+    public native static java.lang.String Format(system.IFormatProvider provider, java.lang.String format, system.Object arg0, system.Object arg1, system.Object arg2);
+    
     @net.sf.jni4net.attributes.ClrMethod("(LSystem/IFormatProvider;LSystem/String;[LSystem/Object;)LSystem/String;")
     public native static java.lang.String Format(system.IFormatProvider provider, java.lang.String format, system.Object[] args);
     
@@ -407,6 +425,9 @@ public class String extends system.Object implements system.IComparable, system.
     
     @net.sf.jni4net.attributes.ClrMethod("([LSystem/Object;)LSystem/String;")
     public native static java.lang.String Concat(system.Object[] args);
+    
+    @net.sf.jni4net.attributes.ClrMethod("([[LSystem/Collections/Generic/IEnumerable`1;)LSystem/String;")
+    public native static java.lang.String Concat(system.collections.IEnumerable values);
     
     @net.sf.jni4net.attributes.ClrMethod("(LSystem/String;LSystem/String;)LSystem/String;")
     public native static java.lang.String Concat(java.lang.String str0, java.lang.String str1);

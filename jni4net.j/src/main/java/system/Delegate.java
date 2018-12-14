@@ -71,9 +71,6 @@ public class Delegate extends system.Object implements system.ICloneable, system
     @net.sf.jni4net.attributes.ClrMethod("(LSystem/Type;LSystem/Type;LSystem/String;ZZ)LSystem/Delegate;")
     public native static system.Delegate CreateDelegate(system.Type type, system.Type target, java.lang.String method, boolean ignoreCase, boolean throwOnBindFailure);
     
-    @net.sf.jni4net.attributes.ClrMethod("(LSystem/Type;LSystem/Reflection/MethodInfo;)LSystem/Delegate;")
-    public native static system.Delegate CreateDelegate(system.Type type, system.reflection.MethodInfo method);
-    
     @net.sf.jni4net.attributes.ClrMethod("(LSystem/Type;LSystem/Reflection/MethodInfo;Z)LSystem/Delegate;")
     public native static system.Delegate CreateDelegate(system.Type type, system.reflection.MethodInfo method, boolean throwOnBindFailure);
     
@@ -82,6 +79,9 @@ public class Delegate extends system.Object implements system.ICloneable, system
     
     @net.sf.jni4net.attributes.ClrMethod("(LSystem/Type;LSystem/Object;LSystem/Reflection/MethodInfo;Z)LSystem/Delegate;")
     public native static system.Delegate CreateDelegate(system.Type type, system.Object firstArgument, system.reflection.MethodInfo method, boolean throwOnBindFailure);
+    
+    @net.sf.jni4net.attributes.ClrMethod("(LSystem/Type;LSystem/Reflection/MethodInfo;)LSystem/Delegate;")
+    public native static system.Delegate CreateDelegate(system.Type type, system.reflection.MethodInfo method);
     
     public static system.Type typeof() {
         return system.Delegate.staticType;

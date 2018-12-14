@@ -35,15 +35,26 @@ class __GenericDeclaration extends system.Object implements java.lang.reflect.Ge
     
     @net.sf.jni4net.attributes.ClrMethod("()[Ljava/lang/reflect/TypeVariable;")
     public native java.lang.reflect.TypeVariable[] getTypeParameters();
-
-    @net.sf.jni4net.attributes.ClrMethod("()Ljava/lang/annotation/Annotation;()Ljava/lang/Class;")
-    public native <T extends java.lang.annotation.Annotation> T getAnnotation(java.lang.Class<T> annotationClass);
-
-    @net.sf.jni4net.attributes.ClrMethod("()Ljava/lang/annotation/Annotation;")
+    
+    @net.sf.jni4net.attributes.ClrMethod("(Ljava/lang/Class;)Ljava/lang/annotation/Annotation;")
+    public native java.lang.annotation.Annotation getAnnotation(java.lang.Class arg0);
+    
+    @net.sf.jni4net.attributes.ClrMethod("()[Ljava/lang/annotation/Annotation;")
     public native java.lang.annotation.Annotation[] getAnnotations();
-
-    @net.sf.jni4net.attributes.ClrMethod("()Ljava/lang/annotation/Annotation;")
+    
+    @net.sf.jni4net.attributes.ClrMethod("(Ljava/lang/Class;)[Ljava/lang/annotation/Annotation;")
+    public native java.lang.annotation.Annotation[] getAnnotationsByType(java.lang.Class arg0);
+    
+    @net.sf.jni4net.attributes.ClrMethod("(Ljava/lang/Class;)Ljava/lang/annotation/Annotation;")
+    public native java.lang.annotation.Annotation getDeclaredAnnotation(java.lang.Class arg0);
+    
+    @net.sf.jni4net.attributes.ClrMethod("()[Ljava/lang/annotation/Annotation;")
     public native java.lang.annotation.Annotation[] getDeclaredAnnotations();
-
+    
+    @net.sf.jni4net.attributes.ClrMethod("(Ljava/lang/Class;)[Ljava/lang/annotation/Annotation;")
+    public native java.lang.annotation.Annotation[] getDeclaredAnnotationsByType(java.lang.Class arg0);
+    
+    @net.sf.jni4net.attributes.ClrMethod("(Ljava/lang/Class;)Z")
+    public native boolean isAnnotationPresent(java.lang.Class arg0);
 }
 //</generated-proxy>

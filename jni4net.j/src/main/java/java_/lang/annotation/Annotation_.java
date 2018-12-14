@@ -33,14 +33,14 @@ class __Annotation extends system.Object implements java.lang.annotation.Annotat
             super(__env, __handle);
     }
     
-    @net.sf.jni4net.attributes.ClrMethod("()I")
-    public native int hashCode();
-    
     @net.sf.jni4net.attributes.ClrMethod("(Ljava/lang/Object;)Z")
-    public native boolean equals(java.lang.Object par0);
+    public native boolean equals(java.lang.Object arg0);
     
     @net.sf.jni4net.attributes.ClrMethod("()Ljava/lang/String;")
     public native java.lang.String toString();
+    
+    @net.sf.jni4net.attributes.ClrMethod("()I")
+    public native int hashCode();
     
     @net.sf.jni4net.attributes.ClrMethod("()Ljava/lang/Class;")
     public native java.lang.Class annotationType();

@@ -33,79 +33,100 @@ class __List extends system.Object implements java.util.List {
             super(__env, __handle);
     }
     
-    @net.sf.jni4net.attributes.ClrMethod("()Ljava/util/Iterator;")
-    public native java.util.Iterator iterator();
+    @net.sf.jni4net.attributes.ClrMethod("(Ljava/lang/Object;)Z")
+    public native boolean add(java.lang.Object arg0);
+    
+    @net.sf.jni4net.attributes.ClrMethod("(ILjava/lang/Object;)V")
+    public native void add(int arg0, java.lang.Object arg1);
+    
+    @net.sf.jni4net.attributes.ClrMethod("(I)Ljava/lang/Object;")
+    public native java.lang.Object remove(int arg0);
+    
+    @net.sf.jni4net.attributes.ClrMethod("(Ljava/lang/Object;)Z")
+    public native boolean remove(java.lang.Object arg0);
+    
+    @net.sf.jni4net.attributes.ClrMethod("(I)Ljava/lang/Object;")
+    public native java.lang.Object get(int arg0);
+    
+    @net.sf.jni4net.attributes.ClrMethod("(Ljava/lang/Object;)Z")
+    public native boolean equals(java.lang.Object arg0);
     
     @net.sf.jni4net.attributes.ClrMethod("()I")
     public native int hashCode();
     
-    @net.sf.jni4net.attributes.ClrMethod("(Ljava/lang/Object;)Z")
-    public native boolean add(java.lang.Object par0);
+    @net.sf.jni4net.attributes.ClrMethod("(Ljava/lang/Object;)I")
+    public native int indexOf(java.lang.Object arg0);
     
     @net.sf.jni4net.attributes.ClrMethod("()V")
     public native void clear();
     
     @net.sf.jni4net.attributes.ClrMethod("(Ljava/lang/Object;)Z")
-    public native boolean equals(java.lang.Object par0);
-    
-    @net.sf.jni4net.attributes.ClrMethod("(Ljava/lang/Object;)Z")
-    public native boolean contains(java.lang.Object par0);
-    
-    @net.sf.jni4net.attributes.ClrMethod("(Ljava/util/Collection;)Z")
-    public native boolean addAll(java.util.Collection par0);
-    
-    @net.sf.jni4net.attributes.ClrMethod("()I")
-    public native int size();
-    
-    @net.sf.jni4net.attributes.ClrMethod("([Ljava/lang/Object;)[Ljava/lang/Object;")
-    public native java.lang.Object[] toArray(java.lang.Object[] par0);
-    
-    @net.sf.jni4net.attributes.ClrMethod("()[Ljava/lang/Object;")
-    public native java.lang.Object[] toArray();
-    
-    @net.sf.jni4net.attributes.ClrMethod("(Ljava/lang/Object;)Z")
-    public native boolean remove(java.lang.Object par0);
+    public native boolean contains(java.lang.Object arg0);
     
     @net.sf.jni4net.attributes.ClrMethod("()Z")
     public native boolean isEmpty();
     
-    @net.sf.jni4net.attributes.ClrMethod("(Ljava/util/Collection;)Z")
-    public native boolean containsAll(java.util.Collection par0);
-    
-    @net.sf.jni4net.attributes.ClrMethod("(Ljava/util/Collection;)Z")
-    public native boolean removeAll(java.util.Collection par0);
-    
-    @net.sf.jni4net.attributes.ClrMethod("(Ljava/util/Collection;)Z")
-    public native boolean retainAll(java.util.Collection par0);
-    
-    @net.sf.jni4net.attributes.ClrMethod("(ILjava/lang/Object;)V")
-    public native void add(int par0, java.lang.Object par1);
+    @net.sf.jni4net.attributes.ClrMethod("()Ljava/util/Iterator;")
+    public native java.util.Iterator iterator();
     
     @net.sf.jni4net.attributes.ClrMethod("(Ljava/lang/Object;)I")
-    public native int indexOf(java.lang.Object par0);
+    public native int lastIndexOf(java.lang.Object arg0);
     
-    @net.sf.jni4net.attributes.ClrMethod("(Ljava/lang/Object;)I")
-    public native int lastIndexOf(java.lang.Object par0);
+    @net.sf.jni4net.attributes.ClrMethod("(Ljava/lang/Object;)V")
+    public native void replaceAll(java.util.function.UnaryOperator arg0);
     
-    @net.sf.jni4net.attributes.ClrMethod("(ILjava/util/Collection;)Z")
-    public native boolean addAll(int par0, java.util.Collection par1);
-    
-    @net.sf.jni4net.attributes.ClrMethod("(I)Ljava/lang/Object;")
-    public native java.lang.Object get(int par0);
-    
-    @net.sf.jni4net.attributes.ClrMethod("(I)Ljava/lang/Object;")
-    public native java.lang.Object remove(int par0);
-    
-    @net.sf.jni4net.attributes.ClrMethod("(ILjava/lang/Object;)Ljava/lang/Object;")
-    public native java.lang.Object set(int par0, java.lang.Object par1);
+    @net.sf.jni4net.attributes.ClrMethod("()I")
+    public native int size();
     
     @net.sf.jni4net.attributes.ClrMethod("(II)Ljava/util/List;")
-    public native java.util.List subList(int par0, int par1);
+    public native java.util.List subList(int arg0, int arg1);
+    
+    @net.sf.jni4net.attributes.ClrMethod("()[Ljava/lang/Object;")
+    public native java.lang.Object[] toArray();
+    
+    @net.sf.jni4net.attributes.ClrMethod("([Ljava/lang/Object;)[Ljava/lang/Object;")
+    public native java.lang.Object[] toArray(java.lang.Object[] arg0);
+    
+    @net.sf.jni4net.attributes.ClrMethod("()Ljava/lang/Object;")
+    public native java.util.Spliterator spliterator();
+    
+    @net.sf.jni4net.attributes.ClrMethod("(Ljava/util/Collection;)Z")
+    public native boolean addAll(java.util.Collection arg0);
+    
+    @net.sf.jni4net.attributes.ClrMethod("(ILjava/util/Collection;)Z")
+    public native boolean addAll(int arg0, java.util.Collection arg1);
+    
+    @net.sf.jni4net.attributes.ClrMethod("(ILjava/lang/Object;)Ljava/lang/Object;")
+    public native java.lang.Object set(int arg0, java.lang.Object arg1);
+    
+    @net.sf.jni4net.attributes.ClrMethod("(Ljava/util/Collection;)Z")
+    public native boolean containsAll(java.util.Collection arg0);
     
     @net.sf.jni4net.attributes.ClrMethod("(I)Ljava/util/Iterator;")
-    public native java.util.ListIterator listIterator(int par0);
+    public native java.util.ListIterator listIterator(int arg0);
     
     @net.sf.jni4net.attributes.ClrMethod("()Ljava/util/Iterator;")
     public native java.util.ListIterator listIterator();
+    
+    @net.sf.jni4net.attributes.ClrMethod("(Ljava/util/Collection;)Z")
+    public native boolean removeAll(java.util.Collection arg0);
+    
+    @net.sf.jni4net.attributes.ClrMethod("(Ljava/util/Collection;)Z")
+    public native boolean retainAll(java.util.Collection arg0);
+    
+    @net.sf.jni4net.attributes.ClrMethod("(Ljava/lang/Object;)V")
+    public native void sort(java.util.Comparator arg0);
+    
+    @net.sf.jni4net.attributes.ClrMethod("()Ljava/lang/Object;")
+    public native java.util.stream.Stream stream();
+    
+    @net.sf.jni4net.attributes.ClrMethod("(Ljava/lang/Object;)Z")
+    public native boolean removeIf(java.util.function.Predicate arg0);
+    
+    @net.sf.jni4net.attributes.ClrMethod("()Ljava/lang/Object;")
+    public native java.util.stream.Stream parallelStream();
+    
+    @net.sf.jni4net.attributes.ClrMethod("(Ljava/lang/Object;)V")
+    public native void forEach(java.util.function.Consumer arg0);
 }
 //</generated-proxy>

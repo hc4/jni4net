@@ -59,11 +59,32 @@ public class Stream extends system.MarshalByRefObject implements system.IDisposa
     @net.sf.jni4net.attributes.ClrMethod("(I)V")
     public native void setWriteTimeout(int value);
     
+    @net.sf.jni4net.attributes.ClrMethod("(LSystem/IO/Stream;)LSystem/Threading/Tasks/Task;")
+    public native system.threading.tasks.Task CopyToAsync(system.io.Stream destination);
+    
+    @net.sf.jni4net.attributes.ClrMethod("(LSystem/IO/Stream;I)LSystem/Threading/Tasks/Task;")
+    public native system.threading.tasks.Task CopyToAsync(system.io.Stream destination, int bufferSize);
+    
+    @net.sf.jni4net.attributes.ClrMethod("(LSystem/IO/Stream;ILSystem/Threading/CancellationToken;)LSystem/Threading/Tasks/Task;")
+    public native system.threading.tasks.Task CopyToAsync(system.io.Stream destination, int bufferSize, system.ValueType cancellationToken);
+    
+    @net.sf.jni4net.attributes.ClrMethod("(LSystem/IO/Stream;)V")
+    public native void CopyTo(system.io.Stream destination);
+    
+    @net.sf.jni4net.attributes.ClrMethod("(LSystem/IO/Stream;I)V")
+    public native void CopyTo(system.io.Stream destination, int bufferSize);
+    
     @net.sf.jni4net.attributes.ClrMethod("()V")
     public native void Close();
     
     @net.sf.jni4net.attributes.ClrMethod("()V")
     public native void Flush();
+    
+    @net.sf.jni4net.attributes.ClrMethod("()LSystem/Threading/Tasks/Task;")
+    public native system.threading.tasks.Task FlushAsync();
+    
+    @net.sf.jni4net.attributes.ClrMethod("(LSystem/Threading/CancellationToken;)LSystem/Threading/Tasks/Task;")
+    public native system.threading.tasks.Task FlushAsync(system.ValueType cancellationToken);
     
     @net.sf.jni4net.attributes.ClrMethod("([BIILSystem/AsyncCallback;LSystem/Object;)LSystem/IAsyncResult;")
     public native system.IAsyncResult BeginRead(byte[] buffer, int offset, int count, system.AsyncCallback callback, system.Object state);
@@ -71,11 +92,23 @@ public class Stream extends system.MarshalByRefObject implements system.IDisposa
     @net.sf.jni4net.attributes.ClrMethod("(LSystem/IAsyncResult;)I")
     public native int EndRead(system.IAsyncResult asyncResult);
     
+    @net.sf.jni4net.attributes.ClrMethod("([BII)[[LSystem/Threading/Tasks/Task`1;")
+    public native system.threading.tasks.Task ReadAsync(byte[] buffer, int offset, int count);
+    
+    @net.sf.jni4net.attributes.ClrMethod("([BIILSystem/Threading/CancellationToken;)[[LSystem/Threading/Tasks/Task`1;")
+    public native system.threading.tasks.Task ReadAsync(byte[] buffer, int offset, int count, system.ValueType cancellationToken);
+    
     @net.sf.jni4net.attributes.ClrMethod("([BIILSystem/AsyncCallback;LSystem/Object;)LSystem/IAsyncResult;")
     public native system.IAsyncResult BeginWrite(byte[] buffer, int offset, int count, system.AsyncCallback callback, system.Object state);
     
     @net.sf.jni4net.attributes.ClrMethod("(LSystem/IAsyncResult;)V")
     public native void EndWrite(system.IAsyncResult asyncResult);
+    
+    @net.sf.jni4net.attributes.ClrMethod("([BII)LSystem/Threading/Tasks/Task;")
+    public native system.threading.tasks.Task WriteAsync(byte[] buffer, int offset, int count);
+    
+    @net.sf.jni4net.attributes.ClrMethod("([BIILSystem/Threading/CancellationToken;)LSystem/Threading/Tasks/Task;")
+    public native system.threading.tasks.Task WriteAsync(byte[] buffer, int offset, int count, system.ValueType cancellationToken);
     
     @net.sf.jni4net.attributes.ClrMethod("(JLSystem/IO/SeekOrigin;)J")
     public native long Seek(long offset, system.Enum origin);
