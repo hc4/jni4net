@@ -66,12 +66,6 @@
     <Compile Include="Program.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\jni4net.n\src\jni4net.n.csproj">
-      <Project>{774AED55-B9EC-4C7D-8EEB-1B2481C578B2}</Project>
-      <Name>jni4net.n</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="app.config" />
     <None Include="config\toolConfig.xsd">
       <CustomToolNamespace>net.sf.jni4net.tool.config</CustomToolNamespace>
@@ -97,6 +91,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="favicon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\jni4net.n\src\jni4net.n.csproj">
+      <Project>{774aed55-b9ec-4c7d-8eeb-1b2481c578b2}</Project>
+      <Name>jni4net.n</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
