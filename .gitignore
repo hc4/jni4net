@@ -2,5 +2,6 @@ jni4net.iws
 **/target/**
 tools/keys/jni4net.snk
 tools/lib/
-/.vs/jni4net/v15/.suo
-/.vs/jni4net/v15/Server/sqlite3
+obj
+/.vs
+*.user
