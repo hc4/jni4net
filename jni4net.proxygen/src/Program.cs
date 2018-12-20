@@ -54,16 +54,6 @@ namespace net.sf.jni4net.proxygen
                     return -1;
                 }
 
-                Version version = typeof(Program).Assembly.GetName().Version;
-                lib = typeof(Program).Assembly.Location.Replace("proxygen.exe", "jni4net.n-" + version + ".dll").Replace("jni4net.jni4net.n", "jni4net.n");
-                if (!File.Exists(lib))
-                {
-                    lib = lib.Replace("\\bin\\", "\\lib\\");
-                }
-
-                AppDomain currentDomain = AppDomain.CurrentDomain;
-                currentDomain.AssemblyResolve += AssemblyResolve;
-
                 return Work(args);
             }
             catch (Exception ex)
@@ -77,15 +67,6 @@ namespace net.sf.jni4net.proxygen
                 Console.Error.Write(ex.ToString());
                 return -1;
             }
-        }
-
-        static Assembly AssemblyResolve(object sender, ResolveEventArgs args)
-        {
-            if (args.Name.Contains("jni4net.n"))
-            {
-                return Assembly.LoadFrom(lib);
-            }
-            return null;
         }
 
         [SecurityPermission(SecurityAction.Assert, Flags = SecurityPermissionFlag.UnmanagedCode | SecurityPermissionFlag.Assertion | SecurityPermissionFlag.Execution)]

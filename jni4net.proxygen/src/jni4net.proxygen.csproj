@@ -14,6 +14,7 @@
     <RootNamespace>net.sf.jni4net.proxygen</RootNamespace>
     <AssemblyName>proxygen</AssemblyName>
     <TargetFramework>netcoreapp2.1</TargetFramework>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <FileAlignment>512</FileAlignment>
     <StartupObject></StartupObject>
     <ApplicationIcon>favicon.ico</ApplicationIcon>

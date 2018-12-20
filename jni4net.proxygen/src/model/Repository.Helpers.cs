@@ -187,7 +187,10 @@ namespace net.sf.jni4net.proxygen.model
         {
             bool foundJni4net = false;
             knownAssemblies = new List<Assembly>();
-            knownAssemblies.Add(typeof (object).Assembly);
+
+            var netAssembly = Assembly.Load(@"netstandard");
+            knownAssemblies.Add(netAssembly);
+
             if (config.AssemblyReference != null && config.AssemblyReference.Length>0)
             {
                 foreach (var reference in config.AssemblyReference)
@@ -419,6 +422,12 @@ namespace net.sf.jni4net.proxygen.model
 
         private static bool TestCLRType(Type type)
         {
+            // test if type available in netstandard
+            if (FindType(type.FullName) == null)
+            {
+                return true;
+            }
+
             return type.IsPointer
                 //|| type.IsByRef 
                 //|| typeof (Delegate).IsAssignableFrom(type)
@@ -529,6 +538,20 @@ namespace net.sf.jni4net.proxygen.model
                 reg.IsSkipJVMInterface = !registration.SyncInterface;
                 reg.MergeJavaSource = registration.MergeJavaSource;
             }
+        }
+
+        private static Type FindType(string typeName)
+        {
+            foreach (Assembly a in knownAssemblies)
+            {
+                var type = a.GetType(typeName);
+                if (type != null)
+                {
+                    return type;
+                }
+            }
+
+            return null;
         }
     }
 }

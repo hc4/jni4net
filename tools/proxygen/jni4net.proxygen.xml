@@ -198,10 +198,9 @@ This content is released under the (http://opensource.org/licenses/MIT) MIT Lice
   <!-- io -->
   <ClrType TypeName="System.IO.FileStream"/>
   <ClrType TypeName="System.IO.Stream"/>
-  <ClrType TypeName="System.Console"/>
   <ClrType TypeName="System.Environment"/>
-  <ClrType TypeName="System.IO.TextWriter"/>
-  <ClrType TypeName="System.IO.TextReader"/>
+<!--  <ClrType TypeName="System.IO.TextWriter"/> 
+  <ClrType TypeName="System.IO.TextReader"/>     -->
     
   <!-- tasks -->
   <ClrType TypeName="System.Threading.Tasks.Task" />
@@ -220,7 +219,6 @@ This content is released under the (http://opensource.org/licenses/MIT) MIT Lice
   <ClrType TypeName="System.Runtime.Serialization.ISerializable"/>
   <ClrType TypeName="System.Runtime.Serialization.SerializationInfo"/>
   <ClrType TypeName="System.Runtime.Serialization.StreamingContext"/>
-  <ClrType TypeName="System.Security.IEvidenceFactory"/>
   <ClrType TypeName="System.IComparable"/>
   <ClrType TypeName="System.IConvertible">
 	  <!-- 
@@ -247,10 +245,6 @@ This content is released under the (http://opensource.org/licenses/MIT) MIT Lice
   <ClrType TypeName="System.Reflection.ConstructorInfo"/>
   <ClrType TypeName="System.Reflection.MethodInfo"/>
   <ClrType TypeName="System.Reflection.PropertyInfo"/>
-  <ClrType TypeName="System.Runtime.InteropServices._FieldInfo" Generate="false">
-    <MethodModifier MethodName="SetValueDirect" Signature="(LSystem/TypedReference;LSystem/Object;)V" Skip="true"/>
-    <MethodModifier MethodName="GetValueDirect" Signature="(LSystem/TypedReference;)LSystem/Object;" Skip="true"/>
-  </ClrType>
   <ClrType TypeName="System.Reflection.FieldInfo">
 	  <MethodModifier MethodName="SetValueDirect" Signature="(LSystem/TypedReference;LSystem/Object;)V" Skip="true"/>
 	  <MethodModifier MethodName="GetValueDirect" Signature="(LSystem/TypedReference;)LSystem/Object;" Skip="true"/>

@@ -24,6 +24,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
+using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using java.io;
@@ -283,8 +284,7 @@ namespace net.sf.jni4net.proxygen.model
                     }
                     else if (clrWrapperA != null && type.IsSealed && type.Name.StartsWith("__"))
                     {
-                        var realType =
-                            clrWrapperA.GetType().GetProperty("InterfaceType").GetValue(clrWrapperA, null) as Type;
+                        var realType = clrWrapperA.GetType().GetProperty("InterfaceType").GetValue(clrWrapperA, null) as Type;
                         if (realType != null)
                         {
                             string clazzName = GetInterfaceName(type);
@@ -345,15 +345,7 @@ namespace net.sf.jni4net.proxygen.model
         {
             foreach (TypeRegistration registration in config.ClrType)
             {
-                Type type = null;
-                foreach (Assembly a in knownAssemblies)
-                {
-                    type = a.GetType(registration.TypeName);
-                    if (type != null)
-                    {
-                        break;
-                    }
-                }
+                var type = FindType(registration.TypeName);
 
                 if (type == null)
                 {
