@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "jni4net.proxygen": {
+      "commandName": "Project",
+      "commandLineArgs": "moex-rms.proxygen.xml ",
+      "workingDirectory": "X:\\Projects\\ExtendableApp\\LimitsControl\\rms",
+      "environmentVariables": {
+        "JAVA_HOME": "C:\\Program Files\\Java\\jre1.8.0_181"
+      }
+    }
+  }
+}

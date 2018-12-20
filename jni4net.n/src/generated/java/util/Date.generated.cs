@@ -27,47 +27,47 @@ namespace java.util {
         
         internal static global::net.sf.jni4net.jni.MethodId j4n_before4;
         
-        internal static global::net.sf.jni4net.jni.MethodId j4n_UTC5;
+        internal static global::net.sf.jni4net.jni.MethodId j4n_getDate5;
         
-        internal static global::net.sf.jni4net.jni.MethodId j4n_from6;
+        internal static global::net.sf.jni4net.jni.MethodId j4n_UTC6;
         
-        internal static global::net.sf.jni4net.jni.MethodId j4n_getHours7;
+        internal static global::net.sf.jni4net.jni.MethodId j4n_from7;
         
-        internal static global::net.sf.jni4net.jni.MethodId j4n_getMinutes8;
+        internal static global::net.sf.jni4net.jni.MethodId j4n_getHours8;
         
-        internal static global::net.sf.jni4net.jni.MethodId j4n_getSeconds9;
+        internal static global::net.sf.jni4net.jni.MethodId j4n_getMinutes9;
         
-        internal static global::net.sf.jni4net.jni.MethodId j4n_getTime10;
+        internal static global::net.sf.jni4net.jni.MethodId j4n_getSeconds10;
         
-        internal static global::net.sf.jni4net.jni.MethodId j4n_getTimezoneOffset11;
+        internal static global::net.sf.jni4net.jni.MethodId j4n_getTime11;
         
-        internal static global::net.sf.jni4net.jni.MethodId j4n_setDate12;
+        internal static global::net.sf.jni4net.jni.MethodId j4n_getTimezoneOffset12;
         
-        internal static global::net.sf.jni4net.jni.MethodId j4n_setHours13;
+        internal static global::net.sf.jni4net.jni.MethodId j4n_setDate13;
         
-        internal static global::net.sf.jni4net.jni.MethodId j4n_setMinutes14;
+        internal static global::net.sf.jni4net.jni.MethodId j4n_setHours14;
         
-        internal static global::net.sf.jni4net.jni.MethodId j4n_setMonth15;
+        internal static global::net.sf.jni4net.jni.MethodId j4n_setMinutes15;
         
-        internal static global::net.sf.jni4net.jni.MethodId j4n_setSeconds16;
+        internal static global::net.sf.jni4net.jni.MethodId j4n_setMonth16;
         
-        internal static global::net.sf.jni4net.jni.MethodId j4n_setTime17;
+        internal static global::net.sf.jni4net.jni.MethodId j4n_setSeconds17;
         
-        internal static global::net.sf.jni4net.jni.MethodId j4n_setYear18;
+        internal static global::net.sf.jni4net.jni.MethodId j4n_setTime18;
         
-        internal static global::net.sf.jni4net.jni.MethodId j4n_toGMTString19;
+        internal static global::net.sf.jni4net.jni.MethodId j4n_setYear19;
         
-        internal static global::net.sf.jni4net.jni.MethodId j4n_toInstant20;
+        internal static global::net.sf.jni4net.jni.MethodId j4n_toGMTString20;
         
-        internal static global::net.sf.jni4net.jni.MethodId j4n_toLocaleString21;
+        internal static global::net.sf.jni4net.jni.MethodId j4n_toInstant21;
         
-        internal static global::net.sf.jni4net.jni.MethodId j4n_getDate22;
+        internal static global::net.sf.jni4net.jni.MethodId j4n_toLocaleString22;
         
         internal static global::net.sf.jni4net.jni.MethodId j4n_getDay23;
         
-        internal static global::net.sf.jni4net.jni.MethodId j4n_getYear24;
+        internal static global::net.sf.jni4net.jni.MethodId j4n_getMonth24;
         
-        internal static global::net.sf.jni4net.jni.MethodId j4n_getMonth25;
+        internal static global::net.sf.jni4net.jni.MethodId j4n_getYear25;
         
         internal static global::net.sf.jni4net.jni.MethodId j4n__ctorDate26;
         
@@ -152,27 +152,27 @@ namespace java.util {
             global::java.util.Date.j4n_parse2 = @__env.GetStaticMethodID(global::java.util.Date.staticClass, "parse", "(Ljava/lang/String;)J");
             global::java.util.Date.j4n_after3 = @__env.GetMethodID(global::java.util.Date.staticClass, "after", "(Ljava/util/Date;)Z");
             global::java.util.Date.j4n_before4 = @__env.GetMethodID(global::java.util.Date.staticClass, "before", "(Ljava/util/Date;)Z");
-            global::java.util.Date.j4n_UTC5 = @__env.GetStaticMethodID(global::java.util.Date.staticClass, "UTC", "(IIIIII)J");
-            global::java.util.Date.j4n_from6 = @__env.GetStaticMethodID(global::java.util.Date.staticClass, "from", "(Ljava/time/Instant;)Ljava/util/Date;");
-            global::java.util.Date.j4n_getHours7 = @__env.GetMethodID(global::java.util.Date.staticClass, "getHours", "()I");
-            global::java.util.Date.j4n_getMinutes8 = @__env.GetMethodID(global::java.util.Date.staticClass, "getMinutes", "()I");
-            global::java.util.Date.j4n_getSeconds9 = @__env.GetMethodID(global::java.util.Date.staticClass, "getSeconds", "()I");
-            global::java.util.Date.j4n_getTime10 = @__env.GetMethodID(global::java.util.Date.staticClass, "getTime", "()J");
-            global::java.util.Date.j4n_getTimezoneOffset11 = @__env.GetMethodID(global::java.util.Date.staticClass, "getTimezoneOffset", "()I");
-            global::java.util.Date.j4n_setDate12 = @__env.GetMethodID(global::java.util.Date.staticClass, "setDate", "(I)V");
-            global::java.util.Date.j4n_setHours13 = @__env.GetMethodID(global::java.util.Date.staticClass, "setHours", "(I)V");
-            global::java.util.Date.j4n_setMinutes14 = @__env.GetMethodID(global::java.util.Date.staticClass, "setMinutes", "(I)V");
-            global::java.util.Date.j4n_setMonth15 = @__env.GetMethodID(global::java.util.Date.staticClass, "setMonth", "(I)V");
-            global::java.util.Date.j4n_setSeconds16 = @__env.GetMethodID(global::java.util.Date.staticClass, "setSeconds", "(I)V");
-            global::java.util.Date.j4n_setTime17 = @__env.GetMethodID(global::java.util.Date.staticClass, "setTime", "(J)V");
-            global::java.util.Date.j4n_setYear18 = @__env.GetMethodID(global::java.util.Date.staticClass, "setYear", "(I)V");
-            global::java.util.Date.j4n_toGMTString19 = @__env.GetMethodID(global::java.util.Date.staticClass, "toGMTString", "()Ljava/lang/String;");
-            global::java.util.Date.j4n_toInstant20 = @__env.GetMethodID(global::java.util.Date.staticClass, "toInstant", "()Ljava/time/Instant;");
-            global::java.util.Date.j4n_toLocaleString21 = @__env.GetMethodID(global::java.util.Date.staticClass, "toLocaleString", "()Ljava/lang/String;");
-            global::java.util.Date.j4n_getDate22 = @__env.GetMethodID(global::java.util.Date.staticClass, "getDate", "()I");
+            global::java.util.Date.j4n_getDate5 = @__env.GetMethodID(global::java.util.Date.staticClass, "getDate", "()I");
+            global::java.util.Date.j4n_UTC6 = @__env.GetStaticMethodID(global::java.util.Date.staticClass, "UTC", "(IIIIII)J");
+            global::java.util.Date.j4n_from7 = @__env.GetStaticMethodID(global::java.util.Date.staticClass, "from", "(Ljava/time/Instant;)Ljava/util/Date;");
+            global::java.util.Date.j4n_getHours8 = @__env.GetMethodID(global::java.util.Date.staticClass, "getHours", "()I");
+            global::java.util.Date.j4n_getMinutes9 = @__env.GetMethodID(global::java.util.Date.staticClass, "getMinutes", "()I");
+            global::java.util.Date.j4n_getSeconds10 = @__env.GetMethodID(global::java.util.Date.staticClass, "getSeconds", "()I");
+            global::java.util.Date.j4n_getTime11 = @__env.GetMethodID(global::java.util.Date.staticClass, "getTime", "()J");
+            global::java.util.Date.j4n_getTimezoneOffset12 = @__env.GetMethodID(global::java.util.Date.staticClass, "getTimezoneOffset", "()I");
+            global::java.util.Date.j4n_setDate13 = @__env.GetMethodID(global::java.util.Date.staticClass, "setDate", "(I)V");
+            global::java.util.Date.j4n_setHours14 = @__env.GetMethodID(global::java.util.Date.staticClass, "setHours", "(I)V");
+            global::java.util.Date.j4n_setMinutes15 = @__env.GetMethodID(global::java.util.Date.staticClass, "setMinutes", "(I)V");
+            global::java.util.Date.j4n_setMonth16 = @__env.GetMethodID(global::java.util.Date.staticClass, "setMonth", "(I)V");
+            global::java.util.Date.j4n_setSeconds17 = @__env.GetMethodID(global::java.util.Date.staticClass, "setSeconds", "(I)V");
+            global::java.util.Date.j4n_setTime18 = @__env.GetMethodID(global::java.util.Date.staticClass, "setTime", "(J)V");
+            global::java.util.Date.j4n_setYear19 = @__env.GetMethodID(global::java.util.Date.staticClass, "setYear", "(I)V");
+            global::java.util.Date.j4n_toGMTString20 = @__env.GetMethodID(global::java.util.Date.staticClass, "toGMTString", "()Ljava/lang/String;");
+            global::java.util.Date.j4n_toInstant21 = @__env.GetMethodID(global::java.util.Date.staticClass, "toInstant", "()Ljava/time/Instant;");
+            global::java.util.Date.j4n_toLocaleString22 = @__env.GetMethodID(global::java.util.Date.staticClass, "toLocaleString", "()Ljava/lang/String;");
             global::java.util.Date.j4n_getDay23 = @__env.GetMethodID(global::java.util.Date.staticClass, "getDay", "()I");
-            global::java.util.Date.j4n_getYear24 = @__env.GetMethodID(global::java.util.Date.staticClass, "getYear", "()I");
-            global::java.util.Date.j4n_getMonth25 = @__env.GetMethodID(global::java.util.Date.staticClass, "getMonth", "()I");
+            global::java.util.Date.j4n_getMonth24 = @__env.GetMethodID(global::java.util.Date.staticClass, "getMonth", "()I");
+            global::java.util.Date.j4n_getYear25 = @__env.GetMethodID(global::java.util.Date.staticClass, "getYear", "()I");
             global::java.util.Date.j4n__ctorDate26 = @__env.GetMethodID(global::java.util.Date.staticClass, "<init>", "(Ljava/lang/String;)V");
             global::java.util.Date.j4n__ctorDate27 = @__env.GetMethodID(global::java.util.Date.staticClass, "<init>", "(IIIIII)V");
             global::java.util.Date.j4n__ctorDate28 = @__env.GetMethodID(global::java.util.Date.staticClass, "<init>", "(IIIII)V");
@@ -221,11 +221,19 @@ namespace java.util {
             }
         }
         
+        [global::net.sf.jni4net.attributes.JavaMethodAttribute("()I")]
+        public virtual int getDate() {
+            global::net.sf.jni4net.jni.JNIEnv @__env = this.Env;
+            using(new global::net.sf.jni4net.jni.LocalFrame(@__env, 10)){
+            return ((int)(@__env.CallIntMethod(this, global::java.util.Date.j4n_getDate5)));
+            }
+        }
+        
         [global::net.sf.jni4net.attributes.JavaMethodAttribute("(IIIIII)J")]
         public static long UTC(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5) {
             global::net.sf.jni4net.jni.JNIEnv @__env = global::net.sf.jni4net.jni.JNIEnv.ThreadEnv;
             using(new global::net.sf.jni4net.jni.LocalFrame(@__env, 22)){
-            return ((long)(@__env.CallStaticLongMethod(global::java.util.Date.staticClass, global::java.util.Date.j4n_UTC5, global::net.sf.jni4net.utils.Convertor.ParPrimC2J(arg0), global::net.sf.jni4net.utils.Convertor.ParPrimC2J(arg1), global::net.sf.jni4net.utils.Convertor.ParPrimC2J(arg2), global::net.sf.jni4net.utils.Convertor.ParPrimC2J(arg3), global::net.sf.jni4net.utils.Convertor.ParPrimC2J(arg4), global::net.sf.jni4net.utils.Convertor.ParPrimC2J(arg5))));
+            return ((long)(@__env.CallStaticLongMethod(global::java.util.Date.staticClass, global::java.util.Date.j4n_UTC6, global::net.sf.jni4net.utils.Convertor.ParPrimC2J(arg0), global::net.sf.jni4net.utils.Convertor.ParPrimC2J(arg1), global::net.sf.jni4net.utils.Convertor.ParPrimC2J(arg2), global::net.sf.jni4net.utils.Convertor.ParPrimC2J(arg3), global::net.sf.jni4net.utils.Convertor.ParPrimC2J(arg4), global::net.sf.jni4net.utils.Convertor.ParPrimC2J(arg5))));
             }
         }
         
@@ -233,7 +241,7 @@ namespace java.util {
         public static global::java.util.Date from(global::java.lang.Object arg0) {
             global::net.sf.jni4net.jni.JNIEnv @__env = global::net.sf.jni4net.jni.JNIEnv.ThreadEnv;
             using(new global::net.sf.jni4net.jni.LocalFrame(@__env, 12)){
-            return global::net.sf.jni4net.utils.Convertor.StrongJ2Cp<global::java.util.Date>(@__env, @__env.CallStaticObjectMethodPtr(global::java.util.Date.staticClass, global::java.util.Date.j4n_from6, global::net.sf.jni4net.utils.Convertor.ParStrongCp2J(arg0)));
+            return global::net.sf.jni4net.utils.Convertor.StrongJ2Cp<global::java.util.Date>(@__env, @__env.CallStaticObjectMethodPtr(global::java.util.Date.staticClass, global::java.util.Date.j4n_from7, global::net.sf.jni4net.utils.Convertor.ParStrongCp2J(arg0)));
             }
         }
         
@@ -241,7 +249,7 @@ namespace java.util {
         public virtual int getHours() {
             global::net.sf.jni4net.jni.JNIEnv @__env = this.Env;
             using(new global::net.sf.jni4net.jni.LocalFrame(@__env, 10)){
-            return ((int)(@__env.CallIntMethod(this, global::java.util.Date.j4n_getHours7)));
+            return ((int)(@__env.CallIntMethod(this, global::java.util.Date.j4n_getHours8)));
             }
         }
         
@@ -249,7 +257,7 @@ namespace java.util {
         public virtual int getMinutes() {
             global::net.sf.jni4net.jni.JNIEnv @__env = this.Env;
             using(new global::net.sf.jni4net.jni.LocalFrame(@__env, 10)){
-            return ((int)(@__env.CallIntMethod(this, global::java.util.Date.j4n_getMinutes8)));
+            return ((int)(@__env.CallIntMethod(this, global::java.util.Date.j4n_getMinutes9)));
             }
         }
         
@@ -257,7 +265,7 @@ namespace java.util {
         public virtual int getSeconds() {
             global::net.sf.jni4net.jni.JNIEnv @__env = this.Env;
             using(new global::net.sf.jni4net.jni.LocalFrame(@__env, 10)){
-            return ((int)(@__env.CallIntMethod(this, global::java.util.Date.j4n_getSeconds9)));
+            return ((int)(@__env.CallIntMethod(this, global::java.util.Date.j4n_getSeconds10)));
             }
         }
         
@@ -265,7 +273,7 @@ namespace java.util {
         public virtual long getTime() {
             global::net.sf.jni4net.jni.JNIEnv @__env = this.Env;
             using(new global::net.sf.jni4net.jni.LocalFrame(@__env, 10)){
-            return ((long)(@__env.CallLongMethod(this, global::java.util.Date.j4n_getTime10)));
+            return ((long)(@__env.CallLongMethod(this, global::java.util.Date.j4n_getTime11)));
             }
         }
         
@@ -273,7 +281,7 @@ namespace java.util {
         public virtual int getTimezoneOffset() {
             global::net.sf.jni4net.jni.JNIEnv @__env = this.Env;
             using(new global::net.sf.jni4net.jni.LocalFrame(@__env, 10)){
-            return ((int)(@__env.CallIntMethod(this, global::java.util.Date.j4n_getTimezoneOffset11)));
+            return ((int)(@__env.CallIntMethod(this, global::java.util.Date.j4n_getTimezoneOffset12)));
             }
         }
         
@@ -281,7 +289,7 @@ namespace java.util {
         public virtual void setDate(int arg0) {
             global::net.sf.jni4net.jni.JNIEnv @__env = this.Env;
             using(new global::net.sf.jni4net.jni.LocalFrame(@__env, 12)){
-            @__env.CallVoidMethod(this, global::java.util.Date.j4n_setDate12, global::net.sf.jni4net.utils.Convertor.ParPrimC2J(arg0));
+            @__env.CallVoidMethod(this, global::java.util.Date.j4n_setDate13, global::net.sf.jni4net.utils.Convertor.ParPrimC2J(arg0));
             }
         }
         
@@ -289,7 +297,7 @@ namespace java.util {
         public virtual void setHours(int arg0) {
             global::net.sf.jni4net.jni.JNIEnv @__env = this.Env;
             using(new global::net.sf.jni4net.jni.LocalFrame(@__env, 12)){
-            @__env.CallVoidMethod(this, global::java.util.Date.j4n_setHours13, global::net.sf.jni4net.utils.Convertor.ParPrimC2J(arg0));
+            @__env.CallVoidMethod(this, global::java.util.Date.j4n_setHours14, global::net.sf.jni4net.utils.Convertor.ParPrimC2J(arg0));
             }
         }
         
@@ -297,7 +305,7 @@ namespace java.util {
         public virtual void setMinutes(int arg0) {
             global::net.sf.jni4net.jni.JNIEnv @__env = this.Env;
             using(new global::net.sf.jni4net.jni.LocalFrame(@__env, 12)){
-            @__env.CallVoidMethod(this, global::java.util.Date.j4n_setMinutes14, global::net.sf.jni4net.utils.Convertor.ParPrimC2J(arg0));
+            @__env.CallVoidMethod(this, global::java.util.Date.j4n_setMinutes15, global::net.sf.jni4net.utils.Convertor.ParPrimC2J(arg0));
             }
         }
         
@@ -305,7 +313,7 @@ namespace java.util {
         public virtual void setMonth(int arg0) {
             global::net.sf.jni4net.jni.JNIEnv @__env = this.Env;
             using(new global::net.sf.jni4net.jni.LocalFrame(@__env, 12)){
-            @__env.CallVoidMethod(this, global::java.util.Date.j4n_setMonth15, global::net.sf.jni4net.utils.Convertor.ParPrimC2J(arg0));
+            @__env.CallVoidMethod(this, global::java.util.Date.j4n_setMonth16, global::net.sf.jni4net.utils.Convertor.ParPrimC2J(arg0));
             }
         }
         
@@ -313,7 +321,7 @@ namespace java.util {
         public virtual void setSeconds(int arg0) {
             global::net.sf.jni4net.jni.JNIEnv @__env = this.Env;
             using(new global::net.sf.jni4net.jni.LocalFrame(@__env, 12)){
-            @__env.CallVoidMethod(this, global::java.util.Date.j4n_setSeconds16, global::net.sf.jni4net.utils.Convertor.ParPrimC2J(arg0));
+            @__env.CallVoidMethod(this, global::java.util.Date.j4n_setSeconds17, global::net.sf.jni4net.utils.Convertor.ParPrimC2J(arg0));
             }
         }
         
@@ -321,7 +329,7 @@ namespace java.util {
         public virtual void setTime(long arg0) {
             global::net.sf.jni4net.jni.JNIEnv @__env = this.Env;
             using(new global::net.sf.jni4net.jni.LocalFrame(@__env, 12)){
-            @__env.CallVoidMethod(this, global::java.util.Date.j4n_setTime17, global::net.sf.jni4net.utils.Convertor.ParPrimC2J(arg0));
+            @__env.CallVoidMethod(this, global::java.util.Date.j4n_setTime18, global::net.sf.jni4net.utils.Convertor.ParPrimC2J(arg0));
             }
         }
         
@@ -329,7 +337,7 @@ namespace java.util {
         public virtual void setYear(int arg0) {
             global::net.sf.jni4net.jni.JNIEnv @__env = this.Env;
             using(new global::net.sf.jni4net.jni.LocalFrame(@__env, 12)){
-            @__env.CallVoidMethod(this, global::java.util.Date.j4n_setYear18, global::net.sf.jni4net.utils.Convertor.ParPrimC2J(arg0));
+            @__env.CallVoidMethod(this, global::java.util.Date.j4n_setYear19, global::net.sf.jni4net.utils.Convertor.ParPrimC2J(arg0));
             }
         }
         
@@ -337,7 +345,7 @@ namespace java.util {
         public virtual global::java.lang.String toGMTString() {
             global::net.sf.jni4net.jni.JNIEnv @__env = this.Env;
             using(new global::net.sf.jni4net.jni.LocalFrame(@__env, 10)){
-            return global::net.sf.jni4net.utils.Convertor.StrongJ2CpString(@__env, @__env.CallObjectMethodPtr(this, global::java.util.Date.j4n_toGMTString19));
+            return global::net.sf.jni4net.utils.Convertor.StrongJ2CpString(@__env, @__env.CallObjectMethodPtr(this, global::java.util.Date.j4n_toGMTString20));
             }
         }
         
@@ -345,7 +353,7 @@ namespace java.util {
         public virtual global::java.lang.Object toInstant() {
             global::net.sf.jni4net.jni.JNIEnv @__env = this.Env;
             using(new global::net.sf.jni4net.jni.LocalFrame(@__env, 10)){
-            return global::net.sf.jni4net.utils.Convertor.StrongJ2Cp<global::java.lang.Object>(@__env, @__env.CallObjectMethodPtr(this, global::java.util.Date.j4n_toInstant20));
+            return global::net.sf.jni4net.utils.Convertor.StrongJ2Cp<global::java.lang.Object>(@__env, @__env.CallObjectMethodPtr(this, global::java.util.Date.j4n_toInstant21));
             }
         }
         
@@ -353,15 +361,7 @@ namespace java.util {
         public virtual global::java.lang.String toLocaleString() {
             global::net.sf.jni4net.jni.JNIEnv @__env = this.Env;
             using(new global::net.sf.jni4net.jni.LocalFrame(@__env, 10)){
-            return global::net.sf.jni4net.utils.Convertor.StrongJ2CpString(@__env, @__env.CallObjectMethodPtr(this, global::java.util.Date.j4n_toLocaleString21));
-            }
-        }
-        
-        [global::net.sf.jni4net.attributes.JavaMethodAttribute("()I")]
-        public virtual int getDate() {
-            global::net.sf.jni4net.jni.JNIEnv @__env = this.Env;
-            using(new global::net.sf.jni4net.jni.LocalFrame(@__env, 10)){
-            return ((int)(@__env.CallIntMethod(this, global::java.util.Date.j4n_getDate22)));
+            return global::net.sf.jni4net.utils.Convertor.StrongJ2CpString(@__env, @__env.CallObjectMethodPtr(this, global::java.util.Date.j4n_toLocaleString22));
             }
         }
         
@@ -374,18 +374,18 @@ namespace java.util {
         }
         
         [global::net.sf.jni4net.attributes.JavaMethodAttribute("()I")]
-        public virtual int getYear() {
+        public virtual int getMonth() {
             global::net.sf.jni4net.jni.JNIEnv @__env = this.Env;
             using(new global::net.sf.jni4net.jni.LocalFrame(@__env, 10)){
-            return ((int)(@__env.CallIntMethod(this, global::java.util.Date.j4n_getYear24)));
+            return ((int)(@__env.CallIntMethod(this, global::java.util.Date.j4n_getMonth24)));
             }
         }
         
         [global::net.sf.jni4net.attributes.JavaMethodAttribute("()I")]
-        public virtual int getMonth() {
+        public virtual int getYear() {
             global::net.sf.jni4net.jni.JNIEnv @__env = this.Env;
             using(new global::net.sf.jni4net.jni.LocalFrame(@__env, 10)){
-            return ((int)(@__env.CallIntMethod(this, global::java.util.Date.j4n_getMonth25)));
+            return ((int)(@__env.CallIntMethod(this, global::java.util.Date.j4n_getYear25)));
             }
         }
         

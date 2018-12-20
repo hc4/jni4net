@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
-    <StartArguments>moex-rms.proxygen.xml</StartArguments>
-    <StartWorkingDirectory>X:\Projects\ExtendableApp\LimitsControl\rms</StartWorkingDirectory>
+  <PropertyGroup>
+    <_LastSelectedProfileId>X:\Projects\jni4net\jni4net.proxygen\src\Properties\PublishProfiles\FolderProfile.pubxml</_LastSelectedProfileId>
+    <ShowAllFiles>false</ShowAllFiles>
   </PropertyGroup>
 </Project>

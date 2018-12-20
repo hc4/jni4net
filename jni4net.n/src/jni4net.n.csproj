@@ -10,7 +10,7 @@
     <OutputType>Library</OutputType>
     <RootNamespace>net.sf.jni4net</RootNamespace>
     <AssemblyName>jni4net.n-0.8.9.0</AssemblyName>
-    <TargetFramework>net471</TargetFramework>
+    <TargetFramework>netstandard2.0</TargetFramework>
     <FileAlignment>512</FileAlignment>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>../../tools/keys/jni4net.snk</AssemblyOriginatorKeyFile>
@@ -48,14 +48,14 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="..\target\build-sources\generated-sources\META-INF\AssemblyInfo.cs">
       <Link>generated\AssemblyInfo.cs</Link>
     </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="System.CodeDom" Version="4.5.0" />
+    <PackageReference Include="System.Reflection.Emit" Version="4.3.0" />
+    <PackageReference Include="System.Security.Permissions" Version="4.5.0" />
   </ItemGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

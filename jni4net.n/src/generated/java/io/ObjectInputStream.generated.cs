@@ -29,17 +29,17 @@ namespace java.io {
         
         internal static global::net.sf.jni4net.jni.MethodId j4n_readFloat5;
         
-        internal static global::net.sf.jni4net.jni.MethodId j4n_readBoolean6;
+        internal static global::net.sf.jni4net.jni.MethodId j4n_readLong6;
         
-        internal static global::net.sf.jni4net.jni.MethodId j4n_readByte7;
+        internal static global::net.sf.jni4net.jni.MethodId j4n_readFully7;
         
-        internal static global::net.sf.jni4net.jni.MethodId j4n_readDouble8;
+        internal static global::net.sf.jni4net.jni.MethodId j4n_readFully8;
         
-        internal static global::net.sf.jni4net.jni.MethodId j4n_readFully9;
+        internal static global::net.sf.jni4net.jni.MethodId j4n_readBoolean9;
         
-        internal static global::net.sf.jni4net.jni.MethodId j4n_readFully10;
+        internal static global::net.sf.jni4net.jni.MethodId j4n_readByte10;
         
-        internal static global::net.sf.jni4net.jni.MethodId j4n_readLong11;
+        internal static global::net.sf.jni4net.jni.MethodId j4n_readDouble11;
         
         internal static global::net.sf.jni4net.jni.MethodId j4n_readShort12;
         
@@ -434,12 +434,12 @@ namespace java.io {
             global::java.io.ObjectInputStream.j4n_readChar3 = @__env.GetMethodID(global::java.io.ObjectInputStream.staticClass, "readChar", "()C");
             global::java.io.ObjectInputStream.j4n_readUTF4 = @__env.GetMethodID(global::java.io.ObjectInputStream.staticClass, "readUTF", "()Ljava/lang/String;");
             global::java.io.ObjectInputStream.j4n_readFloat5 = @__env.GetMethodID(global::java.io.ObjectInputStream.staticClass, "readFloat", "()F");
-            global::java.io.ObjectInputStream.j4n_readBoolean6 = @__env.GetMethodID(global::java.io.ObjectInputStream.staticClass, "readBoolean", "()Z");
-            global::java.io.ObjectInputStream.j4n_readByte7 = @__env.GetMethodID(global::java.io.ObjectInputStream.staticClass, "readByte", "()B");
-            global::java.io.ObjectInputStream.j4n_readDouble8 = @__env.GetMethodID(global::java.io.ObjectInputStream.staticClass, "readDouble", "()D");
-            global::java.io.ObjectInputStream.j4n_readFully9 = @__env.GetMethodID(global::java.io.ObjectInputStream.staticClass, "readFully", "([BII)V");
-            global::java.io.ObjectInputStream.j4n_readFully10 = @__env.GetMethodID(global::java.io.ObjectInputStream.staticClass, "readFully", "([B)V");
-            global::java.io.ObjectInputStream.j4n_readLong11 = @__env.GetMethodID(global::java.io.ObjectInputStream.staticClass, "readLong", "()J");
+            global::java.io.ObjectInputStream.j4n_readLong6 = @__env.GetMethodID(global::java.io.ObjectInputStream.staticClass, "readLong", "()J");
+            global::java.io.ObjectInputStream.j4n_readFully7 = @__env.GetMethodID(global::java.io.ObjectInputStream.staticClass, "readFully", "([B)V");
+            global::java.io.ObjectInputStream.j4n_readFully8 = @__env.GetMethodID(global::java.io.ObjectInputStream.staticClass, "readFully", "([BII)V");
+            global::java.io.ObjectInputStream.j4n_readBoolean9 = @__env.GetMethodID(global::java.io.ObjectInputStream.staticClass, "readBoolean", "()Z");
+            global::java.io.ObjectInputStream.j4n_readByte10 = @__env.GetMethodID(global::java.io.ObjectInputStream.staticClass, "readByte", "()B");
+            global::java.io.ObjectInputStream.j4n_readDouble11 = @__env.GetMethodID(global::java.io.ObjectInputStream.staticClass, "readDouble", "()D");
             global::java.io.ObjectInputStream.j4n_readShort12 = @__env.GetMethodID(global::java.io.ObjectInputStream.staticClass, "readShort", "()S");
             global::java.io.ObjectInputStream.j4n_readUnsignedByte13 = @__env.GetMethodID(global::java.io.ObjectInputStream.staticClass, "readUnsignedByte", "()I");
             global::java.io.ObjectInputStream.j4n_readUnsignedShort14 = @__env.GetMethodID(global::java.io.ObjectInputStream.staticClass, "readUnsignedShort", "()I");
@@ -528,35 +528,11 @@ namespace java.io {
             }
         }
         
-        [global::net.sf.jni4net.attributes.JavaMethodAttribute("()Z")]
-        public virtual bool readBoolean() {
+        [global::net.sf.jni4net.attributes.JavaMethodAttribute("()J")]
+        public virtual long readLong() {
             global::net.sf.jni4net.jni.JNIEnv @__env = this.Env;
             using(new global::net.sf.jni4net.jni.LocalFrame(@__env, 10)){
-            return ((bool)(@__env.CallBooleanMethod(this, global::java.io.ObjectInputStream.j4n_readBoolean6)));
-            }
-        }
-        
-        [global::net.sf.jni4net.attributes.JavaMethodAttribute("()B")]
-        public virtual byte readByte() {
-            global::net.sf.jni4net.jni.JNIEnv @__env = this.Env;
-            using(new global::net.sf.jni4net.jni.LocalFrame(@__env, 10)){
-            return ((byte)(@__env.CallByteMethod(this, global::java.io.ObjectInputStream.j4n_readByte7)));
-            }
-        }
-        
-        [global::net.sf.jni4net.attributes.JavaMethodAttribute("()D")]
-        public virtual double readDouble() {
-            global::net.sf.jni4net.jni.JNIEnv @__env = this.Env;
-            using(new global::net.sf.jni4net.jni.LocalFrame(@__env, 10)){
-            return ((double)(@__env.CallDoubleMethod(this, global::java.io.ObjectInputStream.j4n_readDouble8)));
-            }
-        }
-        
-        [global::net.sf.jni4net.attributes.JavaMethodAttribute("([BII)V")]
-        public virtual void readFully(byte[] arg0, int arg1, int arg2) {
-            global::net.sf.jni4net.jni.JNIEnv @__env = this.Env;
-            using(new global::net.sf.jni4net.jni.LocalFrame(@__env, 16)){
-            @__env.CallVoidMethod(this, global::java.io.ObjectInputStream.j4n_readFully9, global::net.sf.jni4net.utils.Convertor.ParArrayPrimC2J(@__env, arg0), global::net.sf.jni4net.utils.Convertor.ParPrimC2J(arg1), global::net.sf.jni4net.utils.Convertor.ParPrimC2J(arg2));
+            return ((long)(@__env.CallLongMethod(this, global::java.io.ObjectInputStream.j4n_readLong6)));
             }
         }
         
@@ -564,15 +540,39 @@ namespace java.io {
         public virtual void readFully(byte[] arg0) {
             global::net.sf.jni4net.jni.JNIEnv @__env = this.Env;
             using(new global::net.sf.jni4net.jni.LocalFrame(@__env, 12)){
-            @__env.CallVoidMethod(this, global::java.io.ObjectInputStream.j4n_readFully10, global::net.sf.jni4net.utils.Convertor.ParArrayPrimC2J(@__env, arg0));
+            @__env.CallVoidMethod(this, global::java.io.ObjectInputStream.j4n_readFully7, global::net.sf.jni4net.utils.Convertor.ParArrayPrimC2J(@__env, arg0));
             }
         }
         
-        [global::net.sf.jni4net.attributes.JavaMethodAttribute("()J")]
-        public virtual long readLong() {
+        [global::net.sf.jni4net.attributes.JavaMethodAttribute("([BII)V")]
+        public virtual void readFully(byte[] arg0, int arg1, int arg2) {
+            global::net.sf.jni4net.jni.JNIEnv @__env = this.Env;
+            using(new global::net.sf.jni4net.jni.LocalFrame(@__env, 16)){
+            @__env.CallVoidMethod(this, global::java.io.ObjectInputStream.j4n_readFully8, global::net.sf.jni4net.utils.Convertor.ParArrayPrimC2J(@__env, arg0), global::net.sf.jni4net.utils.Convertor.ParPrimC2J(arg1), global::net.sf.jni4net.utils.Convertor.ParPrimC2J(arg2));
+            }
+        }
+        
+        [global::net.sf.jni4net.attributes.JavaMethodAttribute("()Z")]
+        public virtual bool readBoolean() {
             global::net.sf.jni4net.jni.JNIEnv @__env = this.Env;
             using(new global::net.sf.jni4net.jni.LocalFrame(@__env, 10)){
-            return ((long)(@__env.CallLongMethod(this, global::java.io.ObjectInputStream.j4n_readLong11)));
+            return ((bool)(@__env.CallBooleanMethod(this, global::java.io.ObjectInputStream.j4n_readBoolean9)));
+            }
+        }
+        
+        [global::net.sf.jni4net.attributes.JavaMethodAttribute("()B")]
+        public virtual byte readByte() {
+            global::net.sf.jni4net.jni.JNIEnv @__env = this.Env;
+            using(new global::net.sf.jni4net.jni.LocalFrame(@__env, 10)){
+            return ((byte)(@__env.CallByteMethod(this, global::java.io.ObjectInputStream.j4n_readByte10)));
+            }
+        }
+        
+        [global::net.sf.jni4net.attributes.JavaMethodAttribute("()D")]
+        public virtual double readDouble() {
+            global::net.sf.jni4net.jni.JNIEnv @__env = this.Env;
+            using(new global::net.sf.jni4net.jni.LocalFrame(@__env, 10)){
+            return ((double)(@__env.CallDoubleMethod(this, global::java.io.ObjectInputStream.j4n_readDouble11)));
             }
         }
         

@@ -35,7 +35,7 @@ using net.sf.jni4net.proxygen.model;
 
 namespace net.sf.jni4net.proxygen
 {
-    public class Program
+    public static class Program
     {
         private static string lib;
         internal static int Main(string[] args)

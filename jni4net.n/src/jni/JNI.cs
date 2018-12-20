@@ -74,6 +74,7 @@ namespace net.sf.jni4net.jni
             if (string.IsNullOrEmpty(Bridge.Setup.JavaHome))
             {
                 Bridge.Setup.JavaHome = Environment.GetEnvironmentVariable(JAVA_HOME_ENV);
+
                 if (string.IsNullOrEmpty(Bridge.Setup.JavaHome))
                 {
                     Bridge.Setup.JavaHome = null;
@@ -87,74 +88,6 @@ namespace net.sf.jni4net.jni
                     catch(Exception ex)
                     {
                         throw new JNIException("JAVA_HOME environment variable is incorrect: " + Bridge.Setup.JavaHome, ex);
-                    }
-                }
-            }
-
-            if (!IsRunningOnUnix())
-            {
-                string arch = Environment.GetEnvironmentVariable(ARCH_ENV);
-                var is64Arch = (arch != null && arch.Contains("64"));
-                var is64Process = (IntPtr.Size == 8);
-
-                if (Bridge.Setup.JavaHome == null)
-                {
-                    string jreVersion = (string)Registry.GetValue(JRE_REGISTRY_KEY, "CurrentVersion", null);
-                    if (jreVersion != null)
-                    {
-                        string keyName = Path.Combine(JRE_REGISTRY_KEY, jreVersion);
-                        directory = (string)Registry.GetValue(keyName, "RuntimeLib", null);
-                        Bridge.Setup.JavaHome = (string)Registry.GetValue(keyName, "JavaHome", null);
-                    }
-                }
-
-                if (Bridge.Setup.JavaHome == null)
-                {
-                    string jdkVersion = (string)Registry.GetValue(JDK_REGISTRY_KEY, "CurrentVersion", null);
-                    if (jdkVersion != null)
-                    {
-                        string keyName = Path.Combine(JDK_REGISTRY_KEY, jdkVersion);
-                        directory = (string)Registry.GetValue(keyName, "RuntimeLib", null);
-                        Bridge.Setup.JavaHome = (string)Registry.GetValue(keyName, "JavaHome", null);
-                    }
-                }
-
-                if (Bridge.Setup.JavaHome == null || Bridge.Setup.IgnoreJavaHome)
-                {
-                    string prfi = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles);
-                    if (is64Arch && !is64Process)
-                    {
-                        prfi = prfi + " (x86)";
-                    }
-                    if (Directory.Exists(prfi))
-                    {
-                        string prfijava = Path.Combine(prfi, "Java");
-                        if (Directory.Exists(prfijava))
-                        {
-                            string[] directories = Directory.GetDirectories(prfijava, "jre*");
-                            if (directories.Length > 0)
-                            {
-                                Array.Sort(directories);
-                                Bridge.Setup.JavaHome = directories[directories.Length - 1];
-                                if (Bridge.Setup.Verbose)
-                                {
-                                    Console.WriteLine("Guessed JAVA_HOME to " + Bridge.Setup.JavaHome);
-                                }
-                            }
-                            else
-                            {
-                                directories = Directory.GetDirectories(prfijava, "jdk*");
-                                if (directories.Length > 0)
-                                {
-                                    Array.Sort(directories);
-                                    Bridge.Setup.JavaHome = directories[directories.Length - 1];
-                                    if (Bridge.Setup.Verbose)
-                                    {
-                                        Console.WriteLine("Guessed JAVA_HOME to " + Bridge.Setup.JavaHome);
-                                    }
-                                }
-                            }
-                        }
                     }
                 }
             }

@@ -29,8 +29,14 @@ public class FieldInfo extends system.reflection.MemberInfo {
     @net.sf.jni4net.attributes.ClrMethod("(LSystem/Object;)LSystem/Object;")
     public native system.Object GetValue(system.Object obj);
     
+    @net.sf.jni4net.attributes.ClrMethod("(LSystem/TypedReference;)LSystem/Object;")
+    public native system.Object GetValueDirect(system.ValueType obj);
+    
     @net.sf.jni4net.attributes.ClrMethod("(LSystem/Object;LSystem/Object;LSystem/Reflection/BindingFlags;LSystem/Reflection/Binder;LSystem/Globalization/CultureInfo;)V")
     public native void SetValue(system.Object obj, system.Object value, system.reflection.BindingFlags invokeAttr, system.Object binder, system.Object culture);
+    
+    @net.sf.jni4net.attributes.ClrMethod("(LSystem/TypedReference;LSystem/Object;)V")
+    public native void SetValueDirect(system.ValueType obj, system.Object value);
     
     @net.sf.jni4net.attributes.ClrMethod("()LSystem/RuntimeFieldHandle;")
     public native system.ValueType getFieldHandle();
