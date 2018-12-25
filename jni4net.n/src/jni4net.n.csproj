@@ -70,7 +70,7 @@
     </PostBuildEvent>
     <PreBuildEvent>if not exist $(OutDir)\build-sources\generated-sources\META-INF mkdir $(OutDir)\build-sources\generated-sources\META-INF\
 echo [assembly: System.Reflection.AssemblyVersion("0.8.9.0")] &gt; $(OutDir)\build-sources\generated-sources\META-INF\AssemblyInfo.cs
-if not exist $(SolutionDir)\tools\keys\jni4net.snk "%25ProgramFiles%25\Microsoft SDKs\Windows\v7.0A\bin\sn.exe" -k $(SolutionDir)\tools\keys\jni4net.snk
+if not exist $(SolutionDir)\tools\keys\jni4net.snk "%ProgramFiles(x86)%\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.6.1 Tools\sn.exe" -k $(SolutionDir)\tools\keys\jni4net.snk
 </PreBuildEvent>
   </PropertyGroup>
 </Project>
