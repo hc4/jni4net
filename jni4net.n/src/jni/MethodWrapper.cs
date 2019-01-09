@@ -115,7 +115,7 @@ namespace net.sf.jni4net.jni
 
         public static void GetDelegateForFunctionPointer<T>(IntPtr ptr, ref T res)
         {
-            res = (T) (object) Marshal.GetDelegateForFunctionPointer(ptr, typeof (T));
+            res = Marshal.GetDelegateForFunctionPointer<T>(ptr);
         }
 
         #region Nested type: Signature

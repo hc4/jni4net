@@ -27,7 +27,6 @@ namespace net.sf.jni4net.utils
 {
     partial class Registry
     {
-        private static readonly bool initialized;
         private static readonly Dictionary<Type, RegistryRecord> knownCLR = new Dictionary<Type, RegistryRecord>();
 
         private static readonly Dictionary<Type, RegistryRecord> knownCLRInterfaces =
@@ -47,11 +46,11 @@ namespace net.sf.jni4net.utils
         private static readonly Dictionary<Class, RegistryRecord> knownJVMProxies =
             new Dictionary<Class, RegistryRecord>();
 
+        private static bool initialized;
         internal static ClassLoader systemClassLoader;
 
-        static Registry()
+        internal static void Init(JNIEnv env)
         {
-            JNIEnv env = JNIEnv.ThreadEnv;
             RegisterType(typeof(Class), true, env);
             RegisterType(typeof(Object), true, env);
             RegisterType(typeof(String), true, env);
@@ -113,6 +112,23 @@ namespace net.sf.jni4net.utils
             RegisterType(typeof(ClassLoader), true, env);
 
             systemClassLoader = ClassLoader.getSystemClassLoader();
+        }
+
+        public static void Reset()
+        {
+            lock (typeof(Registry))
+            {
+                initialized = false;
+                systemClassLoader = null;
+
+                knownCLR.Clear();
+                knownCLRInterfaces.Clear();
+                knownCLRProxies.Clear();
+                knownCLRWrappers.Clear();
+                knownJVM.Clear();
+                knownJVMInterfaces.Clear();
+                knownJVMProxies.Clear();
+            }
         }
 
         public static void RegisterAssembly(Assembly assembly, bool bindJVM, ClassLoader classLoader)

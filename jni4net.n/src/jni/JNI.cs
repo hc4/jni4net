@@ -10,11 +10,10 @@ This content is released under the (http://opensource.org/licenses/MIT) MIT Lice
 #endregion
 
 using System;
+using System.ComponentModel;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Security.Permissions;
-using JType=java.lang.reflect.Type;
-using Microsoft.Win32;
 
 namespace net.sf.jni4net.jni
 {
@@ -30,7 +29,7 @@ namespace net.sf.jni4net.jni
         private const string JAVA_HOME_ENV = "JAVA_HOME";
         private const string ARCH_ENV = "PROCESSOR_ARCHITECTURE";
 
-        private static bool init;
+        private static Dll dll;
 
         /*static JNI()
         {
@@ -41,19 +40,29 @@ namespace net.sf.jni4net.jni
         [RegistryPermission(SecurityAction.Assert, Read = JRE_REGISTRY_KEY)]
         [RegistryPermission(SecurityAction.Assert, Read = JDK_REGISTRY_KEY)]
         [FileIOPermission(SecurityAction.Assert, Unrestricted = true)]
-        [SecurityPermission(SecurityAction.Assert, Flags = SecurityPermissionFlag.Execution|SecurityPermissionFlag.UnmanagedCode|SecurityPermissionFlag.SkipVerification)]
+        [SecurityPermission(SecurityAction.Assert, Flags = SecurityPermissionFlag.Execution | SecurityPermissionFlag.UnmanagedCode | SecurityPermissionFlag.SkipVerification)]
         private static void Init()
         {
-            if (!init)
+            if (dll == null)
             {
                 string findJvmDir = FindJvmDir();
-                AddEnvironmentPath(findJvmDir);
+//                AddEnvironmentPath(findJvmDir);
                 var args = new JavaVMInitArgs();
                 try
                 {
                     //just load DLL
-                    Dll.JNI_GetDefaultJavaVMInitArgs(&args);
-                    init = true;
+                    var dll = new Dll(findJvmDir);
+                    try
+                    {
+                        dll.GetDefaultJavaVMInitArgs(&args);
+                    }
+                    catch
+                    {
+                        dll.Dispose();
+                        throw;
+                    }
+
+                    JNI.dll = dll;
                 }
                 catch (BadImageFormatException ex)
                 {
@@ -66,6 +75,12 @@ namespace net.sf.jni4net.jni
                                            , ex);
                 }
             }
+        }
+
+        internal static void Reset()
+        {
+            dll?.Dispose();
+            dll = null;
         }
 
         private static string FindJvmDir()
@@ -85,7 +100,7 @@ namespace net.sf.jni4net.jni
                     {
                         Bridge.Setup.JavaHome = Path.GetFullPath(Bridge.Setup.JavaHome.Replace("\"", ""));
                     }
-                    catch(Exception ex)
+                    catch (Exception ex)
                     {
                         throw new JNIException("JAVA_HOME environment variable is incorrect: " + Bridge.Setup.JavaHome, ex);
                     }
@@ -137,16 +152,16 @@ namespace net.sf.jni4net.jni
 
         private static bool IsRunningOnUnix()
         {
-            int p = (int) Environment.OSVersion.Platform;
+            int p = (int)Environment.OSVersion.Platform;
             return ((p == 4) || (p == 6) || (p == 128));
         }
 
-        public static void CreateJavaVM(out JavaVM jvm, out JNIEnv env, params string[] options)
+        public static void CreateJavaVM(out JNIEnv env, params string[] options)
         {
-            CreateJavaVM(out jvm, out env, false, options);
+            CreateJavaVM(out env, false, options);
         }
 
-        public static void CreateJavaVM(out JavaVM jvm, out JNIEnv env, bool attachIfExists, params string[] options)
+        public static void CreateJavaVM(out JNIEnv env, bool attachIfExists, params string[] options)
         {
             Init();
             IntPtr njvm;
@@ -172,7 +187,7 @@ namespace net.sf.jni4net.jni
             {
                 IntPtr njvma;
                 int count;
-                result = Dll.JNI_GetCreatedJavaVMs(out njvma, 1, out count);
+                result = dll.GetCreatedJavaVMs(out njvma, 1, out count);
                 if (result != JNIResult.JNI_OK)
                 {
                     throw new JNIException("Can't enumerate current JVMs " + result);
@@ -180,7 +195,7 @@ namespace net.sf.jni4net.jni
                 if (count > 0)
                 {
                     njvm = njvma;
-                    jvm = new JavaVM(njvm);
+                    var jvm = new JavaVM(njvm);
                     result = jvm.AttachCurrentThread(out env, args);
                     if (result != JNIResult.JNI_OK)
                     {
@@ -189,14 +204,14 @@ namespace net.sf.jni4net.jni
                     return;
                 }
             }
-            result = Dll.JNI_CreateJavaVM(out njvm, out nenv, &args);
+            result = dll.CreateJavaVM(out njvm, out nenv, &args);
             if (result != JNIResult.JNI_OK)
             {
                 Console.Error.WriteLine("Can't load JVM (already have one ?)");
                 throw new JNIException("Can't load JVM (already have one ?) " + result);
             }
-            jvm = new JavaVM(njvm);
-            env = new JNIEnv(nenv);
+
+            env = new JNIEnv(nenv, njvm);
         }
 
         private static void AddEnvironmentPath(string jvm)
@@ -209,21 +224,64 @@ namespace net.sf.jni4net.jni
             }
         }
 
-
         #region Nested type: Dll
 
-        private static class Dll
+        private sealed class Dll : IDisposable
         {
-            [DllImport("jvm.dll", CallingConvention = CallingConvention.StdCall)]
-            internal static extern JNIResult JNI_CreateJavaVM(out IntPtr pvm, out IntPtr penv,
-                                                              JavaVMInitArgs* args);
+            [UnmanagedFunctionPointer(CallingConvention.StdCall)]
+            public delegate JNIResult JNI_CreateJavaVM(out IntPtr pvm, out IntPtr penv, JavaVMInitArgs* args);
 
-            [DllImport("jvm.dll", CallingConvention = CallingConvention.StdCall)]
-            internal static extern JNIResult JNI_GetCreatedJavaVMs(out IntPtr pvm, int size,
-                                                                   [Out] out int size2);
+            [UnmanagedFunctionPointer(CallingConvention.StdCall)]
+            public delegate JNIResult JNI_GetCreatedJavaVMs(out IntPtr pvm, int size, [Out] out int size2);
 
-            [DllImport("jvm.dll", CallingConvention = CallingConvention.StdCall)]
-            internal static extern JNIResult JNI_GetDefaultJavaVMInitArgs(JavaVMInitArgs* args);
+            [UnmanagedFunctionPointer(CallingConvention.StdCall)]
+            public delegate JNIResult JNI_GetDefaultJavaVMInitArgs(JavaVMInitArgs* args);
+
+            [DllImport("kernel32.dll", SetLastError = true)]
+            private static extern IntPtr LoadLibrary(string lpFilename);
+
+            [DllImport("kernel32.dll", CharSet = CharSet.Ansi, SetLastError = true)]
+            private static extern IntPtr GetProcAddress(IntPtr hModule, string procedureName);
+
+            [DllImport("kernel32.dll", SetLastError = true)]
+            private static extern bool FreeLibrary(IntPtr hModule);
+
+            private readonly IntPtr _pLib;
+
+            public readonly JNI_CreateJavaVM CreateJavaVM;
+            public readonly JNI_GetCreatedJavaVMs GetCreatedJavaVMs;
+            public readonly JNI_GetDefaultJavaVMInitArgs GetDefaultJavaVMInitArgs;
+
+            public Dll(string dir)
+            {
+                var libPath = Path.Combine(dir, "jvm.dll");
+                _pLib = LoadLibrary(libPath);
+                if (_pLib == IntPtr.Zero)
+                {
+                    throw new Exception("Failed to load JVM from " + libPath);
+                }
+
+                CreateJavaVM = FindMethod<JNI_CreateJavaVM>(nameof(JNI_CreateJavaVM));
+                GetCreatedJavaVMs = FindMethod<JNI_GetCreatedJavaVMs>(nameof(JNI_GetCreatedJavaVMs));
+                GetDefaultJavaVMInitArgs = FindMethod<JNI_GetDefaultJavaVMInitArgs>(nameof(JNI_GetDefaultJavaVMInitArgs));
+            }
+
+            private T FindMethod<T>(string name)
+            {
+                var result = GetProcAddress(_pLib, name);
+                if (result == IntPtr.Zero)
+                {
+                    int error = Marshal.GetLastWin32Error();
+                    throw new Win32Exception(error, name + " not found");
+                }
+
+                return Marshal.GetDelegateForFunctionPointer<T>(result);
+            }
+            
+            public void Dispose()
+            {
+                FreeLibrary(_pLib);
+            }
         }
 
         #endregion

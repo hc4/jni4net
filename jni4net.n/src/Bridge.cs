@@ -84,11 +84,10 @@ namespace net.sf.jni4net
         [ReflectionPermission(SecurityAction.Assert, Unrestricted = true)]
         private static JNIEnv CreateJVM()
         {
-            JavaVM jvm;
             JNIEnv env;
             try
             {
-                JNI.CreateJavaVM(out jvm, out env, true, setup.JVMOptions);
+                JNI.CreateJavaVM(out env, true, setup.JVMOptions);
             }
             catch (TypeInitializationException ex)
             {
@@ -97,7 +96,7 @@ namespace net.sf.jni4net
                     // it didn't help, throw original exception
                     throw new JNIException("Can't initialize jni4net. (32bit vs 64bit JVM vs CLR ?)"
                                            + "\nCLR architecture: " + ((IntPtr.Size == 8) ? "64bit" : "32bit")
-                                           + "\nJAVA_HOME: " + (setup==null || setup.JavaHome == null
+                                           + "\nJAVA_HOME: " + (setup == null || setup.JavaHome == null
                                                                     ? "null"
                                                                     : Path.GetFullPath(setup.JavaHome))
                                            , ex);
@@ -108,6 +107,22 @@ namespace net.sf.jni4net
             jvmLoaded = true;
             DumpRuntimeVersions();
             return env;
+        }
+
+        public static void DestroyJVM(JNIEnv env)
+        {
+            var result = env.GetJavaVM().DestroyJavaVM();
+            if (result != JNIResult.JNI_OK)
+            {
+                throw new JNIException("DestroyJavaVM failed: " + result);
+            }
+
+            knownAssemblies.Clear();
+
+            JNIEnv.Reset();
+            Registry.Reset();
+            JNI.Reset();
+            jvmLoaded = false;
         }
 
         [FileIOPermission(SecurityAction.Assert, Unrestricted = true)]
@@ -172,7 +187,7 @@ namespace net.sf.jni4net
 
         public static string GetVersion()
         {
-            return typeof (Bridge).Assembly.GetName().Version.ToString();
+            return typeof(Bridge).Assembly.GetName().Version.ToString();
         }
 
         [FileIOPermission(SecurityAction.Assert, Unrestricted = true)]
@@ -310,12 +325,12 @@ namespace net.sf.jni4net
                     return -6;
                 }
                 var newSetup = new BridgeSetup(false)
-                                   {
-                                       Verbose = env.GetStaticBooleanField(br, vb),
-                                       Debug = env.GetStaticBooleanField(br, db),
-                                       BindStatic = true,
-                                       BindNative = true
-                                   };
+                {
+                    Verbose = env.GetStaticBooleanField(br, vb),
+                    Debug = env.GetStaticBooleanField(br, db),
+                    BindStatic = true,
+                    BindNative = true
+                };
                 BindCore(env, newSetup);
                 if (Setup.JavaHome == null)
                 {
@@ -377,10 +392,13 @@ namespace net.sf.jni4net
                 var homeDll = new Uri(typeof(Bridge).Assembly.GetName().CodeBase).AbsolutePath;
                 Console.WriteLine("loading core from " + homeDll);
             }
+
+            Registry.Init(env);
+
             setup = newSetup;
             if (!setup.BindCoreOnly)
             {
-                RegisterAssembly(typeof (Bridge).Assembly);
+                RegisterAssembly(typeof(Bridge).Assembly);
             }
             __Bridge.Init(env);
 

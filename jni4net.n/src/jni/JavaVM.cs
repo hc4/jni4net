@@ -48,7 +48,7 @@ namespace net.sf.jni4net.jni
             {
                 result = attachCurrentThread.Invoke(native, out env, null);
             }
-            penv = new JNIEnv(env);
+            penv = new JNIEnv(env, IntPtr.Zero);
             return result;
         }
 
@@ -74,7 +74,7 @@ namespace net.sf.jni4net.jni
             }
             if (result == JNIResult.JNI_OK)
             {
-                penv = new JNIEnv(env);
+                penv = new JNIEnv(env, IntPtr.Zero);
             }
             else
             {
@@ -109,7 +109,7 @@ namespace net.sf.jni4net.jni
             }
             IntPtr env;
             JNIResult result = getEnv.Invoke(native, out env, version);
-            penv = new JNIEnv(env);
+            penv = new JNIEnv(env, IntPtr.Zero);
             return result;
         }
 

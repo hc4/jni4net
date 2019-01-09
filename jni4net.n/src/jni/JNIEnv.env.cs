@@ -22,13 +22,19 @@ namespace net.sf.jni4net.jni
         [ThreadStatic] private static JNIEnv threadJNIEnv;
 
         private readonly IntPtr envPtr;
+
         private JNINativeInterface functions;
         private JavaVM javaVM;
 
-        internal JNIEnv(IntPtr native)
+        internal JNIEnv(IntPtr native, IntPtr njvm)
         {
-            this.envPtr = native;
-            functions = *(*(JavaPtr*) native.ToPointer()).functions;
+            envPtr = native;
+            if (njvm != IntPtr.Zero)
+            {
+                javaVM = new JavaVM(njvm);
+            }
+
+            functions = *(*(JavaPtr*)native.ToPointer()).functions;
             InitMethods();
             if (defaultVM == null)
             {
@@ -48,12 +54,15 @@ namespace net.sf.jni4net.jni
                         throw new JNIException(
                             "AttachCurrentThreadAsDaemon failed: Java VM is not attached, call JNI.CreateJavaVM() first");
                     }
-                    JNIResult result = defaultVM.AttachCurrentThreadAsDaemon(out threadJNIEnv, null);
+                    JNIResult result = defaultVM.AttachCurrentThreadAsDaemon(out var env, null);
                     if (result != JNIResult.JNI_OK)
                     {
                         throw new JNIException("AttachCurrentThreadAsDaemon failed: " + result);
                     }
+
+                    threadJNIEnv = env;
                 }
+
                 return threadJNIEnv;
             }
         }
@@ -67,6 +76,7 @@ namespace net.sf.jni4net.jni
                 {
                     throw new JNIException("DetachCurrentThread failed: " + result);
                 }
+
                 threadJNIEnv = null;
             }
         }
@@ -76,12 +86,15 @@ namespace net.sf.jni4net.jni
         {
             if (threadJNIEnv == null)
             {
-                JNIResult result = vm.AttachCurrentThreadAsDaemon(out threadJNIEnv, null);
+                JNIResult result = vm.AttachCurrentThreadAsDaemon(out var env, null);
                 if (result != JNIResult.JNI_OK)
                 {
                     throw new JNIException("AttachCurrentThreadAsDaemon failed: " + result);
                 }
+
+                threadJNIEnv = env;
             }
+
             return threadJNIEnv;
         }
 
@@ -91,12 +104,15 @@ namespace net.sf.jni4net.jni
         {
             if (threadJNIEnv == null)
             {
-                JNIResult result = vm.AttachCurrentThreadAsDaemon(out threadJNIEnv, null);
+                JNIResult result = vm.AttachCurrentThreadAsDaemon(out var env, null);
                 if (result != JNIResult.JNI_OK)
                 {
                     return null;
                 }
+
+                threadJNIEnv = env;
             }
+
             return threadJNIEnv;
         }
 
@@ -111,7 +127,7 @@ namespace net.sf.jni4net.jni
             {
                 return threadJNIEnv;
             }
-            return new JNIEnv(envi);
+            return new JNIEnv(envi, IntPtr.Zero);
         }
 
         #region Nested type: JavaPtr

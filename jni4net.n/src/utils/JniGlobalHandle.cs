@@ -10,6 +10,7 @@ This content is released under the (http://opensource.org/licenses/MIT) MIT Lice
 #endregion
 
 using System;
+using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Runtime.ConstrainedExecution;
 using System.Runtime.InteropServices;
@@ -46,7 +47,7 @@ namespace net.sf.jni4net.utils
             [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
             get { return zero; }
         }
-
+        
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         public JniGlobalHandle(IntPtr handleValue, JavaVM javaVM)
             : base(IntPtr.Zero, true)

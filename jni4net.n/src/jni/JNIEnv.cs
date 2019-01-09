@@ -1460,5 +1460,10 @@ namespace net.sf.jni4net.jni
         }
 
         #endregion
+
+        public static void Reset()
+        {
+//            threadJNIEnv.Values.Clear();
+        }
     }
 }
