@@ -72,5 +72,6 @@
 echo [assembly: System.Reflection.AssemblyVersion("0.8.9.0")] &gt; $(OutDir)\build-sources\generated-sources\META-INF\AssemblyInfo.cs
 if not exist $(SolutionDir)\tools\keys\jni4net.snk "%ProgramFiles(x86)%\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.6.1 Tools\sn.exe" -k $(SolutionDir)\tools\keys\jni4net.snk
 </PreBuildEvent>
+    <LangVersion>7.3</LangVersion>
   </PropertyGroup>
 </Project>

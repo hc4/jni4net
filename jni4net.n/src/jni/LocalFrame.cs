@@ -14,7 +14,7 @@ using net.sf.jni4net.utils;
 
 namespace net.sf.jni4net.jni
 {
-    public class LocalFrame : IDisposable
+    public readonly struct LocalFrame : IDisposable
     {
         private readonly JNIEnv env;
 
