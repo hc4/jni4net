@@ -20,9 +20,9 @@ namespace net.sf.jni4net.utils
 {
     [Serializable]
     [StructLayout(LayoutKind.Sequential)]
-    public struct JniGlobalHandleNs
+    public readonly ref struct JniGlobalHandleNs
     {
-        internal IntPtr handle;
+        internal readonly IntPtr handle;
     }
 
     [Serializable]
@@ -33,7 +33,7 @@ namespace net.sf.jni4net.utils
             return handle == null || handle.IsInvalid;
         }
 
-        internal JavaVM javaVM;
+        internal readonly JavaVM javaVM;
 
         private static readonly JniGlobalHandle zero = new JniGlobalHandle(IntPtr.Zero, null);
 

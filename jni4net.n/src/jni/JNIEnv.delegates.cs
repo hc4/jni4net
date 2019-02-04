@@ -10,7 +10,6 @@ This content is released under the (http://opensource.org/licenses/MIT) MIT Lice
 #endregion
 
 using System;
-using System.Runtime.ConstrainedExecution;
 using System.Runtime.InteropServices;
 using System.Security;
 using net.sf.jni4net.utils;
@@ -34,7 +33,7 @@ namespace net.sf.jni4net.jni
 
             [UnmanagedFunctionPointer(CallingConvention.StdCall)]
             internal delegate byte CallBooleanMethod(
-                IntPtr thiz, JniHandle obj, IntPtr methodIdJavaPtr, params Value[] args);
+                IntPtr thiz, JniHandle obj, IntPtr methodIdJavaPtr, ref Value args);
 
             #endregion
 
@@ -42,7 +41,7 @@ namespace net.sf.jni4net.jni
 
             [UnmanagedFunctionPointer(CallingConvention.StdCall)]
             internal delegate byte CallByteMethod(
-                IntPtr thiz, JniHandle obj, IntPtr methodID, params Value[] args);
+                IntPtr thiz, JniHandle obj, IntPtr methodID, ref Value args);
 
             #endregion
 
@@ -50,7 +49,7 @@ namespace net.sf.jni4net.jni
 
             [UnmanagedFunctionPointer(CallingConvention.StdCall)]
             internal delegate ushort CallCharMethod(
-                IntPtr thiz, JniHandle obj, IntPtr methodID, params Value[] args);
+                IntPtr thiz, JniHandle obj, IntPtr methodID, ref Value args);
 
             #endregion
 
@@ -58,7 +57,7 @@ namespace net.sf.jni4net.jni
 
             [UnmanagedFunctionPointer(CallingConvention.StdCall)]
             internal delegate double CallDoubleMethod(
-                IntPtr thiz, JniHandle obj, IntPtr methodID, params Value[] args);
+                IntPtr thiz, JniHandle obj, IntPtr methodID, ref Value args);
 
             #endregion
 
@@ -66,7 +65,7 @@ namespace net.sf.jni4net.jni
 
             [UnmanagedFunctionPointer(CallingConvention.StdCall)]
             internal delegate float CallFloatMethod(
-                IntPtr thiz, JniHandle obj, IntPtr methodID, params Value[] args);
+                IntPtr thiz, JniHandle obj, IntPtr methodID, ref Value args);
 
             #endregion
 
@@ -74,7 +73,7 @@ namespace net.sf.jni4net.jni
 
             [UnmanagedFunctionPointer(CallingConvention.StdCall)]
             internal delegate int CallIntMethod(
-                IntPtr thiz, JniHandle obj, IntPtr methodIdJavaPtr, params Value[] args);
+                IntPtr thiz, JniHandle obj, IntPtr methodIdJavaPtr, ref Value args);
 
             #endregion
 
@@ -82,7 +81,7 @@ namespace net.sf.jni4net.jni
 
             [UnmanagedFunctionPointer(CallingConvention.StdCall)]
             internal delegate long CallLongMethod(
-                IntPtr thiz, JniHandle obj, IntPtr methodID, params Value[] args);
+                IntPtr thiz, JniHandle obj, IntPtr methodID, ref Value args);
 
             #endregion
 
@@ -90,7 +89,7 @@ namespace net.sf.jni4net.jni
 
             [UnmanagedFunctionPointer(CallingConvention.StdCall)]
             internal delegate byte CallNonvirtualBooleanMethod(
-                JniHandle obj, JniHandle clazz, IntPtr methodID, params Value[] args);
+                JniHandle obj, JniHandle clazz, IntPtr methodID, ref Value args);
 
             #endregion
 
@@ -99,7 +98,7 @@ namespace net.sf.jni4net.jni
             [UnmanagedFunctionPointer(CallingConvention.StdCall)]
             internal delegate byte CallNonvirtualByteMethod(IntPtr thiz,
                                                             JniHandle obj, JniHandle clazz,
-                                                            IntPtr methodID, params Value[] args);
+                                                            IntPtr methodID, ref Value args);
 
             #endregion
 
@@ -108,7 +107,7 @@ namespace net.sf.jni4net.jni
             [UnmanagedFunctionPointer(CallingConvention.StdCall)]
             internal delegate ushort CallNonvirtualCharMethod(IntPtr thiz,
                                                               JniHandle obj, JniHandle clazz,
-                                                              IntPtr methodID, params Value[] args);
+                                                              IntPtr methodID, ref Value args);
 
             #endregion
 
@@ -117,7 +116,7 @@ namespace net.sf.jni4net.jni
             [UnmanagedFunctionPointer(CallingConvention.StdCall)]
             internal delegate double CallNonvirtualDoubleMethod(IntPtr thiz,
                                                                 JniHandle obj, JniHandle clazz,
-                                                                IntPtr methodID, params Value[] args);
+                                                                IntPtr methodID, ref Value args);
 
             #endregion
 
@@ -126,7 +125,7 @@ namespace net.sf.jni4net.jni
             [UnmanagedFunctionPointer(CallingConvention.StdCall)]
             internal delegate float CallNonvirtualFloatMethod(IntPtr thiz,
                                                               JniHandle obj, JniHandle clazz,
-                                                              IntPtr methodID, params Value[] args);
+                                                              IntPtr methodID, ref Value args);
 
             #endregion
 
@@ -135,7 +134,7 @@ namespace net.sf.jni4net.jni
             [UnmanagedFunctionPointer(CallingConvention.StdCall)]
             internal delegate int CallNonvirtualIntMethod(IntPtr thiz,
                                                           JniHandle obj, JniHandle clazz,
-                                                          IntPtr methodID, params Value[] args);
+                                                          IntPtr methodID, ref Value args);
 
             #endregion
 
@@ -144,7 +143,7 @@ namespace net.sf.jni4net.jni
             [UnmanagedFunctionPointer(CallingConvention.StdCall)]
             internal delegate long CallNonvirtualLongMethod(IntPtr thiz,
                                                             JniHandle obj, JniHandle clazz,
-                                                            IntPtr methodID, params Value[] args);
+                                                            IntPtr methodID, ref Value args);
 
             #endregion
 
@@ -153,7 +152,7 @@ namespace net.sf.jni4net.jni
             [UnmanagedFunctionPointer(CallingConvention.StdCall)]
             internal delegate JniLocalHandle CallNonvirtualObjectMethod(IntPtr thiz,
                                                                 JniHandle obj, JniHandle clazz,
-                                                                IntPtr methodID, params Value[] args
+                                                                IntPtr methodID, ref Value args
                 );
 
             #endregion
@@ -163,7 +162,7 @@ namespace net.sf.jni4net.jni
             [UnmanagedFunctionPointer(CallingConvention.StdCall)]
             internal delegate short CallNonvirtualShortMethod(IntPtr thiz,
                                                               JniHandle obj, JniHandle clazz,
-                                                              IntPtr methodID, params Value[] args);
+                                                              IntPtr methodID, ref Value args);
 
             #endregion
 
@@ -172,7 +171,7 @@ namespace net.sf.jni4net.jni
             [UnmanagedFunctionPointer(CallingConvention.StdCall)]
             internal delegate void CallNonvirtualVoidMethod(IntPtr thiz,
                                                             JniHandle obj, JniHandle clazz,
-                                                            IntPtr methodID, params Value[] args);
+                                                            IntPtr methodID, ref Value args);
 
             #endregion
 
@@ -180,7 +179,7 @@ namespace net.sf.jni4net.jni
 
             [UnmanagedFunctionPointer(CallingConvention.StdCall)]
             internal delegate JniLocalHandle CallObjectMethod(
-                IntPtr thiz, JniHandle obj, IntPtr methodIdJavaPtr, params Value[] args);
+                IntPtr thiz, JniHandle obj, IntPtr methodIdJavaPtr, ref Value args);
 
             #endregion
 
@@ -188,7 +187,7 @@ namespace net.sf.jni4net.jni
 
             [UnmanagedFunctionPointer(CallingConvention.StdCall)]
             internal delegate short CallShortMethod(
-                IntPtr thiz, JniHandle obj, IntPtr methodID, params Value[] args);
+                IntPtr thiz, JniHandle obj, IntPtr methodID, ref Value args);
 
             #endregion
 
@@ -196,7 +195,7 @@ namespace net.sf.jni4net.jni
 
             [UnmanagedFunctionPointer(CallingConvention.StdCall)]
             internal delegate byte CallStaticBooleanMethod(
-                IntPtr thiz, JniHandle clazz, IntPtr methodID, params Value[] args);
+                IntPtr thiz, JniHandle clazz, IntPtr methodID, ref Value args);
 
             #endregion
 
@@ -204,7 +203,7 @@ namespace net.sf.jni4net.jni
 
             [UnmanagedFunctionPointer(CallingConvention.StdCall)]
             internal delegate byte CallStaticByteMethod(
-                IntPtr thiz, JniHandle clazz, IntPtr methodID, params Value[] args);
+                IntPtr thiz, JniHandle clazz, IntPtr methodID, ref Value args);
 
             #endregion
 
@@ -212,7 +211,7 @@ namespace net.sf.jni4net.jni
 
             [UnmanagedFunctionPointer(CallingConvention.StdCall)]
             internal delegate ushort CallStaticCharMethod(
-                IntPtr thiz, JniHandle clazz, IntPtr methodID, params Value[] args);
+                IntPtr thiz, JniHandle clazz, IntPtr methodID, ref Value args);
 
             #endregion
 
@@ -220,7 +219,7 @@ namespace net.sf.jni4net.jni
 
             [UnmanagedFunctionPointer(CallingConvention.StdCall)]
             internal delegate double CallStaticDoubleMethod(
-                IntPtr thiz, JniHandle clazz, IntPtr methodID, params Value[] args);
+                IntPtr thiz, JniHandle clazz, IntPtr methodID, ref Value args);
 
             #endregion
 
@@ -228,7 +227,7 @@ namespace net.sf.jni4net.jni
 
             [UnmanagedFunctionPointer(CallingConvention.StdCall)]
             internal delegate float CallStaticFloatMethod(
-                IntPtr thiz, JniHandle clazz, IntPtr methodID, params Value[] args);
+                IntPtr thiz, JniHandle clazz, IntPtr methodID, ref Value args);
 
             #endregion
 
@@ -236,7 +235,7 @@ namespace net.sf.jni4net.jni
 
             [UnmanagedFunctionPointer(CallingConvention.StdCall)]
             internal delegate int CallStaticIntMethod(
-                IntPtr thiz, JniHandle obj, IntPtr methodIdJavaPtr, params Value[] args);
+                IntPtr thiz, JniHandle obj, IntPtr methodIdJavaPtr, ref Value args);
 
             #endregion
 
@@ -244,7 +243,7 @@ namespace net.sf.jni4net.jni
 
             [UnmanagedFunctionPointer(CallingConvention.StdCall)]
             internal delegate long CallStaticLongMethod(
-                IntPtr thiz, JniHandle clazz, IntPtr methodID, params Value[] args);
+                IntPtr thiz, JniHandle clazz, IntPtr methodID, ref Value args);
 
             #endregion
 
@@ -252,7 +251,7 @@ namespace net.sf.jni4net.jni
 
             [UnmanagedFunctionPointer(CallingConvention.StdCall)]
             internal delegate JniLocalHandle CallStaticObjectMethod(
-                IntPtr thiz, JniHandle clazz, IntPtr methodID, params Value[] args);
+                IntPtr thiz, JniHandle clazz, IntPtr methodID, ref Value args);
 
             #endregion
 
@@ -260,7 +259,7 @@ namespace net.sf.jni4net.jni
 
             [UnmanagedFunctionPointer(CallingConvention.StdCall)]
             internal delegate short CallStaticShortMethod(
-                IntPtr thiz, JniHandle clazz, IntPtr methodID, params Value[] args);
+                IntPtr thiz, JniHandle clazz, IntPtr methodID, ref Value args);
 
             #endregion
 
@@ -268,7 +267,7 @@ namespace net.sf.jni4net.jni
 
             [UnmanagedFunctionPointer(CallingConvention.StdCall)]
             internal delegate JNIResult CallStaticVoidMethod(
-                IntPtr thiz, JniHandle clazz, IntPtr methodIdJavaPtr, params Value[] args);
+                IntPtr thiz, JniHandle clazz, IntPtr methodIdJavaPtr, ref Value args);
 
             #endregion
 
@@ -276,7 +275,7 @@ namespace net.sf.jni4net.jni
 
             [UnmanagedFunctionPointer(CallingConvention.StdCall)]
             internal delegate JNIResult CallVoidMethod(
-                IntPtr thiz, JniHandle obj, IntPtr methodIdJavaPtr, params Value[] args);
+                IntPtr thiz, JniHandle obj, IntPtr methodIdJavaPtr, ref Value args);
 
             #endregion
 
@@ -864,7 +863,7 @@ namespace net.sf.jni4net.jni
 
             [UnmanagedFunctionPointer(CallingConvention.StdCall)]
             internal delegate JniLocalHandle NewObject(
-                IntPtr thiz, JniHandle clazz, IntPtr methodID, params Value[] args);
+                IntPtr thiz, JniHandle clazz, IntPtr methodID, ref Value args);
 
             #endregion
 

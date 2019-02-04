@@ -20,15 +20,25 @@ using java.lang.reflect;
 using java.nio;
 using java_.lang;
 using net.sf.jni4net.utils;
-using Exception=System.Exception;
-using Object=java.lang.Object;
-using String=java.lang.String;
+using Exception = System.Exception;
+using Object = java.lang.Object;
+using String = java.lang.String;
 
 namespace net.sf.jni4net.jni
 {
     [SecurityPermission(SecurityAction.Assert, Flags = SecurityPermissionFlag.Execution | SecurityPermissionFlag.UnmanagedCode | SecurityPermissionFlag.SkipVerification)]
     public unsafe partial class JNIEnv
     {
+        private static ref Value Ref(Value[] args)
+        {
+            if (args.Length > 0)
+            {
+                return ref args[0];
+            }
+
+            return ref Value.Null;
+        }
+
         #region JNI methods
 
         public int GetVersion()
@@ -154,7 +164,7 @@ namespace net.sf.jni4net.jni
         public Field ToReflectedField(Class cls, FieldId fieldID, bool isStatic)
         {
             JniLocalHandle res = toReflectedField.Invoke(envPtr, cls.jvmHandle, fieldID.native,
-                                                 isStatic ? (byte) 1 : (byte) 0);
+                                                 isStatic ? (byte)1 : (byte)0);
             ExceptionTest();
             return Convertor.StrongJ2Cp<Field>(this, res);
         }
@@ -162,7 +172,7 @@ namespace net.sf.jni4net.jni
         public Method ToReflectedMethod(Class cls, MethodId methodId, bool isStatic)
         {
             JniLocalHandle res = toReflectedMethod.Invoke(envPtr, cls.jvmHandle, methodId.native,
-                                                  isStatic ? (byte) 1 : (byte) 0);
+                                                  isStatic ? (byte)1 : (byte)0);
             ExceptionTest();
             return Convertor.StrongJ2Cp<Method>(this, res);
         }
@@ -222,7 +232,7 @@ namespace net.sf.jni4net.jni
                 Console.WriteLine("CallStaticVoidMethod : " + clazz.FullName);
             }
 #endif
-            callStaticVoidMethod(envPtr, clazz.jvmHandle, methodIdNative.native, args);
+            callStaticVoidMethod(envPtr, clazz.jvmHandle, methodIdNative.native, ref Ref(args));
             //TODO result could be tested in Java 1.6
             ExceptionTest();
         }
@@ -241,7 +251,7 @@ namespace net.sf.jni4net.jni
                 Console.WriteLine("CallStaticIntMethod : " + clazz.FullName);
             }
 #endif
-            int res = callStaticIntMethod(envPtr, clazz.jvmHandle, methodIdNative.native, args);
+            int res = callStaticIntMethod(envPtr, clazz.jvmHandle, methodIdNative.native, ref Ref(args));
             ExceptionTest();
             return res;
         }
@@ -254,7 +264,7 @@ namespace net.sf.jni4net.jni
                 Console.WriteLine("CallStaticLongMethod : " + clazz.FullName);
             }
 #endif
-            long res = callStaticLongMethod(envPtr, clazz.jvmHandle, methodIdNative.native, args);
+            long res = callStaticLongMethod(envPtr, clazz.jvmHandle, methodIdNative.native, ref Ref(args));
             ExceptionTest();
             return res;
         }
@@ -267,7 +277,7 @@ namespace net.sf.jni4net.jni
                 Console.WriteLine("CallStaticDoubleMethod : " + clazz.FullName);
             }
 #endif
-            double res = callStaticDoubleMethod(envPtr, clazz.jvmHandle, methodIdNative.native, args);
+            double res = callStaticDoubleMethod(envPtr, clazz.jvmHandle, methodIdNative.native, ref Ref(args));
             ExceptionTest();
             return res;
         }
@@ -280,7 +290,7 @@ namespace net.sf.jni4net.jni
                 Console.WriteLine("CallStaticFloatMethod : " + clazz.FullName);
             }
 #endif
-            float res = callStaticFloatMethod(envPtr, clazz.jvmHandle, methodIdNative.native, args);
+            float res = callStaticFloatMethod(envPtr, clazz.jvmHandle, methodIdNative.native, ref Ref(args));
             ExceptionTest();
             return res;
         }
@@ -293,7 +303,7 @@ namespace net.sf.jni4net.jni
                 Console.WriteLine("CallStaticShortMethod : " + clazz.FullName);
             }
 #endif
-            short res = callStaticShortMethod(envPtr, clazz.jvmHandle, methodIdNative.native, args);
+            short res = callStaticShortMethod(envPtr, clazz.jvmHandle, methodIdNative.native, ref Ref(args));
             ExceptionTest();
             return res;
         }
@@ -306,7 +316,7 @@ namespace net.sf.jni4net.jni
                 Console.WriteLine("CallStaticCharMethod : " + clazz.FullName);
             }
 #endif
-            var res = (char) callStaticCharMethod(envPtr, clazz.jvmHandle, methodIdNative.native, args);
+            var res = (char)callStaticCharMethod(envPtr, clazz.jvmHandle, methodIdNative.native, ref Ref(args));
             ExceptionTest();
             return res;
         }
@@ -319,7 +329,7 @@ namespace net.sf.jni4net.jni
                 Console.WriteLine("CallStaticBooleanMethod : " + clazz.FullName);
             }
 #endif
-            bool res = callStaticBooleanMethod(envPtr, clazz.jvmHandle, methodIdNative.native, args) != 0;
+            bool res = callStaticBooleanMethod(envPtr, clazz.jvmHandle, methodIdNative.native, ref Ref(args)) != 0;
             ExceptionTest();
             return res;
         }
@@ -332,7 +342,7 @@ namespace net.sf.jni4net.jni
                 Console.WriteLine("CallStaticByteMethod : " + clazz.FullName);
             }
 #endif
-            byte res = callStaticByteMethod(envPtr, clazz.jvmHandle, methodIdNative.native, args);
+            byte res = callStaticByteMethod(envPtr, clazz.jvmHandle, methodIdNative.native, ref Ref(args));
             ExceptionTest();
             return res;
         }
@@ -353,8 +363,8 @@ namespace net.sf.jni4net.jni
             MethodId idNative = GetStaticMethodID(clazz, method, sig);
             if (idNative != null)
             {
-                if (typeof (IObject).IsAssignableFrom(typeof (TRes))
-                    ||(typeof(object)==(typeof(TRes)) 
+                if (typeof(IObject).IsAssignableFrom(typeof(TRes))
+                    || (typeof(object) == (typeof(TRes))
                     || typeof(Delegate).IsAssignableFrom(typeof(TRes)))
                     )
                 {
@@ -364,41 +374,41 @@ namespace net.sf.jni4net.jni
                 {
                     return CallStaticObjectMethod<TRes>(clazz, idNative, args);
                 }
-                if (typeof (int).IsAssignableFrom(typeof (TRes)))
+                if (typeof(int).IsAssignableFrom(typeof(TRes)))
                 {
-                    return (TRes) (object) CallStaticIntMethod(clazz, idNative, args);
+                    return (TRes)(object)CallStaticIntMethod(clazz, idNative, args);
                 }
-                if (typeof (bool).IsAssignableFrom(typeof (TRes)))
+                if (typeof(bool).IsAssignableFrom(typeof(TRes)))
                 {
-                    return (TRes) (object) CallStaticBooleanMethod(clazz, idNative, args);
+                    return (TRes)(object)CallStaticBooleanMethod(clazz, idNative, args);
                 }
-                if (typeof (long).IsAssignableFrom(typeof (TRes)))
+                if (typeof(long).IsAssignableFrom(typeof(TRes)))
                 {
-                    return (TRes) (object) CallStaticLongMethod(clazz, idNative, args);
+                    return (TRes)(object)CallStaticLongMethod(clazz, idNative, args);
                 }
-                if (typeof (double).IsAssignableFrom(typeof (TRes)))
+                if (typeof(double).IsAssignableFrom(typeof(TRes)))
                 {
-                    return (TRes) (object) CallStaticDoubleMethod(clazz, idNative, args);
+                    return (TRes)(object)CallStaticDoubleMethod(clazz, idNative, args);
                 }
-                if (typeof (byte).IsAssignableFrom(typeof (TRes)))
+                if (typeof(byte).IsAssignableFrom(typeof(TRes)))
                 {
-                    return (TRes) (object) CallStaticByteMethod(clazz, idNative, args);
+                    return (TRes)(object)CallStaticByteMethod(clazz, idNative, args);
                 }
-                if (typeof (short).IsAssignableFrom(typeof (TRes)))
+                if (typeof(short).IsAssignableFrom(typeof(TRes)))
                 {
-                    return (TRes) (object) CallStaticShortMethod(clazz, idNative, args);
+                    return (TRes)(object)CallStaticShortMethod(clazz, idNative, args);
                 }
-                if (typeof (float).IsAssignableFrom(typeof (TRes)))
+                if (typeof(float).IsAssignableFrom(typeof(TRes)))
                 {
-                    return (TRes) (object) CallStaticFloatMethod(clazz, idNative, args);
+                    return (TRes)(object)CallStaticFloatMethod(clazz, idNative, args);
                 }
-                if (typeof (char).IsAssignableFrom(typeof (TRes)))
+                if (typeof(char).IsAssignableFrom(typeof(TRes)))
                 {
-                    return (TRes) (object) CallStaticCharMethod(clazz, idNative, args);
+                    return (TRes)(object)CallStaticCharMethod(clazz, idNative, args);
                 }
-                if (typeof (byte).IsAssignableFrom(typeof (TRes)))
+                if (typeof(byte).IsAssignableFrom(typeof(TRes)))
                 {
-                    return (TRes) (object) CallStaticByteMethod(clazz, idNative, args);
+                    return (TRes)(object)CallStaticByteMethod(clazz, idNative, args);
                 }
             }
             throw new ArgumentException();
@@ -410,7 +420,7 @@ namespace net.sf.jni4net.jni
 
         public void CallVoidMethod(JniHandle obj, MethodId methodId, params Value[] args)
         {
-            callVoidMethod(envPtr, obj, methodId.native, args);
+            callVoidMethod(envPtr, obj, methodId.native, ref Ref(args));
             //TODO result could be tested in Java 1.6
             ExceptionTest();
         }
@@ -440,19 +450,29 @@ namespace net.sf.jni4net.jni
                 Console.WriteLine("CallBooleanMethod : " + obj.GetType().FullName);
             }
 #endif
-            bool res = callBooleanMethod(envPtr, obj.JvmHandle, methodIdNative.native, args) != 0;
+            bool res = callBooleanMethod(envPtr, obj.JvmHandle, methodIdNative.native, ref Ref(args)) != 0;
             ExceptionTest();
             return res;
         }
 
         public bool CallBooleanMethod(JniHandle obj, MethodId methodIdNative, params Value[] args)
         {
-            bool res = callBooleanMethod(envPtr, obj, methodIdNative.native, args) != 0;
+            bool res = callBooleanMethod(envPtr, obj, methodIdNative.native, ref Ref(args)) != 0;
             ExceptionTest();
             return res;
         }
 
+        public int CallIntMethod(IJvmProxy obj, MethodId methodIdNative)
+        {
+            return CallIntMethod(obj, methodIdNative, ref Value.Null);
+        }
+
         public int CallIntMethod(IJvmProxy obj, MethodId methodIdNative, params Value[] args)
+        {
+            return CallIntMethod(obj, methodIdNative, ref Ref(args));
+        }
+
+        public int CallIntMethod(IJvmProxy obj, MethodId methodIdNative, ref Value args)
         {
 #if DEBUG
             if (Bridge.Setup.VeryVerbose)
@@ -460,14 +480,14 @@ namespace net.sf.jni4net.jni
                 Console.WriteLine("CallIntMethod : " + obj.GetType().FullName);
             }
 #endif
-            int res = callIntMethod(envPtr, obj.JvmHandle, methodIdNative.native, args);
+            int res = callIntMethod(envPtr, obj.JvmHandle, methodIdNative.native, ref args);
             ExceptionTest();
             return res;
         }
 
         public int CallIntMethod(JniHandle obj, MethodId methodIdNative, params Value[] args)
         {
-            int res = callIntMethod(envPtr, obj, methodIdNative.native, args);
+            int res = callIntMethod(envPtr, obj, methodIdNative.native, ref Ref(args));
             ExceptionTest();
             return res;
         }
@@ -480,14 +500,14 @@ namespace net.sf.jni4net.jni
                 Console.WriteLine("CallShortMethod : " + obj.GetType().FullName);
             }
 #endif
-            short res = callShortMethod(envPtr, obj.JvmHandle, methodIdNative.native, args);
+            short res = callShortMethod(envPtr, obj.JvmHandle, methodIdNative.native, ref Ref(args));
             ExceptionTest();
             return res;
         }
 
         public short CallShortMethod(JniHandle obj, MethodId methodIdNative, params Value[] args)
         {
-            short res = callShortMethod(envPtr, obj, methodIdNative.native, args);
+            short res = callShortMethod(envPtr, obj, methodIdNative.native, ref Ref(args));
             ExceptionTest();
             return res;
         }
@@ -500,14 +520,14 @@ namespace net.sf.jni4net.jni
                 Console.WriteLine("CallLongMethod : " + obj.GetType().FullName);
             }
 #endif
-            long res = callLongMethod(envPtr, obj.JvmHandle, methodIdNative.native, args);
+            long res = callLongMethod(envPtr, obj.JvmHandle, methodIdNative.native, ref Ref(args));
             ExceptionTest();
             return res;
         }
 
         public long CallLongMethod(JniHandle obj, MethodId methodIdNative, params Value[] args)
         {
-            long res = callLongMethod(envPtr, obj, methodIdNative.native, args);
+            long res = callLongMethod(envPtr, obj, methodIdNative.native, ref Ref(args));
             ExceptionTest();
             return res;
         }
@@ -520,14 +540,14 @@ namespace net.sf.jni4net.jni
                 Console.WriteLine("CallByteMethod : " + obj.GetType().FullName);
             }
 #endif
-            byte res = callByteMethod(envPtr, obj.JvmHandle, methodIdNative.native, args);
+            byte res = callByteMethod(envPtr, obj.JvmHandle, methodIdNative.native, ref Ref(args));
             ExceptionTest();
             return res;
         }
 
         public byte CallByteMethod(JniHandle obj, MethodId methodIdNative, params Value[] args)
         {
-            byte res = callByteMethod(envPtr, obj, methodIdNative.native, args);
+            byte res = callByteMethod(envPtr, obj, methodIdNative.native, ref Ref(args));
             ExceptionTest();
             return res;
         }
@@ -540,14 +560,14 @@ namespace net.sf.jni4net.jni
                 Console.WriteLine("CallDoubleMethod : " + obj.GetType().FullName);
             }
 #endif
-            double res = callDoubleMethod(envPtr, obj.JvmHandle, methodIdNative.native, args);
+            double res = callDoubleMethod(envPtr, obj.JvmHandle, methodIdNative.native, ref Ref(args));
             ExceptionTest();
             return res;
         }
 
         public double CallDoubleMethod(JniHandle obj, MethodId methodIdNative, params Value[] args)
         {
-            double res = callDoubleMethod(envPtr, obj, methodIdNative.native, args);
+            double res = callDoubleMethod(envPtr, obj, methodIdNative.native, ref Ref(args));
             ExceptionTest();
             return res;
         }
@@ -560,14 +580,14 @@ namespace net.sf.jni4net.jni
                 Console.WriteLine("CallFloatMethod : " + obj.GetType().FullName);
             }
 #endif
-            float res = callFloatMethod(envPtr, obj.JvmHandle, methodIdNative.native, args);
+            float res = callFloatMethod(envPtr, obj.JvmHandle, methodIdNative.native, ref Ref(args));
             ExceptionTest();
             return res;
         }
 
         public float CallFloatMethod(JniHandle obj, MethodId methodIdNative, params Value[] args)
         {
-            float res = callFloatMethod(envPtr, obj, methodIdNative.native, args);
+            float res = callFloatMethod(envPtr, obj, methodIdNative.native, ref Ref(args));
             ExceptionTest();
             return res;
         }
@@ -580,14 +600,14 @@ namespace net.sf.jni4net.jni
                 Console.WriteLine("CallCharMethod : " + obj.GetType().FullName);
             }
 #endif
-            var res = (char)callCharMethod(envPtr, obj.JvmHandle, methodIdNative.native, args);
+            var res = (char)callCharMethod(envPtr, obj.JvmHandle, methodIdNative.native, ref Ref(args));
             ExceptionTest();
             return res;
         }
 
         public char CallCharMethod(JniHandle obj, MethodId methodIdNative, params Value[] args)
         {
-            var res = (char) callCharMethod(envPtr, obj, methodIdNative.native, args);
+            var res = (char)callCharMethod(envPtr, obj, methodIdNative.native, ref Ref(args));
             ExceptionTest();
             return res;
         }
@@ -640,8 +660,8 @@ namespace net.sf.jni4net.jni
             MethodId idNative = GetMethodID(GetObjectClass(obj), method, sig);
             if (idNative != null)
             {
-                if (typeof (IObject).IsAssignableFrom(typeof (TRes))
-                    || typeof(object)==(typeof(TRes))
+                if (typeof(IObject).IsAssignableFrom(typeof(TRes))
+                    || typeof(object) == (typeof(TRes))
                     || typeof(Delegate).IsAssignableFrom(typeof(TRes)))
                 {
                     return CallObjectMethod<TRes>(obj, idNative, args);
@@ -650,41 +670,41 @@ namespace net.sf.jni4net.jni
                 {
                     return CallObjectMethod<TRes>(obj, idNative, args);
                 }
-                if (typeof (int).IsAssignableFrom(typeof (TRes)))
+                if (typeof(int).IsAssignableFrom(typeof(TRes)))
                 {
-                    return (TRes) (object) CallIntMethod(obj, idNative, args);
+                    return (TRes)(object)CallIntMethod(obj, idNative, args);
                 }
-                if (typeof (bool).IsAssignableFrom(typeof (TRes)))
+                if (typeof(bool).IsAssignableFrom(typeof(TRes)))
                 {
-                    return (TRes) (object) CallBooleanMethod(obj, idNative, args);
+                    return (TRes)(object)CallBooleanMethod(obj, idNative, args);
                 }
-                if (typeof (long).IsAssignableFrom(typeof (TRes)))
+                if (typeof(long).IsAssignableFrom(typeof(TRes)))
                 {
-                    return (TRes) (object) CallLongMethod(obj, idNative, args);
+                    return (TRes)(object)CallLongMethod(obj, idNative, args);
                 }
-                if (typeof (double).IsAssignableFrom(typeof (TRes)))
+                if (typeof(double).IsAssignableFrom(typeof(TRes)))
                 {
-                    return (TRes) (object) CallDoubleMethod(obj, idNative, args);
+                    return (TRes)(object)CallDoubleMethod(obj, idNative, args);
                 }
-                if (typeof (byte).IsAssignableFrom(typeof (TRes)))
+                if (typeof(byte).IsAssignableFrom(typeof(TRes)))
                 {
-                    return (TRes) (object) CallByteMethod(obj, idNative, args);
+                    return (TRes)(object)CallByteMethod(obj, idNative, args);
                 }
-                if (typeof (short).IsAssignableFrom(typeof (TRes)))
+                if (typeof(short).IsAssignableFrom(typeof(TRes)))
                 {
-                    return (TRes) (object) CallShortMethod(obj, idNative, args);
+                    return (TRes)(object)CallShortMethod(obj, idNative, args);
                 }
-                if (typeof (float).IsAssignableFrom(typeof (TRes)))
+                if (typeof(float).IsAssignableFrom(typeof(TRes)))
                 {
-                    return (TRes) (object) CallFloatMethod(obj, idNative, args);
+                    return (TRes)(object)CallFloatMethod(obj, idNative, args);
                 }
-                if (typeof (char).IsAssignableFrom(typeof (TRes)))
+                if (typeof(char).IsAssignableFrom(typeof(TRes)))
                 {
-                    return (TRes) (object) CallCharMethod(obj, idNative, args);
+                    return (TRes)(object)CallCharMethod(obj, idNative, args);
                 }
-                if (typeof (byte).IsAssignableFrom(typeof (TRes)))
+                if (typeof(byte).IsAssignableFrom(typeof(TRes)))
                 {
-                    return (TRes) (object) CallByteMethod(obj, idNative, args);
+                    return (TRes)(object)CallByteMethod(obj, idNative, args);
                 }
             }
             throw new ArgumentException();
@@ -756,7 +776,7 @@ namespace net.sf.jni4net.jni
 
         public char GetCharField(IJvmProxy obj, FieldId fieldID)
         {
-            var res = (char) getCharField(envPtr, obj.JvmHandle, fieldID.native);
+            var res = (char)getCharField(envPtr, obj.JvmHandle, fieldID.native);
             ExceptionTest();
             return res;
         }
@@ -766,49 +786,49 @@ namespace net.sf.jni4net.jni
             FieldId id = GetFieldID(obj.getClass(), fieldName, sig);
             if (id != null)
             {
-                if (typeof (IObject).IsAssignableFrom(typeof (TRes)))
+                if (typeof(IObject).IsAssignableFrom(typeof(TRes)))
                 {
                     return GetObjectField<TRes>(obj, id);
                 }
-                if (typeof (string).IsAssignableFrom(typeof (TRes)))
+                if (typeof(string).IsAssignableFrom(typeof(TRes)))
                 {
                     return GetObjectField<TRes>(obj, id);
                 }
-                if (typeof (int).IsAssignableFrom(typeof (TRes)))
+                if (typeof(int).IsAssignableFrom(typeof(TRes)))
                 {
-                    return (TRes) (object) GetIntField(obj, id);
+                    return (TRes)(object)GetIntField(obj, id);
                 }
-                if (typeof (bool).IsAssignableFrom(typeof (TRes)))
+                if (typeof(bool).IsAssignableFrom(typeof(TRes)))
                 {
-                    return (TRes) (object) GetBooleanField(obj, id);
+                    return (TRes)(object)GetBooleanField(obj, id);
                 }
-                if (typeof (long).IsAssignableFrom(typeof (TRes)))
+                if (typeof(long).IsAssignableFrom(typeof(TRes)))
                 {
-                    return (TRes) (object) GetLongField(obj, id);
+                    return (TRes)(object)GetLongField(obj, id);
                 }
-                if (typeof (double).IsAssignableFrom(typeof (TRes)))
+                if (typeof(double).IsAssignableFrom(typeof(TRes)))
                 {
-                    return (TRes) (object) GetDoubleField(obj, id);
+                    return (TRes)(object)GetDoubleField(obj, id);
                 }
-                if (typeof (byte).IsAssignableFrom(typeof (TRes)))
+                if (typeof(byte).IsAssignableFrom(typeof(TRes)))
                 {
-                    return (TRes) (object) GetByteField(obj, id);
+                    return (TRes)(object)GetByteField(obj, id);
                 }
-                if (typeof (short).IsAssignableFrom(typeof (TRes)))
+                if (typeof(short).IsAssignableFrom(typeof(TRes)))
                 {
-                    return (TRes) (object) GetShortField(obj, id);
+                    return (TRes)(object)GetShortField(obj, id);
                 }
-                if (typeof (float).IsAssignableFrom(typeof (TRes)))
+                if (typeof(float).IsAssignableFrom(typeof(TRes)))
                 {
-                    return (TRes) (object) GetFloatField(obj, id);
+                    return (TRes)(object)GetFloatField(obj, id);
                 }
-                if (typeof (char).IsAssignableFrom(typeof (TRes)))
+                if (typeof(char).IsAssignableFrom(typeof(TRes)))
                 {
-                    return (TRes) (object) GetCharField(obj, id);
+                    return (TRes)(object)GetCharField(obj, id);
                 }
-                if (typeof (byte).IsAssignableFrom(typeof (TRes)))
+                if (typeof(byte).IsAssignableFrom(typeof(TRes)))
                 {
-                    return (TRes) (object) GetByteField(obj, id);
+                    return (TRes)(object)GetByteField(obj, id);
                 }
                 throw new NotImplementedException();
             }
@@ -839,7 +859,7 @@ namespace net.sf.jni4net.jni
 
         internal void SetBooleanField(IJvmProxy obj, FieldId fieldID, bool value)
         {
-            setBooleanField(envPtr, obj.JvmHandle, fieldID.native, value ? (byte) 1 : (byte) 0);
+            setBooleanField(envPtr, obj.JvmHandle, fieldID.native, value ? (byte)1 : (byte)0);
             ExceptionTest();
         }
 
@@ -884,49 +904,49 @@ namespace net.sf.jni4net.jni
             FieldId id = GetFieldID(obj.getClass(), fieldName, sig);
             if (id != null)
             {
-                if (typeof (IObject).IsAssignableFrom(typeof (T)))
+                if (typeof(IObject).IsAssignableFrom(typeof(T)))
                 {
-                    SetObjectField(obj, id, (Object) (object) value);
+                    SetObjectField(obj, id, (Object)(object)value);
                 }
-                else if (typeof (string).IsAssignableFrom(typeof (T)))
+                else if (typeof(string).IsAssignableFrom(typeof(T)))
                 {
-                    SetObjectField(obj, id, (String) (string) (object) value);
+                    SetObjectField(obj, id, (String)(string)(object)value);
                 }
-                else if (typeof (int).IsAssignableFrom(typeof (T)))
+                else if (typeof(int).IsAssignableFrom(typeof(T)))
                 {
-                    SetIntField(obj, id, (int) (object) value);
+                    SetIntField(obj, id, (int)(object)value);
                 }
-                else if (typeof (bool).IsAssignableFrom(typeof (T)))
+                else if (typeof(bool).IsAssignableFrom(typeof(T)))
                 {
-                    SetBooleanField(obj, id, (bool) (object) value);
+                    SetBooleanField(obj, id, (bool)(object)value);
                 }
-                else if (typeof (long).IsAssignableFrom(typeof (T)))
+                else if (typeof(long).IsAssignableFrom(typeof(T)))
                 {
-                    SetLongField(obj, id, (long) (object) value);
+                    SetLongField(obj, id, (long)(object)value);
                 }
-                else if (typeof (double).IsAssignableFrom(typeof (T)))
+                else if (typeof(double).IsAssignableFrom(typeof(T)))
                 {
-                    SetDoubleField(obj, id, (double) (object) value);
+                    SetDoubleField(obj, id, (double)(object)value);
                 }
-                else if (typeof (byte).IsAssignableFrom(typeof (T)))
+                else if (typeof(byte).IsAssignableFrom(typeof(T)))
                 {
-                    SetByteField(obj, id, (byte) (object) value);
+                    SetByteField(obj, id, (byte)(object)value);
                 }
-                else if (typeof (short).IsAssignableFrom(typeof (T)))
+                else if (typeof(short).IsAssignableFrom(typeof(T)))
                 {
-                    SetShortField(obj, id, (short) (object) value);
+                    SetShortField(obj, id, (short)(object)value);
                 }
-                else if (typeof (float).IsAssignableFrom(typeof (T)))
+                else if (typeof(float).IsAssignableFrom(typeof(T)))
                 {
-                    SetFloatField(obj, id, (float) (object) id);
+                    SetFloatField(obj, id, (float)(object)id);
                 }
-                else if (typeof (char).IsAssignableFrom(typeof (T)))
+                else if (typeof(char).IsAssignableFrom(typeof(T)))
                 {
-                    SetCharField(obj, id, (char) (object) id);
+                    SetCharField(obj, id, (char)(object)id);
                 }
-                else if (typeof (byte).IsAssignableFrom(typeof (T)))
+                else if (typeof(byte).IsAssignableFrom(typeof(T)))
                 {
-                    SetByteField(obj, id, (byte) (object) id);
+                    SetByteField(obj, id, (byte)(object)id);
                 }
                 else
                 {
@@ -1005,49 +1025,49 @@ namespace net.sf.jni4net.jni
             FieldId id = GetStaticFieldID(clazz, fieldName, sig);
             if (id != null)
             {
-                if (typeof (IObject).IsAssignableFrom(typeof (T)))
+                if (typeof(IObject).IsAssignableFrom(typeof(T)))
                 {
-                    SetStaticObjectField(clazz, id, (Object) (object) value);
+                    SetStaticObjectField(clazz, id, (Object)(object)value);
                 }
-                else if (typeof (string).IsAssignableFrom(typeof (T)))
+                else if (typeof(string).IsAssignableFrom(typeof(T)))
                 {
-                    SetStaticObjectField(clazz, id, (String) (string) (object) value);
+                    SetStaticObjectField(clazz, id, (String)(string)(object)value);
                 }
-                else if (typeof (int).IsAssignableFrom(typeof (T)))
+                else if (typeof(int).IsAssignableFrom(typeof(T)))
                 {
-                    SetStaticIntField(clazz, id, (int) (object) value);
+                    SetStaticIntField(clazz, id, (int)(object)value);
                 }
-                else if (typeof (bool).IsAssignableFrom(typeof (T)))
+                else if (typeof(bool).IsAssignableFrom(typeof(T)))
                 {
-                    SetStaticBooleanField(clazz, id, (bool) (object) value);
+                    SetStaticBooleanField(clazz, id, (bool)(object)value);
                 }
-                else if (typeof (long).IsAssignableFrom(typeof (T)))
+                else if (typeof(long).IsAssignableFrom(typeof(T)))
                 {
-                    SetStaticLongField(clazz, id, (long) (object) value);
+                    SetStaticLongField(clazz, id, (long)(object)value);
                 }
-                else if (typeof (double).IsAssignableFrom(typeof (T)))
+                else if (typeof(double).IsAssignableFrom(typeof(T)))
                 {
-                    SetStaticDoubleField(clazz, id, (double) (object) value);
+                    SetStaticDoubleField(clazz, id, (double)(object)value);
                 }
-                else if (typeof (byte).IsAssignableFrom(typeof (T)))
+                else if (typeof(byte).IsAssignableFrom(typeof(T)))
                 {
-                    SetStaticByteField(clazz, id, (byte) (object) value);
+                    SetStaticByteField(clazz, id, (byte)(object)value);
                 }
-                else if (typeof (short).IsAssignableFrom(typeof (T)))
+                else if (typeof(short).IsAssignableFrom(typeof(T)))
                 {
-                    SetStaticShortField(clazz, id, (short) (object) value);
+                    SetStaticShortField(clazz, id, (short)(object)value);
                 }
-                else if (typeof (float).IsAssignableFrom(typeof (T)))
+                else if (typeof(float).IsAssignableFrom(typeof(T)))
                 {
-                    SetStaticFloatField(clazz, id, (float) (object) value);
+                    SetStaticFloatField(clazz, id, (float)(object)value);
                 }
-                else if (typeof (char).IsAssignableFrom(typeof (T)))
+                else if (typeof(char).IsAssignableFrom(typeof(T)))
                 {
-                    SetStaticCharField(clazz, id, (char) (object) value);
+                    SetStaticCharField(clazz, id, (char)(object)value);
                 }
-                else if (typeof (byte).IsAssignableFrom(typeof (T)))
+                else if (typeof(byte).IsAssignableFrom(typeof(T)))
                 {
-                    SetStaticByteField(clazz, id, (byte) (object) value);
+                    SetStaticByteField(clazz, id, (byte)(object)value);
                 }
                 else
                 {
@@ -1125,7 +1145,7 @@ namespace net.sf.jni4net.jni
 
         public char GetStaticCharField(Class clazz, FieldId fieldID)
         {
-            var res = (char) getStaticCharField(envPtr, clazz.jvmHandle, fieldID.native);
+            var res = (char)getStaticCharField(envPtr, clazz.jvmHandle, fieldID.native);
             ExceptionTest();
             return res;
         }
@@ -1146,49 +1166,49 @@ namespace net.sf.jni4net.jni
             FieldId id = GetStaticFieldID(objectClass, fieldName, sig);
             if (id != null)
             {
-                if (typeof (IObject).IsAssignableFrom(typeof (TRes)))
+                if (typeof(IObject).IsAssignableFrom(typeof(TRes)))
                 {
                     return GetStaticObjectField<TRes>(objectClass, id);
                 }
-                if (typeof (string).IsAssignableFrom(typeof (TRes)))
+                if (typeof(string).IsAssignableFrom(typeof(TRes)))
                 {
                     return GetStaticObjectField<TRes>(objectClass, id);
                 }
-                if (typeof (int).IsAssignableFrom(typeof (TRes)))
+                if (typeof(int).IsAssignableFrom(typeof(TRes)))
                 {
-                    return (TRes) (object) GetStaticIntField(objectClass, id);
+                    return (TRes)(object)GetStaticIntField(objectClass, id);
                 }
-                if (typeof (bool).IsAssignableFrom(typeof (TRes)))
+                if (typeof(bool).IsAssignableFrom(typeof(TRes)))
                 {
-                    return (TRes) (object) GetStaticBooleanField(objectClass, id);
+                    return (TRes)(object)GetStaticBooleanField(objectClass, id);
                 }
-                if (typeof (long).IsAssignableFrom(typeof (TRes)))
+                if (typeof(long).IsAssignableFrom(typeof(TRes)))
                 {
-                    return (TRes) (object) GetStaticLongField(objectClass, id);
+                    return (TRes)(object)GetStaticLongField(objectClass, id);
                 }
-                if (typeof (double).IsAssignableFrom(typeof (TRes)))
+                if (typeof(double).IsAssignableFrom(typeof(TRes)))
                 {
-                    return (TRes) (object) GetStaticDoubleField(objectClass, id);
+                    return (TRes)(object)GetStaticDoubleField(objectClass, id);
                 }
-                if (typeof (byte).IsAssignableFrom(typeof (TRes)))
+                if (typeof(byte).IsAssignableFrom(typeof(TRes)))
                 {
-                    return (TRes) (object) GetStaticByteField(objectClass, id);
+                    return (TRes)(object)GetStaticByteField(objectClass, id);
                 }
-                if (typeof (short).IsAssignableFrom(typeof (TRes)))
+                if (typeof(short).IsAssignableFrom(typeof(TRes)))
                 {
-                    return (TRes) (object) GetStaticShortField(objectClass, id);
+                    return (TRes)(object)GetStaticShortField(objectClass, id);
                 }
-                if (typeof (float).IsAssignableFrom(typeof (TRes)))
+                if (typeof(float).IsAssignableFrom(typeof(TRes)))
                 {
-                    return (TRes) (object) GetStaticFloatField(objectClass, id);
+                    return (TRes)(object)GetStaticFloatField(objectClass, id);
                 }
-                if (typeof (char).IsAssignableFrom(typeof (TRes)))
+                if (typeof(char).IsAssignableFrom(typeof(TRes)))
                 {
-                    return (TRes) (object) GetStaticCharField(objectClass, id);
+                    return (TRes)(object)GetStaticCharField(objectClass, id);
                 }
-                if (typeof (byte).IsAssignableFrom(typeof (TRes)))
+                if (typeof(byte).IsAssignableFrom(typeof(TRes)))
                 {
-                    return (TRes) (object) GetStaticByteField(objectClass, id);
+                    return (TRes)(object)GetStaticByteField(objectClass, id);
                 }
                 throw new NotImplementedException();
             }
@@ -1339,23 +1359,70 @@ namespace net.sf.jni4net.jni
             return Convertor.FullJ2C<IJvmProxy>(this, res);
         }
 
-        public void NewObject(Class clazz, MethodId methodID, IJvmProxy obj, params Value[] args)
+        public JniLocalHandle NewObjectPtr(JniHandle clazz, MethodId methodID)
         {
-            JniLocalHandle res = newObject(envPtr, clazz.jvmHandle, methodID.native, args);
-            ExceptionTest();
-            obj.Init(this, res);
+            return NewObjectPtr(clazz, methodID, ref Value.Null);
+        }
+
+        public JniLocalHandle NewObjectPtr(JniHandle clazz, MethodId methodID, Value arg0)
+        {
+            var args = new VarArg1(arg0);
+            return NewObjectPtr(clazz, methodID, ref args.Arg0);
+        }
+
+        public JniLocalHandle NewObjectPtr(JniHandle clazz, MethodId methodID, Value arg0, Value arg1)
+        {
+            var args = new VarArg2(arg0, arg1);
+            return NewObjectPtr(clazz, methodID, ref arg0);
         }
 
         public JniLocalHandle NewObjectPtr(JniHandle clazz, MethodId methodID, params Value[] args)
         {
-            JniLocalHandle res = newObject(envPtr, clazz, methodID.native, args);
+            return NewObjectPtr(clazz, methodID, ref args[0]);
+        }
+
+        public JniLocalHandle NewObjectPtr(JniHandle clazz, MethodId methodID, ref Value args)
+        {
+            JniLocalHandle res = newObject(envPtr, clazz, methodID.native, ref args);
             ExceptionTest();
             return res;
         }
 
+        public void NewObject(Class clazz, MethodId methodID, IJvmProxy obj, params Value[] args)
+        {
+            JniLocalHandle res = newObject(envPtr, clazz.jvmHandle, methodID.native, ref Ref(args));
+            ExceptionTest();
+            obj.Init(this, res);
+        }
+
+        public IObject NewObject(Class clazz, MethodId methodID)
+        {
+            return NewObject(clazz, methodID, ref Value.Null);
+        }
+
+        public IObject NewObject(Class clazz, MethodId methodID, Value arg0)
+        {
+            var args = new VarArg1(arg0);
+            return NewObject(clazz, methodID, ref args.Arg0);
+        }
+
+        public IObject NewObject(Class clazz, MethodId methodID, Value arg0, Value arg1)
+        {
+            var args = new VarArg2(arg0, arg1);
+            return NewObject(clazz, methodID, ref args.Arg0);
+        }
+
         public IObject NewObject(Class clazz, MethodId methodID, params Value[] args)
         {
-            JniLocalHandle res = newObject(envPtr, clazz.jvmHandle, methodID.native, args);
+            return NewObject(clazz, methodID, ref args[0]);
+            JniLocalHandle res = newObject(envPtr, clazz.jvmHandle, methodID.native, ref Ref(args));
+            ExceptionTest();
+            return Convertor.FullJ2C<IJvmProxy>(this, res);
+        }
+
+        public IObject NewObject(Class clazz, MethodId methodID, ref Value args)
+        {
+            JniLocalHandle res = newObject(envPtr, clazz.jvmHandle, methodID.native, ref args);
             ExceptionTest();
             return Convertor.FullJ2C<IJvmProxy>(this, res);
         }
@@ -1463,7 +1530,7 @@ namespace net.sf.jni4net.jni
 
         public static void Reset()
         {
-//            threadJNIEnv.Values.Clear();
+            //            threadJNIEnv.Values.Clear();
         }
     }
 }

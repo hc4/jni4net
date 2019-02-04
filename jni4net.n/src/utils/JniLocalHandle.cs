@@ -17,9 +17,14 @@ namespace net.sf.jni4net.utils
 {
     [Serializable]
     [StructLayout(LayoutKind.Sequential)]
-    public struct JniLocalHandle
+    public readonly ref struct JniLocalHandle
     {
-        internal IntPtr handle;
+        internal readonly IntPtr handle;
+
+        internal JniLocalHandle(IntPtr handle)
+        {
+            this.handle = handle;
+        }
 
         public static JniLocalHandle Zero
         {
