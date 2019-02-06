@@ -18,9 +18,14 @@ namespace net.sf.jni4net.utils
     // http://stackoverflow.com/questions/2035528/how-to-get-getfunctionpointerfordelegate-for-method-with-safehandle-or-workaround
     [Serializable]
     [StructLayout(LayoutKind.Sequential)]
-    public struct JniHandle
+    public readonly struct JniHandle
     {
-        internal IntPtr handle;
+        private readonly IntPtr handle;
+
+        public JniHandle(IntPtr handle)
+        {
+            this.handle = handle;
+        }
 
         public static bool IsNull(JniHandle handle)
         {
@@ -39,7 +44,7 @@ namespace net.sf.jni4net.utils
 
         public static implicit operator JniHandle(JniLocalHandle nonsafe)
         {
-            return new JniHandle {handle = nonsafe.handle};
+            return new JniHandle(nonsafe.handle);
         }
 
         public static implicit operator JniHandle(JniGlobalHandle safe)

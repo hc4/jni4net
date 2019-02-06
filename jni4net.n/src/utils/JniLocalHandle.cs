@@ -21,11 +21,6 @@ namespace net.sf.jni4net.utils
     {
         internal readonly IntPtr handle;
 
-        internal JniLocalHandle(IntPtr handle)
-        {
-            this.handle = handle;
-        }
-
         public static JniLocalHandle Zero
         {
             get { return default(JniLocalHandle); }
@@ -36,14 +31,14 @@ namespace net.sf.jni4net.utils
             return handle.ToInt64();
         }
 
-        public static bool IsNull(JniHandle handle)
+        public static bool IsNull(JniLocalHandle handle)
         {
             return handle.handle == IntPtr.Zero;
         }
 
         public JniHandle DangerousGetHandle()
         {
-            return new JniHandle {handle = handle};
+            return new JniHandle(handle);
         }
 
         public bool IsInvalid()

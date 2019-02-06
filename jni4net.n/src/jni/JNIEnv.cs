@@ -1267,7 +1267,7 @@ namespace net.sf.jni4net.jni
         #region references
 
         [SuppressUnmanagedCodeSecurity]
-        public JniGlobalHandle NewGlobalRef(JniHandle lobj)
+        public JniGlobalHandle NewGlobalRef(JniLocalHandle lobj)
         {
             if (JniLocalHandle.IsNull(lobj))
             {
@@ -1373,7 +1373,7 @@ namespace net.sf.jni4net.jni
         public JniLocalHandle NewObjectPtr(JniHandle clazz, MethodId methodID, Value arg0, Value arg1)
         {
             var args = new VarArg2(arg0, arg1);
-            return NewObjectPtr(clazz, methodID, ref arg0);
+            return NewObjectPtr(clazz, methodID, ref args.Arg0);
         }
 
         public JniLocalHandle NewObjectPtr(JniHandle clazz, MethodId methodID, params Value[] args)

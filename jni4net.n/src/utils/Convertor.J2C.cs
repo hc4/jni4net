@@ -49,15 +49,22 @@ namespace net.sf.jni4net.utils
                     //now we double wrap
                     return (TRes)__IClrProxy.CreateProxy(env, obj);
                 }
+
                 object res = __IClrProxy.GetObject(env, obj);
-                if (res==null && Delegate_._class.isAssignableFrom(clazz))
+                if (res == null)
                 {
-                    //that's delegate implemented in Java
-                    RegistryRecord delRecord = Registry.GetJVMRecord(clazz);
-                    IJvmProxy jvmProxy = delRecord.CreateCLRProxy(env, obj);
-                    Delegate del = Delegate.CreateDelegate(delRecord.CLRInterface, jvmProxy, delRecord.JVMDelegateInvoke);
-                    return (TRes)(object)del;
+                    if (Delegate_._class.isAssignableFrom(clazz))
+                    {
+                        //that's delegate implemented in Java
+                        RegistryRecord delRecord = Registry.GetJVMRecord(clazz);
+                        IJvmProxy jvmProxy = delRecord.CreateCLRProxy(env, obj);
+                        Delegate del = Delegate.CreateDelegate(delRecord.CLRInterface, jvmProxy, delRecord.JVMDelegateInvoke);
+                        return (TRes) (object) del;
+                    }
+
+                    throw new InvalidOperationException($"CLR object not found");
                 }
+
                 if (Bridge.Setup.Debug)
                 {
                     Type realType = res.GetType();

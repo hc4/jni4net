@@ -39,7 +39,7 @@ namespace net.sf.jni4net.utils
 
         public new JniHandle DangerousGetHandle()
         {
-            return new JniHandle { handle = base.DangerousGetHandle() };
+            return new JniHandle(base.DangerousGetHandle());
         }
 
         public static JniGlobalHandle Zero
@@ -47,7 +47,7 @@ namespace net.sf.jni4net.utils
             [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
             get { return zero; }
         }
-        
+
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         public JniGlobalHandle(IntPtr handleValue, JavaVM javaVM)
             : base(IntPtr.Zero, true)

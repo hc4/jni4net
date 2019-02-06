@@ -48,8 +48,11 @@ namespace net.sf.jni4net.jni
                 string findJvmDir = FindJvmDir();
 //                AddEnvironmentPath(findJvmDir);
                 var args = new JavaVMInitArgs();
+                var curDir = Directory.GetCurrentDirectory();
                 try
                 {
+                    Directory.SetCurrentDirectory(findJvmDir);
+
                     //just load DLL
                     var dll = new Dll(findJvmDir);
                     try
@@ -70,9 +73,12 @@ namespace net.sf.jni4net.jni
                     throw new JNIException("Can't initialize jni4net. (32bit vs 64bit JVM vs CLR ?)"
                                            + "\nCLR architecture: " + ((IntPtr.Size == 8) ? "64bit" : "32bit")
                                            + "\nJAVA_HOME: " + (Bridge.Setup == null || Bridge.Setup.JavaHome == null
-                                                                    ? "null"
-                                                                    : Path.GetFullPath(Bridge.Setup.JavaHome))
-                                           , ex);
+                                               ? "null" : Path.GetFullPath(Bridge.Setup.JavaHome))
+                        , ex);
+                }
+                finally
+                {
+                    Directory.SetCurrentDirectory(curDir);
                 }
             }
         }
