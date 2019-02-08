@@ -14,6 +14,7 @@ using System.ComponentModel;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Security.Permissions;
+using DynamicInterop;
 
 namespace net.sf.jni4net.jni
 {
@@ -153,6 +154,12 @@ namespace net.sf.jni4net.jni
                 return directory;
             }
 
+            directory = Bridge.Setup.JavaHome;
+            if (!string.IsNullOrEmpty(directory) && Directory.Exists(directory))
+            {
+                return directory;
+            }
+
             throw new JNIException("JAVA_HOME environment variable points to an invalid location: " + Bridge.Setup.JavaHome);
         }
 
@@ -242,51 +249,26 @@ namespace net.sf.jni4net.jni
 
             [UnmanagedFunctionPointer(CallingConvention.StdCall)]
             public delegate JNIResult JNI_GetDefaultJavaVMInitArgs(JavaVMInitArgs* args);
-
-            [DllImport("kernel32.dll", SetLastError = true)]
-            private static extern IntPtr LoadLibrary(string lpFilename);
-
-            [DllImport("kernel32.dll", CharSet = CharSet.Ansi, SetLastError = true)]
-            private static extern IntPtr GetProcAddress(IntPtr hModule, string procedureName);
-
-            [DllImport("kernel32.dll", SetLastError = true)]
-            private static extern bool FreeLibrary(IntPtr hModule);
-
-            private readonly IntPtr _pLib;
+            
+            private readonly UnmanagedDll _libJvm;
 
             public readonly JNI_CreateJavaVM CreateJavaVM;
             public readonly JNI_GetCreatedJavaVMs GetCreatedJavaVMs;
             public readonly JNI_GetDefaultJavaVMInitArgs GetDefaultJavaVMInitArgs;
 
-            public Dll(string dir)
+            public Dll(string libPath)
             {
-                var libPath = Path.Combine(dir, "jvm.dll");
-                _pLib = LoadLibrary(libPath);
-                if (_pLib == IntPtr.Zero)
-                {
-                    throw new Exception("Failed to load JVM from " + libPath);
-                }
-
-                CreateJavaVM = FindMethod<JNI_CreateJavaVM>(nameof(JNI_CreateJavaVM));
-                GetCreatedJavaVMs = FindMethod<JNI_GetCreatedJavaVMs>(nameof(JNI_GetCreatedJavaVMs));
-                GetDefaultJavaVMInitArgs = FindMethod<JNI_GetDefaultJavaVMInitArgs>(nameof(JNI_GetDefaultJavaVMInitArgs));
-            }
-
-            private T FindMethod<T>(string name)
-            {
-                var result = GetProcAddress(_pLib, name);
-                if (result == IntPtr.Zero)
-                {
-                    int error = Marshal.GetLastWin32Error();
-                    throw new Win32Exception(error, name + " not found");
-                }
-
-                return Marshal.GetDelegateForFunctionPointer<T>(result);
+                var libFileName = RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "jvm.dll" : "libjvm.so";
+                _libJvm = new UnmanagedDll(Path.Combine(libPath, libFileName));
+                
+                CreateJavaVM = _libJvm.GetFunction<JNI_CreateJavaVM>(nameof(JNI_CreateJavaVM));
+                GetCreatedJavaVMs = _libJvm.GetFunction<JNI_GetCreatedJavaVMs>(nameof(JNI_GetCreatedJavaVMs));
+                GetDefaultJavaVMInitArgs = _libJvm.GetFunction<JNI_GetDefaultJavaVMInitArgs>(nameof(JNI_GetDefaultJavaVMInitArgs));
             }
             
             public void Dispose()
             {
-                FreeLibrary(_pLib);
+                _libJvm.Dispose();
             }
         }
 

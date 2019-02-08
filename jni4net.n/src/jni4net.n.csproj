@@ -54,6 +54,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="DynamicInterop" Version="0.9.1" />
     <PackageReference Include="System.CodeDom" Version="4.5.0" />
     <PackageReference Include="System.Reflection.Emit" Version="4.3.0" />
     <PackageReference Include="System.Security.Permissions" Version="4.5.0" />
