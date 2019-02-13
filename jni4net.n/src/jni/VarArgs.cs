@@ -3,9 +3,9 @@
 namespace net.sf.jni4net.jni
 {
     [StructLayout(LayoutKind.Sequential)]
-    internal readonly ref struct VarArgs1
+    internal ref struct VarArgs1
     {
-        public readonly Value Arg0;
+        public Value Arg0;
 
         public VarArgs1(Value arg0)
         {
@@ -14,10 +14,10 @@ namespace net.sf.jni4net.jni
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    internal readonly ref struct VarArgs2
+    internal ref struct VarArgs2
     {
-        public readonly Value Arg0;
-        public readonly Value Arg1;
+        public Value Arg0;
+        public Value Arg1;
 
         public VarArgs2(Value arg0, Value arg1)
         {
@@ -27,11 +27,11 @@ namespace net.sf.jni4net.jni
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    internal readonly ref struct VarArgs3
+    internal ref struct VarArgs3
     {
-        public readonly Value Arg0;
-        public readonly Value Arg1;
-        public readonly Value Arg2;
+        public Value Arg0;
+        public Value Arg1;
+        public Value Arg2;
 
         public VarArgs3(Value arg0, Value arg1, Value arg2)
         {
@@ -42,12 +42,12 @@ namespace net.sf.jni4net.jni
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    internal readonly ref struct VarArgs4
+    internal ref struct VarArgs4
     {
-        public readonly Value Arg0;
-        public readonly Value Arg1;
-        public readonly Value Arg2;
-        public readonly Value Arg3;
+        public Value Arg0;
+        public Value Arg1;
+        public Value Arg2;
+        public Value Arg3;
 
         public VarArgs4(Value arg0, Value arg1, Value arg2, Value arg3)
         {
@@ -59,13 +59,13 @@ namespace net.sf.jni4net.jni
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    internal readonly ref struct VarArgs5
+    internal ref struct VarArgs5
     {
-        public readonly Value Arg0;
-        public readonly Value Arg1;
-        public readonly Value Arg2;
-        public readonly Value Arg3;
-        public readonly Value Arg4;
+        public Value Arg0;
+        public Value Arg1;
+        public Value Arg2;
+        public Value Arg3;
+        public Value Arg4;
 
         public VarArgs5(Value arg0, Value arg1, Value arg2, Value arg3, Value arg4)
         {
@@ -78,14 +78,14 @@ namespace net.sf.jni4net.jni
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    internal readonly ref struct VarArgs6
+    internal ref struct VarArgs6
     {
-        public readonly Value Arg0;
-        public readonly Value Arg1;
-        public readonly Value Arg2;
-        public readonly Value Arg3;
-        public readonly Value Arg4;
-        public readonly Value Arg5;
+        public Value Arg0;
+        public Value Arg1;
+        public Value Arg2;
+        public Value Arg3;
+        public Value Arg4;
+        public Value Arg5;
 
         public VarArgs6(Value arg0, Value arg1, Value arg2, Value arg3, Value arg4, Value arg5)
         {
@@ -99,15 +99,15 @@ namespace net.sf.jni4net.jni
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    internal readonly ref struct VarArgs7
+    internal ref struct VarArgs7
     {
-        public readonly Value Arg0;
-        public readonly Value Arg1;
-        public readonly Value Arg2;
-        public readonly Value Arg3;
-        public readonly Value Arg4;
-        public readonly Value Arg5;
-        public readonly Value Arg6;
+        public Value Arg0;
+        public Value Arg1;
+        public Value Arg2;
+        public Value Arg3;
+        public Value Arg4;
+        public Value Arg5;
+        public Value Arg6;
 
         public VarArgs7(Value arg0, Value arg1, Value arg2, Value arg3, Value arg4, Value arg5, Value arg6)
         {
@@ -123,16 +123,16 @@ namespace net.sf.jni4net.jni
 
 
     [StructLayout(LayoutKind.Sequential)]
-    internal readonly ref struct VarArgs8
+    internal ref struct VarArgs8
     {
-        public readonly Value Arg0;
-        public readonly Value Arg1;
-        public readonly Value Arg2;
-        public readonly Value Arg3;
-        public readonly Value Arg4;
-        public readonly Value Arg5;
-        public readonly Value Arg6;
-        public readonly Value Arg7;
+        public Value Arg0;
+        public Value Arg1;
+        public Value Arg2;
+        public Value Arg3;
+        public Value Arg4;
+        public Value Arg5;
+        public Value Arg6;
+        public Value Arg7;
 
         public VarArgs8(Value arg0, Value arg1, Value arg2, Value arg3, Value arg4, Value arg5, Value arg6, Value arg7)
         {
