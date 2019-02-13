@@ -54,11 +54,34 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <None Include="jni\JNIEnv.VarArgs.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>JNIEnv.VarArgs.tt</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
     <PackageReference Include="DynamicInterop" Version="0.9.1" />
     <PackageReference Include="StrongNamer" Version="0.0.8" />
     <PackageReference Include="System.CodeDom" Version="4.5.0" />
     <PackageReference Include="System.Reflection.Emit" Version="4.3.0" />
     <PackageReference Include="System.Security.Permissions" Version="4.5.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="jni\JNIEnv.VarArgs.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>JNIEnv.VarArgs.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="jni\JNIEnv.VarArgs.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>JNIEnv.VarArgs.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

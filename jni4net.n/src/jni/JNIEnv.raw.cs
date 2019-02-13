@@ -109,53 +109,7 @@ namespace net.sf.jni4net.jni
             ExceptionTest();
             return res;
         }
-
-        public JniLocalHandle CallObjectMethodPtr(IJvmProxy obj, MethodId methodIdNative)
-        {
-            return CallObjectMethodPtr(obj, methodIdNative, ref Value.Null);
-        }
-
-        public JniLocalHandle CallObjectMethodPtr(IJvmProxy obj, MethodId methodIdNative, Value arg0)
-        {
-            var args = new VarArg1(arg0);
-            return CallObjectMethodPtr(obj, methodIdNative, ref args.Arg0);
-        }
-
-        public JniLocalHandle CallObjectMethodPtr(IJvmProxy obj, MethodId methodIdNative, Value arg0, Value arg1)
-        {
-            var args = new VarArg2(arg0, arg1);
-            return CallObjectMethodPtr(obj, methodIdNative, ref args.Arg0);
-        }
-
-        public JniLocalHandle CallObjectMethodPtr(IJvmProxy obj, MethodId methodIdNative, Value arg0, Value arg1, Value arg2)
-        {
-            var args = new VarArg3(arg0, arg1, arg2);
-            return CallObjectMethodPtr(obj, methodIdNative, ref args.Arg0);
-        }
-
-        public JniLocalHandle CallObjectMethodPtr(IJvmProxy obj, MethodId methodIdNative, Value arg0, Value arg1, Value arg2, Value arg3)
-        {
-            var args = new VarArg4(arg0, arg1, arg2, arg3);
-            return CallObjectMethodPtr(obj, methodIdNative, ref args.Arg0);
-        }
-
-        public JniLocalHandle CallObjectMethodPtr(IJvmProxy obj, MethodId methodIdNative, Value arg0, Value arg1, Value arg2, Value arg3, Value arg4)
-        {
-            var args = new VarArg5(arg0, arg1, arg2, arg3, arg4);
-            return CallObjectMethodPtr(obj, methodIdNative, ref args.Arg0);
-        }
-
-        public JniLocalHandle CallObjectMethodPtr(IJvmProxy obj, MethodId methodIdNative, Value arg0, Value arg1, Value arg2, Value arg3, Value arg4, Value arg5)
-        {
-            var args = new VarArg6(arg0, arg1, arg2, arg3, arg4, arg5);
-            return CallObjectMethodPtr(obj, methodIdNative, ref args.Arg0);
-        }
-
-        public JniLocalHandle CallObjectMethodPtr(IJvmProxy obj, MethodId methodIdNative, params Value[] args)
-        {
-            return CallObjectMethodPtr(obj, methodIdNative, ref Ref(args));
-        }
-
+        
         public JniLocalHandle CallObjectMethodPtr(IJvmProxy obj, MethodId methodIdNative, ref Value value)
         {
 #if DEBUG
@@ -188,52 +142,6 @@ namespace net.sf.jni4net.jni
             JniLocalHandle res = getStaticObjectField(envPtr, clazz.jvmHandle, fieldID.native);
             ExceptionTest();
             return res;
-        }
-
-        public JniLocalHandle CallStaticObjectMethodPtr(Class clazz, MethodId methodIdNative)
-        {
-            return CallStaticObjectMethodPtr(clazz, methodIdNative, ref Value.Null);
-        }
-
-        public JniLocalHandle CallStaticObjectMethodPtr(Class clazz, MethodId methodIdNative, Value arg0)
-        {
-            var args = new VarArg1(arg0);
-            return CallStaticObjectMethodPtr(clazz, methodIdNative, ref args.Arg0);
-        }
-
-        public JniLocalHandle CallStaticObjectMethodPtr(Class clazz, MethodId methodIdNative, Value arg0, Value arg1)
-        {
-            var args = new VarArg2(arg0, arg1);
-            return CallStaticObjectMethodPtr(clazz, methodIdNative, ref args.Arg0);
-        }
-
-        public JniLocalHandle CallStaticObjectMethodPtr(Class clazz, MethodId methodIdNative, Value arg0, Value arg1, Value arg2)
-        {
-            var args = new VarArg3(arg0, arg1, arg2);
-            return CallStaticObjectMethodPtr(clazz, methodIdNative, ref args.Arg0);
-        }
-
-        public JniLocalHandle CallStaticObjectMethodPtr(Class clazz, MethodId methodIdNative, Value arg0, Value arg1, Value arg2, Value arg3)
-        {
-            var args = new VarArg4(arg0, arg1, arg2, arg3);
-            return CallStaticObjectMethodPtr(clazz, methodIdNative, ref args.Arg0);
-        }
-
-        public JniLocalHandle CallStaticObjectMethodPtr(Class clazz, MethodId methodIdNative, Value arg0, Value arg1, Value arg2, Value arg3, Value arg4)
-        {
-            var args = new VarArg5(arg0, arg1, arg2, arg3, arg4);
-            return CallStaticObjectMethodPtr(clazz, methodIdNative, ref args.Arg0);
-        }
-
-        public JniLocalHandle CallStaticObjectMethodPtr(Class clazz, MethodId methodIdNative, Value arg0, Value arg1, Value arg2, Value arg3, Value arg4, Value arg5)
-        {
-            var args = new VarArg6(arg0, arg1, arg2, arg3, arg4, arg5);
-            return CallStaticObjectMethodPtr(clazz, methodIdNative, ref args.Arg0);
-        }
-
-        public JniLocalHandle CallStaticObjectMethodPtr(Class clazz, MethodId methodIdNative, params Value[] args)
-        {
-            return CallStaticObjectMethodPtr(clazz, methodIdNative, ref Ref(args));
         }
 
         public JniLocalHandle CallStaticObjectMethodPtr(Class clazz, MethodId methodIdNative, ref Value args)

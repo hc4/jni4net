@@ -1,0 +1,162 @@
+﻿<#@ template debug="true" hostspecific="true" language="C#" #>
+<#@ output extension=".cs" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="EnvDTE" #>
+<#@ assembly name="EnvDTE80" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="EnvDTE" #>
+<#@ import namespace="EnvDTE80" #>
+<#
+    const string EnvClassName = "JNIEnv";
+    const int MaxVarArgsCount = 6;
+
+    IServiceProvider _ServiceProvider = (IServiceProvider)Host;
+    if (_ServiceProvider == null)
+        throw new Exception("Host property returned unexpected value (null)");
+
+    var dte = (DTE)_ServiceProvider.GetService(typeof(EnvDTE.DTE));
+    if (dte == null)
+        throw new Exception("Unable to retrieve EnvDTE.DTE");
+	
+	var selfFileName = Path.GetFileNameWithoutExtension(Host.TemplateFile);
+    var projectItem = dte.Solution.FindProjectItem(Host.TemplateFile);
+    var project = projectItem.ContainingProject;
+
+    string GetAccessString(vsCMAccess access)
+    {
+        switch (access)
+        {
+            case vsCMAccess.vsCMAccessPublic:
+                return "public";
+            case vsCMAccess.vsCMAccessPrivate:
+                return "private";
+            case vsCMAccess.vsCMAccessProject:
+                return "internal";
+            default:
+                throw new ArgumentOutOfRangeException(nameof(access), access, null);
+        }
+    }
+
+	IEnumerable<CodeClass> FindClasses(ProjectItems items, string name)
+    {
+        foreach (ProjectItem item in items)
+        {
+            if (item.Name.StartsWith(selfFileName))
+            {
+                continue;
+            }
+
+            foreach (var subItem in FindClasses(item.ProjectItems, name))
+            {
+                yield return subItem;
+            }
+			
+            if (item.Name.StartsWith(name))
+            {
+                var codeModel = item.FileCodeModel;
+                foreach (var c in FindClassCode(codeModel.CodeElements))
+                {
+                    yield return c;
+                }
+            }
+        }
+    }
+
+
+    IEnumerable<CodeClass> FindClassCode(CodeElements elements)
+    {
+        foreach (CodeElement element in elements)
+        {
+            if (element.Kind == vsCMElement.vsCMElementNamespace)
+	        {
+	            var ns = (CodeNamespace) element;
+	           foreach(var c in FindClassCode(ns.Members))
+	           {
+	               yield return c;
+	           }
+	        }
+			else if (element.Kind == vsCMElement.vsCMElementClass)
+	        {
+	            yield return (CodeClass) element;
+	        }
+	    }
+	}
+
+    IEnumerable<CodeFunction> GetFunctions(CodeClass c)
+    {
+        foreach (CodeElement m in c.Members)
+        {
+            if (m.Kind != vsCMElement.vsCMElementFunction)
+            {
+                continue;
+            }
+
+            yield return (CodeFunction) m;
+        }
+    }
+#>
+// This file is auto-generated. Don't change it!
+namespace net.sf.jni4net.jni
+{        
+	partial class <#= EnvClassName #>
+    {
+<#
+    foreach (var c in FindClasses(project.ProjectItems, EnvClassName))
+    {
+        foreach (var f in GetFunctions(c))
+        {
+            var parameters = f.Parameters.OfType<CodeParameter2>().ToArray();
+            if (parameters.Length == 0)
+            {
+                continue;
+            }
+
+            var lastArg =parameters[parameters.Length-1];
+            if (lastArg.ParameterKind!=vsCMParameterKind.vsCMParameterKindRef || !lastArg.Type.AsFullName.EndsWith(".Value"))
+            {
+                continue;
+            }
+			
+            var funcName = f.FullName;
+			funcName = funcName.Substring(funcName.IndexOf(f.Name));
+
+            var fAccess = GetAccessString(f.Access);
+            var retType = f.Type.AsString;
+            var ret = retType == "void" ? "" : "return ";
+
+            var sigArgsBase = parameters.Take(parameters.Length - 1).Select(x => x.Type.AsString + " " + x.Name).ToArray();
+            var callArgsBase = parameters.Take(parameters.Length - 1).Select(x => x.Name).ToArray();
+			
+            for (var i = 0; i <= MaxVarArgsCount; i++)
+            {
+                var sigArgs = sigArgsBase.Concat(Enumerable.Range(0, i).Select(x => "Value arg" + x));
+                var callArgs = callArgsBase.Append(i == 0 ? "ref Value.Null" : "ref args.Arg0");
+#>        
+        <#= fAccess #> <#= retType #> <#= funcName #>(<#= string.Join(", ", sigArgs) #>)
+		{
+<#
+                if (i > 0)
+                {
+                    var varArgs = Enumerable.Range(0, i).Select(x => "arg" + x);
+#>
+            var args = new VarArgs<#= i #>(<#= string.Join(", ", varArgs) #>);
+<#
+                }
+#>
+		    <#= ret + funcName #>(<#= string.Join(", ", callArgs) #>);
+        }
+<#
+            }
+#>        
+        <#= fAccess #> <#= retType #> <#= funcName #>(<#= string.Join(", ", sigArgsBase.Append("params Value[] args")) #>)
+		{
+		    <#= ret + funcName #>(<#= string.Join(", ", callArgsBase.Append("ref AsRef(args)")) #>);
+        }
+<#
+        }
+    }
+#>	
+    }
+}

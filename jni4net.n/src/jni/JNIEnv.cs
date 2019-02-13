@@ -29,7 +29,7 @@ namespace net.sf.jni4net.jni
     [SecurityPermission(SecurityAction.Assert, Flags = SecurityPermissionFlag.Execution | SecurityPermissionFlag.UnmanagedCode | SecurityPermissionFlag.SkipVerification)]
     public unsafe partial class JNIEnv
     {
-        private static ref Value Ref(Value[] args)
+        private static ref Value AsRef(Value[] args)
         {
             if (args.Length > 0)
             {
@@ -224,7 +224,7 @@ namespace net.sf.jni4net.jni
 
         #region call static
 
-        public void CallStaticVoidMethod(Class clazz, MethodId methodIdNative, params Value[] args)
+        public void CallStaticVoidMethod(Class clazz, MethodId methodIdNative, ref Value args)
         {
 #if DEBUG
             if (Bridge.Setup.VeryVerbose)
@@ -232,18 +232,18 @@ namespace net.sf.jni4net.jni
                 Console.WriteLine("CallStaticVoidMethod : " + clazz.FullName);
             }
 #endif
-            callStaticVoidMethod(envPtr, clazz.jvmHandle, methodIdNative.native, ref Ref(args));
+            callStaticVoidMethod(envPtr, clazz.jvmHandle, methodIdNative.native, ref args);
             //TODO result could be tested in Java 1.6
             ExceptionTest();
         }
 
-        public TRes CallStaticObjectMethod<TRes>(Class clazz, MethodId methodIdNative, params Value[] args)
+        public TRes CallStaticObjectMethod<TRes>(Class clazz, MethodId methodIdNative, ref Value args)
         {
-            JniLocalHandle res = CallStaticObjectMethodPtr(clazz, methodIdNative, args);
+            JniLocalHandle res = CallStaticObjectMethodPtr(clazz, methodIdNative, ref args);
             return Convertor.FullJ2C<TRes>(this, res);
         }
 
-        public int CallStaticIntMethod(Class clazz, MethodId methodIdNative, params Value[] args)
+        public int CallStaticIntMethod(Class clazz, MethodId methodIdNative, ref Value args)
         {
 #if DEBUG
             if (Bridge.Setup.VeryVerbose)
@@ -251,12 +251,12 @@ namespace net.sf.jni4net.jni
                 Console.WriteLine("CallStaticIntMethod : " + clazz.FullName);
             }
 #endif
-            int res = callStaticIntMethod(envPtr, clazz.jvmHandle, methodIdNative.native, ref Ref(args));
+            int res = callStaticIntMethod(envPtr, clazz.jvmHandle, methodIdNative.native, ref args);
             ExceptionTest();
             return res;
         }
 
-        public long CallStaticLongMethod(Class clazz, MethodId methodIdNative, params Value[] args)
+        public long CallStaticLongMethod(Class clazz, MethodId methodIdNative, ref Value args)
         {
 #if DEBUG
             if (Bridge.Setup.VeryVerbose)
@@ -264,12 +264,12 @@ namespace net.sf.jni4net.jni
                 Console.WriteLine("CallStaticLongMethod : " + clazz.FullName);
             }
 #endif
-            long res = callStaticLongMethod(envPtr, clazz.jvmHandle, methodIdNative.native, ref Ref(args));
+            long res = callStaticLongMethod(envPtr, clazz.jvmHandle, methodIdNative.native, ref args);
             ExceptionTest();
             return res;
         }
 
-        public double CallStaticDoubleMethod(Class clazz, MethodId methodIdNative, params Value[] args)
+        public double CallStaticDoubleMethod(Class clazz, MethodId methodIdNative, ref Value args)
         {
 #if DEBUG
             if (Bridge.Setup.VeryVerbose)
@@ -277,12 +277,12 @@ namespace net.sf.jni4net.jni
                 Console.WriteLine("CallStaticDoubleMethod : " + clazz.FullName);
             }
 #endif
-            double res = callStaticDoubleMethod(envPtr, clazz.jvmHandle, methodIdNative.native, ref Ref(args));
+            double res = callStaticDoubleMethod(envPtr, clazz.jvmHandle, methodIdNative.native, ref args);
             ExceptionTest();
             return res;
         }
 
-        public float CallStaticFloatMethod(Class clazz, MethodId methodIdNative, params Value[] args)
+        public float CallStaticFloatMethod(Class clazz, MethodId methodIdNative, ref Value args)
         {
 #if DEBUG
             if (Bridge.Setup.VeryVerbose)
@@ -290,12 +290,12 @@ namespace net.sf.jni4net.jni
                 Console.WriteLine("CallStaticFloatMethod : " + clazz.FullName);
             }
 #endif
-            float res = callStaticFloatMethod(envPtr, clazz.jvmHandle, methodIdNative.native, ref Ref(args));
+            float res = callStaticFloatMethod(envPtr, clazz.jvmHandle, methodIdNative.native, ref args);
             ExceptionTest();
             return res;
         }
 
-        public short CallStaticShortMethod(Class clazz, MethodId methodIdNative, params Value[] args)
+        public short CallStaticShortMethod(Class clazz, MethodId methodIdNative, ref Value args)
         {
 #if DEBUG
             if (Bridge.Setup.VeryVerbose)
@@ -303,12 +303,12 @@ namespace net.sf.jni4net.jni
                 Console.WriteLine("CallStaticShortMethod : " + clazz.FullName);
             }
 #endif
-            short res = callStaticShortMethod(envPtr, clazz.jvmHandle, methodIdNative.native, ref Ref(args));
+            short res = callStaticShortMethod(envPtr, clazz.jvmHandle, methodIdNative.native, ref args);
             ExceptionTest();
             return res;
         }
 
-        public char CallStaticCharMethod(Class clazz, MethodId methodIdNative, params Value[] args)
+        public char CallStaticCharMethod(Class clazz, MethodId methodIdNative, ref Value args)
         {
 #if DEBUG
             if (Bridge.Setup.VeryVerbose)
@@ -316,12 +316,12 @@ namespace net.sf.jni4net.jni
                 Console.WriteLine("CallStaticCharMethod : " + clazz.FullName);
             }
 #endif
-            var res = (char)callStaticCharMethod(envPtr, clazz.jvmHandle, methodIdNative.native, ref Ref(args));
+            var res = (char)callStaticCharMethod(envPtr, clazz.jvmHandle, methodIdNative.native, ref args);
             ExceptionTest();
             return res;
         }
 
-        public bool CallStaticBooleanMethod(Class clazz, MethodId methodIdNative, params Value[] args)
+        public bool CallStaticBooleanMethod(Class clazz, MethodId methodIdNative, ref Value args)
         {
 #if DEBUG
             if (Bridge.Setup.VeryVerbose)
@@ -329,12 +329,12 @@ namespace net.sf.jni4net.jni
                 Console.WriteLine("CallStaticBooleanMethod : " + clazz.FullName);
             }
 #endif
-            bool res = callStaticBooleanMethod(envPtr, clazz.jvmHandle, methodIdNative.native, ref Ref(args)) != 0;
+            bool res = callStaticBooleanMethod(envPtr, clazz.jvmHandle, methodIdNative.native, ref args) != 0;
             ExceptionTest();
             return res;
         }
 
-        public byte CallStaticByteMethod(Class clazz, MethodId methodIdNative, params Value[] args)
+        public byte CallStaticByteMethod(Class clazz, MethodId methodIdNative, ref Value args)
         {
 #if DEBUG
             if (Bridge.Setup.VeryVerbose)
@@ -342,23 +342,23 @@ namespace net.sf.jni4net.jni
                 Console.WriteLine("CallStaticByteMethod : " + clazz.FullName);
             }
 #endif
-            byte res = callStaticByteMethod(envPtr, clazz.jvmHandle, methodIdNative.native, ref Ref(args));
+            byte res = callStaticByteMethod(envPtr, clazz.jvmHandle, methodIdNative.native, ref args);
             ExceptionTest();
             return res;
         }
 
-        internal void CallStaticVoidMethod(Class clazz, string method, string sig, params Value[] args)
+        internal void CallStaticVoidMethod(Class clazz, string method, string sig, ref Value args)
         {
             MethodId idNative = GetStaticMethodID(clazz, method, sig);
             if (idNative != null)
             {
-                CallStaticVoidMethod(clazz, idNative, args);
+                CallStaticVoidMethod(clazz, idNative, ref args);
                 return;
             }
             throw new ArgumentException();
         }
 
-        private TRes CallStaticMethod<TRes>(Class clazz, string method, string sig, params Value[] args)
+        private TRes CallStaticMethod<TRes>(Class clazz, string method, string sig, ref Value args)
         {
             MethodId idNative = GetStaticMethodID(clazz, method, sig);
             if (idNative != null)
@@ -368,47 +368,47 @@ namespace net.sf.jni4net.jni
                     || typeof(Delegate).IsAssignableFrom(typeof(TRes)))
                     )
                 {
-                    return CallStaticObjectMethod<TRes>(clazz, idNative, args);
+                    return CallStaticObjectMethod<TRes>(clazz, idNative, ref args);
                 }
                 if (typeof(string).IsAssignableFrom(typeof(TRes)))
                 {
-                    return CallStaticObjectMethod<TRes>(clazz, idNative, args);
+                    return CallStaticObjectMethod<TRes>(clazz, idNative, ref args);
                 }
                 if (typeof(int).IsAssignableFrom(typeof(TRes)))
                 {
-                    return (TRes)(object)CallStaticIntMethod(clazz, idNative, args);
+                    return (TRes)(object)CallStaticIntMethod(clazz, idNative, ref args);
                 }
                 if (typeof(bool).IsAssignableFrom(typeof(TRes)))
                 {
-                    return (TRes)(object)CallStaticBooleanMethod(clazz, idNative, args);
+                    return (TRes)(object)CallStaticBooleanMethod(clazz, idNative, ref args);
                 }
                 if (typeof(long).IsAssignableFrom(typeof(TRes)))
                 {
-                    return (TRes)(object)CallStaticLongMethod(clazz, idNative, args);
+                    return (TRes)(object)CallStaticLongMethod(clazz, idNative, ref args);
                 }
                 if (typeof(double).IsAssignableFrom(typeof(TRes)))
                 {
-                    return (TRes)(object)CallStaticDoubleMethod(clazz, idNative, args);
+                    return (TRes)(object)CallStaticDoubleMethod(clazz, idNative, ref args);
                 }
                 if (typeof(byte).IsAssignableFrom(typeof(TRes)))
                 {
-                    return (TRes)(object)CallStaticByteMethod(clazz, idNative, args);
+                    return (TRes)(object)CallStaticByteMethod(clazz, idNative, ref args);
                 }
                 if (typeof(short).IsAssignableFrom(typeof(TRes)))
                 {
-                    return (TRes)(object)CallStaticShortMethod(clazz, idNative, args);
+                    return (TRes)(object)CallStaticShortMethod(clazz, idNative, ref args);
                 }
                 if (typeof(float).IsAssignableFrom(typeof(TRes)))
                 {
-                    return (TRes)(object)CallStaticFloatMethod(clazz, idNative, args);
+                    return (TRes)(object)CallStaticFloatMethod(clazz, idNative, ref args);
                 }
                 if (typeof(char).IsAssignableFrom(typeof(TRes)))
                 {
-                    return (TRes)(object)CallStaticCharMethod(clazz, idNative, args);
+                    return (TRes)(object)CallStaticCharMethod(clazz, idNative, ref args);
                 }
                 if (typeof(byte).IsAssignableFrom(typeof(TRes)))
                 {
-                    return (TRes)(object)CallStaticByteMethod(clazz, idNative, args);
+                    return (TRes)(object)CallStaticByteMethod(clazz, idNative, ref args);
                 }
             }
             throw new ArgumentException();
@@ -418,14 +418,14 @@ namespace net.sf.jni4net.jni
 
         #region call instance
 
-        public void CallVoidMethod(JniHandle obj, MethodId methodId, params Value[] args)
+        public void CallVoidMethod(JniHandle obj, MethodId methodId, ref Value args)
         {
-            callVoidMethod(envPtr, obj, methodId.native, ref Ref(args));
+            callVoidMethod(envPtr, obj, methodId.native, ref args);
             //TODO result could be tested in Java 1.6
             ExceptionTest();
         }
 
-        public void CallVoidMethod(IJvmProxy obj, MethodId methodId, params Value[] args)
+        public void CallVoidMethod(IJvmProxy obj, MethodId methodId, ref Value args)
         {
 #if DEBUG
             if (Bridge.Setup.VeryVerbose)
@@ -433,16 +433,16 @@ namespace net.sf.jni4net.jni
                 Console.WriteLine("IJvmProxy : " + obj.GetType().FullName);
             }
 #endif
-            CallVoidMethod(obj.JvmHandle, methodId, args);
+            CallVoidMethod(obj.JvmHandle, methodId, ref args);
         }
 
-        public TRes CallObjectMethod<TRes>(IJvmProxy obj, MethodId methodIdNative, params Value[] args)
+        public TRes CallObjectMethod<TRes>(IJvmProxy obj, MethodId methodIdNative, ref Value args)
         {
-            JniLocalHandle res = CallObjectMethodPtr(obj, methodIdNative, args);
+            JniLocalHandle res = CallObjectMethodPtr(obj, methodIdNative, ref args);
             return Convertor.FullJ2C<TRes>(this, res);
         }
 
-        public bool CallBooleanMethod(IJvmProxy obj, MethodId methodIdNative, params Value[] args)
+        public bool CallBooleanMethod(IJvmProxy obj, MethodId methodIdNative, ref Value args)
         {
 #if DEBUG
             if (Bridge.Setup.VeryVerbose)
@@ -450,28 +450,18 @@ namespace net.sf.jni4net.jni
                 Console.WriteLine("CallBooleanMethod : " + obj.GetType().FullName);
             }
 #endif
-            bool res = callBooleanMethod(envPtr, obj.JvmHandle, methodIdNative.native, ref Ref(args)) != 0;
+            bool res = callBooleanMethod(envPtr, obj.JvmHandle, methodIdNative.native, ref args) != 0;
             ExceptionTest();
             return res;
         }
 
-        public bool CallBooleanMethod(JniHandle obj, MethodId methodIdNative, params Value[] args)
+        public bool CallBooleanMethod(JniHandle obj, MethodId methodIdNative, ref Value args)
         {
-            bool res = callBooleanMethod(envPtr, obj, methodIdNative.native, ref Ref(args)) != 0;
+            bool res = callBooleanMethod(envPtr, obj, methodIdNative.native, ref args) != 0;
             ExceptionTest();
             return res;
         }
-
-        public int CallIntMethod(IJvmProxy obj, MethodId methodIdNative)
-        {
-            return CallIntMethod(obj, methodIdNative, ref Value.Null);
-        }
-
-        public int CallIntMethod(IJvmProxy obj, MethodId methodIdNative, params Value[] args)
-        {
-            return CallIntMethod(obj, methodIdNative, ref Ref(args));
-        }
-
+        
         public int CallIntMethod(IJvmProxy obj, MethodId methodIdNative, ref Value args)
         {
 #if DEBUG
@@ -485,14 +475,14 @@ namespace net.sf.jni4net.jni
             return res;
         }
 
-        public int CallIntMethod(JniHandle obj, MethodId methodIdNative, params Value[] args)
+        public int CallIntMethod(JniHandle obj, MethodId methodIdNative, ref Value args)
         {
-            int res = callIntMethod(envPtr, obj, methodIdNative.native, ref Ref(args));
+            int res = callIntMethod(envPtr, obj, methodIdNative.native, ref args);
             ExceptionTest();
             return res;
         }
 
-        public short CallShortMethod(IJvmProxy obj, MethodId methodIdNative, params Value[] args)
+        public short CallShortMethod(IJvmProxy obj, MethodId methodIdNative, ref Value args)
         {
 #if DEBUG
             if (Bridge.Setup.VeryVerbose)
@@ -500,19 +490,19 @@ namespace net.sf.jni4net.jni
                 Console.WriteLine("CallShortMethod : " + obj.GetType().FullName);
             }
 #endif
-            short res = callShortMethod(envPtr, obj.JvmHandle, methodIdNative.native, ref Ref(args));
+            short res = callShortMethod(envPtr, obj.JvmHandle, methodIdNative.native, ref args);
             ExceptionTest();
             return res;
         }
 
-        public short CallShortMethod(JniHandle obj, MethodId methodIdNative, params Value[] args)
+        public short CallShortMethod(JniHandle obj, MethodId methodIdNative, ref Value args)
         {
-            short res = callShortMethod(envPtr, obj, methodIdNative.native, ref Ref(args));
+            short res = callShortMethod(envPtr, obj, methodIdNative.native, ref args);
             ExceptionTest();
             return res;
         }
 
-        public long CallLongMethod(IJvmProxy obj, MethodId methodIdNative, params Value[] args)
+        public long CallLongMethod(IJvmProxy obj, MethodId methodIdNative, ref Value args)
         {
 #if DEBUG
             if (Bridge.Setup.VeryVerbose)
@@ -520,19 +510,19 @@ namespace net.sf.jni4net.jni
                 Console.WriteLine("CallLongMethod : " + obj.GetType().FullName);
             }
 #endif
-            long res = callLongMethod(envPtr, obj.JvmHandle, methodIdNative.native, ref Ref(args));
+            long res = callLongMethod(envPtr, obj.JvmHandle, methodIdNative.native, ref args);
             ExceptionTest();
             return res;
         }
 
-        public long CallLongMethod(JniHandle obj, MethodId methodIdNative, params Value[] args)
+        public long CallLongMethod(JniHandle obj, MethodId methodIdNative, ref Value args)
         {
-            long res = callLongMethod(envPtr, obj, methodIdNative.native, ref Ref(args));
+            long res = callLongMethod(envPtr, obj, methodIdNative.native, ref args);
             ExceptionTest();
             return res;
         }
 
-        public byte CallByteMethod(IJvmProxy obj, MethodId methodIdNative, params Value[] args)
+        public byte CallByteMethod(IJvmProxy obj, MethodId methodIdNative, ref Value args)
         {
 #if DEBUG
             if (Bridge.Setup.VeryVerbose)
@@ -540,19 +530,19 @@ namespace net.sf.jni4net.jni
                 Console.WriteLine("CallByteMethod : " + obj.GetType().FullName);
             }
 #endif
-            byte res = callByteMethod(envPtr, obj.JvmHandle, methodIdNative.native, ref Ref(args));
+            byte res = callByteMethod(envPtr, obj.JvmHandle, methodIdNative.native, ref args);
             ExceptionTest();
             return res;
         }
 
-        public byte CallByteMethod(JniHandle obj, MethodId methodIdNative, params Value[] args)
+        public byte CallByteMethod(JniHandle obj, MethodId methodIdNative, ref Value args)
         {
-            byte res = callByteMethod(envPtr, obj, methodIdNative.native, ref Ref(args));
+            byte res = callByteMethod(envPtr, obj, methodIdNative.native, ref args);
             ExceptionTest();
             return res;
         }
 
-        public double CallDoubleMethod(IJvmProxy obj, MethodId methodIdNative, params Value[] args)
+        public double CallDoubleMethod(IJvmProxy obj, MethodId methodIdNative, ref Value args)
         {
 #if DEBUG
             if (Bridge.Setup.VeryVerbose)
@@ -560,19 +550,19 @@ namespace net.sf.jni4net.jni
                 Console.WriteLine("CallDoubleMethod : " + obj.GetType().FullName);
             }
 #endif
-            double res = callDoubleMethod(envPtr, obj.JvmHandle, methodIdNative.native, ref Ref(args));
+            double res = callDoubleMethod(envPtr, obj.JvmHandle, methodIdNative.native, ref args);
             ExceptionTest();
             return res;
         }
 
-        public double CallDoubleMethod(JniHandle obj, MethodId methodIdNative, params Value[] args)
+        public double CallDoubleMethod(JniHandle obj, MethodId methodIdNative, ref Value args)
         {
-            double res = callDoubleMethod(envPtr, obj, methodIdNative.native, ref Ref(args));
+            double res = callDoubleMethod(envPtr, obj, methodIdNative.native, ref args);
             ExceptionTest();
             return res;
         }
 
-        public float CallFloatMethod(IJvmProxy obj, MethodId methodIdNative, params Value[] args)
+        public float CallFloatMethod(IJvmProxy obj, MethodId methodIdNative, ref Value args)
         {
 #if DEBUG
             if (Bridge.Setup.VeryVerbose)
@@ -580,19 +570,19 @@ namespace net.sf.jni4net.jni
                 Console.WriteLine("CallFloatMethod : " + obj.GetType().FullName);
             }
 #endif
-            float res = callFloatMethod(envPtr, obj.JvmHandle, methodIdNative.native, ref Ref(args));
+            float res = callFloatMethod(envPtr, obj.JvmHandle, methodIdNative.native, ref args);
             ExceptionTest();
             return res;
         }
 
-        public float CallFloatMethod(JniHandle obj, MethodId methodIdNative, params Value[] args)
+        public float CallFloatMethod(JniHandle obj, MethodId methodIdNative, ref Value args)
         {
-            float res = callFloatMethod(envPtr, obj, methodIdNative.native, ref Ref(args));
+            float res = callFloatMethod(envPtr, obj, methodIdNative.native, ref args);
             ExceptionTest();
             return res;
         }
 
-        public char CallCharMethod(IJvmProxy obj, MethodId methodIdNative, params Value[] args)
+        public char CallCharMethod(IJvmProxy obj, MethodId methodIdNative, ref Value args)
         {
 #if DEBUG
             if (Bridge.Setup.VeryVerbose)
@@ -600,19 +590,19 @@ namespace net.sf.jni4net.jni
                 Console.WriteLine("CallCharMethod : " + obj.GetType().FullName);
             }
 #endif
-            var res = (char)callCharMethod(envPtr, obj.JvmHandle, methodIdNative.native, ref Ref(args));
+            var res = (char)callCharMethod(envPtr, obj.JvmHandle, methodIdNative.native, ref args);
             ExceptionTest();
             return res;
         }
 
-        public char CallCharMethod(JniHandle obj, MethodId methodIdNative, params Value[] args)
+        public char CallCharMethod(JniHandle obj, MethodId methodIdNative, ref Value args)
         {
-            var res = (char)callCharMethod(envPtr, obj, methodIdNative.native, ref Ref(args));
+            var res = (char)callCharMethod(envPtr, obj, methodIdNative.native, ref args);
             ExceptionTest();
             return res;
         }
 
-        private void CallVoidMethod(IJvmProxy obj, string method, string sig, params Value[] args)
+        private void CallVoidMethod(IJvmProxy obj, string method, string sig, ref Value args)
         {
             Class objectClass = GetObjectClass(obj);
             if (objectClass != null)
@@ -620,14 +610,14 @@ namespace net.sf.jni4net.jni
                 MethodId methodId = GetMethodID(objectClass, method, sig);
                 if (methodId != null)
                 {
-                    CallVoidMethod(obj, methodId, args);
+                    CallVoidMethod(obj, methodId, ref args);
                     return;
                 }
             }
             throw new ArgumentException();
         }
 
-        public bool CallBooleanMethod(IJvmProxy obj, string method, string sig, params Value[] args)
+        public bool CallBooleanMethod(IJvmProxy obj, string method, string sig, ref Value args)
         {
             Class objectClass = GetObjectClass(obj);
             if (objectClass != null)
@@ -635,13 +625,13 @@ namespace net.sf.jni4net.jni
                 MethodId methodId = GetMethodID(objectClass, method, sig);
                 if (methodId != null)
                 {
-                    return CallBooleanMethod(obj, methodId, args);
+                    return CallBooleanMethod(obj, methodId, ref args);
                 }
             }
             throw new ArgumentException();
         }
 
-        private int CallIntMethod(IJvmProxy obj, string method, string sig, params Value[] args)
+        private int CallIntMethod(IJvmProxy obj, string method, string sig, ref Value args)
         {
             Class objectClass = GetObjectClass(obj);
             if (objectClass != null)
@@ -649,13 +639,13 @@ namespace net.sf.jni4net.jni
                 MethodId methodId = GetMethodID(objectClass, method, sig);
                 if (methodId != null)
                 {
-                    return CallIntMethod(obj, methodId, args);
+                    return CallIntMethod(obj, methodId, ref args);
                 }
             }
             throw new ArgumentException();
         }
 
-        private TRes CallMethod<TRes>(IJvmProxy obj, string method, string sig, params Value[] args)
+        private TRes CallMethod<TRes>(IJvmProxy obj, string method, string sig, ref Value args)
         {
             MethodId idNative = GetMethodID(GetObjectClass(obj), method, sig);
             if (idNative != null)
@@ -664,47 +654,47 @@ namespace net.sf.jni4net.jni
                     || typeof(object) == (typeof(TRes))
                     || typeof(Delegate).IsAssignableFrom(typeof(TRes)))
                 {
-                    return CallObjectMethod<TRes>(obj, idNative, args);
+                    return CallObjectMethod<TRes>(obj, idNative, ref args);
                 }
                 if (typeof(string).IsAssignableFrom(typeof(TRes)))
                 {
-                    return CallObjectMethod<TRes>(obj, idNative, args);
+                    return CallObjectMethod<TRes>(obj, idNative, ref args);
                 }
                 if (typeof(int).IsAssignableFrom(typeof(TRes)))
                 {
-                    return (TRes)(object)CallIntMethod(obj, idNative, args);
+                    return (TRes)(object)CallIntMethod(obj, idNative, ref args);
                 }
                 if (typeof(bool).IsAssignableFrom(typeof(TRes)))
                 {
-                    return (TRes)(object)CallBooleanMethod(obj, idNative, args);
+                    return (TRes)(object)CallBooleanMethod(obj, idNative, ref args);
                 }
                 if (typeof(long).IsAssignableFrom(typeof(TRes)))
                 {
-                    return (TRes)(object)CallLongMethod(obj, idNative, args);
+                    return (TRes)(object)CallLongMethod(obj, idNative, ref args);
                 }
                 if (typeof(double).IsAssignableFrom(typeof(TRes)))
                 {
-                    return (TRes)(object)CallDoubleMethod(obj, idNative, args);
+                    return (TRes)(object)CallDoubleMethod(obj, idNative, ref args);
                 }
                 if (typeof(byte).IsAssignableFrom(typeof(TRes)))
                 {
-                    return (TRes)(object)CallByteMethod(obj, idNative, args);
+                    return (TRes)(object)CallByteMethod(obj, idNative, ref args);
                 }
                 if (typeof(short).IsAssignableFrom(typeof(TRes)))
                 {
-                    return (TRes)(object)CallShortMethod(obj, idNative, args);
+                    return (TRes)(object)CallShortMethod(obj, idNative, ref args);
                 }
                 if (typeof(float).IsAssignableFrom(typeof(TRes)))
                 {
-                    return (TRes)(object)CallFloatMethod(obj, idNative, args);
+                    return (TRes)(object)CallFloatMethod(obj, idNative, ref args);
                 }
                 if (typeof(char).IsAssignableFrom(typeof(TRes)))
                 {
-                    return (TRes)(object)CallCharMethod(obj, idNative, args);
+                    return (TRes)(object)CallCharMethod(obj, idNative, ref args);
                 }
                 if (typeof(byte).IsAssignableFrom(typeof(TRes)))
                 {
-                    return (TRes)(object)CallByteMethod(obj, idNative, args);
+                    return (TRes)(object)CallByteMethod(obj, idNative, ref args);
                 }
             }
             throw new ArgumentException();
@@ -1358,29 +1348,7 @@ namespace net.sf.jni4net.jni
             ExceptionTest();
             return Convertor.FullJ2C<IJvmProxy>(this, res);
         }
-
-        public JniLocalHandle NewObjectPtr(JniHandle clazz, MethodId methodID)
-        {
-            return NewObjectPtr(clazz, methodID, ref Value.Null);
-        }
-
-        public JniLocalHandle NewObjectPtr(JniHandle clazz, MethodId methodID, Value arg0)
-        {
-            var args = new VarArg1(arg0);
-            return NewObjectPtr(clazz, methodID, ref args.Arg0);
-        }
-
-        public JniLocalHandle NewObjectPtr(JniHandle clazz, MethodId methodID, Value arg0, Value arg1)
-        {
-            var args = new VarArg2(arg0, arg1);
-            return NewObjectPtr(clazz, methodID, ref args.Arg0);
-        }
-
-        public JniLocalHandle NewObjectPtr(JniHandle clazz, MethodId methodID, params Value[] args)
-        {
-            return NewObjectPtr(clazz, methodID, ref args[0]);
-        }
-
+        
         public JniLocalHandle NewObjectPtr(JniHandle clazz, MethodId methodID, ref Value args)
         {
             JniLocalHandle res = newObject(envPtr, clazz, methodID.native, ref args);
@@ -1388,36 +1356,11 @@ namespace net.sf.jni4net.jni
             return res;
         }
 
-        public void NewObject(Class clazz, MethodId methodID, IJvmProxy obj, params Value[] args)
+        public void NewObject(Class clazz, MethodId methodID, IJvmProxy obj, ref Value args)
         {
-            JniLocalHandle res = newObject(envPtr, clazz.jvmHandle, methodID.native, ref Ref(args));
+            JniLocalHandle res = newObject(envPtr, clazz.jvmHandle, methodID.native, ref args);
             ExceptionTest();
             obj.Init(this, res);
-        }
-
-        public IObject NewObject(Class clazz, MethodId methodID)
-        {
-            return NewObject(clazz, methodID, ref Value.Null);
-        }
-
-        public IObject NewObject(Class clazz, MethodId methodID, Value arg0)
-        {
-            var args = new VarArg1(arg0);
-            return NewObject(clazz, methodID, ref args.Arg0);
-        }
-
-        public IObject NewObject(Class clazz, MethodId methodID, Value arg0, Value arg1)
-        {
-            var args = new VarArg2(arg0, arg1);
-            return NewObject(clazz, methodID, ref args.Arg0);
-        }
-
-        public IObject NewObject(Class clazz, MethodId methodID, params Value[] args)
-        {
-            return NewObject(clazz, methodID, ref args[0]);
-            JniLocalHandle res = newObject(envPtr, clazz.jvmHandle, methodID.native, ref Ref(args));
-            ExceptionTest();
-            return Convertor.FullJ2C<IJvmProxy>(this, res);
         }
 
         public IObject NewObject(Class clazz, MethodId methodID, ref Value args)
