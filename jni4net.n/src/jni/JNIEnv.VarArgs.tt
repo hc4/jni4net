@@ -10,7 +10,7 @@
 <#@ import namespace="EnvDTE80" #>
 <#
     const string EnvClassName = "JNIEnv";
-    const int MaxVarArgsCount = 6;
+    const int MaxVarArgsCount = 8;
 
     IServiceProvider _ServiceProvider = (IServiceProvider)Host;
     if (_ServiceProvider == null)

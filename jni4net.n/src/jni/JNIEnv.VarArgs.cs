@@ -45,6 +45,18 @@ namespace net.sf.jni4net.jni
 		    CallStaticVoidMethod(clazz, methodIdNative, ref args.Arg0);
         }
         
+        public void CallStaticVoidMethod(java.lang.Class clazz, net.sf.jni4net.jni.MethodId methodIdNative, Value arg0, Value arg1, Value arg2, Value arg3, Value arg4, Value arg5, Value arg6)
+		{
+            var args = new VarArgs7(arg0, arg1, arg2, arg3, arg4, arg5, arg6);
+		    CallStaticVoidMethod(clazz, methodIdNative, ref args.Arg0);
+        }
+        
+        public void CallStaticVoidMethod(java.lang.Class clazz, net.sf.jni4net.jni.MethodId methodIdNative, Value arg0, Value arg1, Value arg2, Value arg3, Value arg4, Value arg5, Value arg6, Value arg7)
+		{
+            var args = new VarArgs8(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7);
+		    CallStaticVoidMethod(clazz, methodIdNative, ref args.Arg0);
+        }
+        
         public void CallStaticVoidMethod(java.lang.Class clazz, net.sf.jni4net.jni.MethodId methodIdNative, params Value[] args)
 		{
 		    CallStaticVoidMethod(clazz, methodIdNative, ref AsRef(args));
@@ -88,6 +100,18 @@ namespace net.sf.jni4net.jni
         public TRes CallStaticObjectMethod<TRes>(java.lang.Class clazz, net.sf.jni4net.jni.MethodId methodIdNative, Value arg0, Value arg1, Value arg2, Value arg3, Value arg4, Value arg5)
 		{
             var args = new VarArgs6(arg0, arg1, arg2, arg3, arg4, arg5);
+		    return CallStaticObjectMethod<TRes>(clazz, methodIdNative, ref args.Arg0);
+        }
+        
+        public TRes CallStaticObjectMethod<TRes>(java.lang.Class clazz, net.sf.jni4net.jni.MethodId methodIdNative, Value arg0, Value arg1, Value arg2, Value arg3, Value arg4, Value arg5, Value arg6)
+		{
+            var args = new VarArgs7(arg0, arg1, arg2, arg3, arg4, arg5, arg6);
+		    return CallStaticObjectMethod<TRes>(clazz, methodIdNative, ref args.Arg0);
+        }
+        
+        public TRes CallStaticObjectMethod<TRes>(java.lang.Class clazz, net.sf.jni4net.jni.MethodId methodIdNative, Value arg0, Value arg1, Value arg2, Value arg3, Value arg4, Value arg5, Value arg6, Value arg7)
+		{
+            var args = new VarArgs8(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7);
 		    return CallStaticObjectMethod<TRes>(clazz, methodIdNative, ref args.Arg0);
         }
         
@@ -137,6 +161,18 @@ namespace net.sf.jni4net.jni
 		    return CallStaticIntMethod(clazz, methodIdNative, ref args.Arg0);
         }
         
+        public int CallStaticIntMethod(java.lang.Class clazz, net.sf.jni4net.jni.MethodId methodIdNative, Value arg0, Value arg1, Value arg2, Value arg3, Value arg4, Value arg5, Value arg6)
+		{
+            var args = new VarArgs7(arg0, arg1, arg2, arg3, arg4, arg5, arg6);
+		    return CallStaticIntMethod(clazz, methodIdNative, ref args.Arg0);
+        }
+        
+        public int CallStaticIntMethod(java.lang.Class clazz, net.sf.jni4net.jni.MethodId methodIdNative, Value arg0, Value arg1, Value arg2, Value arg3, Value arg4, Value arg5, Value arg6, Value arg7)
+		{
+            var args = new VarArgs8(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7);
+		    return CallStaticIntMethod(clazz, methodIdNative, ref args.Arg0);
+        }
+        
         public int CallStaticIntMethod(java.lang.Class clazz, net.sf.jni4net.jni.MethodId methodIdNative, params Value[] args)
 		{
 		    return CallStaticIntMethod(clazz, methodIdNative, ref AsRef(args));
@@ -180,6 +216,18 @@ namespace net.sf.jni4net.jni
         public long CallStaticLongMethod(java.lang.Class clazz, net.sf.jni4net.jni.MethodId methodIdNative, Value arg0, Value arg1, Value arg2, Value arg3, Value arg4, Value arg5)
 		{
             var args = new VarArgs6(arg0, arg1, arg2, arg3, arg4, arg5);
+		    return CallStaticLongMethod(clazz, methodIdNative, ref args.Arg0);
+        }
+        
+        public long CallStaticLongMethod(java.lang.Class clazz, net.sf.jni4net.jni.MethodId methodIdNative, Value arg0, Value arg1, Value arg2, Value arg3, Value arg4, Value arg5, Value arg6)
+		{
+            var args = new VarArgs7(arg0, arg1, arg2, arg3, arg4, arg5, arg6);
+		    return CallStaticLongMethod(clazz, methodIdNative, ref args.Arg0);
+        }
+        
+        public long CallStaticLongMethod(java.lang.Class clazz, net.sf.jni4net.jni.MethodId methodIdNative, Value arg0, Value arg1, Value arg2, Value arg3, Value arg4, Value arg5, Value arg6, Value arg7)
+		{
+            var args = new VarArgs8(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7);
 		    return CallStaticLongMethod(clazz, methodIdNative, ref args.Arg0);
         }
         
@@ -229,6 +277,18 @@ namespace net.sf.jni4net.jni
 		    return CallStaticDoubleMethod(clazz, methodIdNative, ref args.Arg0);
         }
         
+        public double CallStaticDoubleMethod(java.lang.Class clazz, net.sf.jni4net.jni.MethodId methodIdNative, Value arg0, Value arg1, Value arg2, Value arg3, Value arg4, Value arg5, Value arg6)
+		{
+            var args = new VarArgs7(arg0, arg1, arg2, arg3, arg4, arg5, arg6);
+		    return CallStaticDoubleMethod(clazz, methodIdNative, ref args.Arg0);
+        }
+        
+        public double CallStaticDoubleMethod(java.lang.Class clazz, net.sf.jni4net.jni.MethodId methodIdNative, Value arg0, Value arg1, Value arg2, Value arg3, Value arg4, Value arg5, Value arg6, Value arg7)
+		{
+            var args = new VarArgs8(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7);
+		    return CallStaticDoubleMethod(clazz, methodIdNative, ref args.Arg0);
+        }
+        
         public double CallStaticDoubleMethod(java.lang.Class clazz, net.sf.jni4net.jni.MethodId methodIdNative, params Value[] args)
 		{
 		    return CallStaticDoubleMethod(clazz, methodIdNative, ref AsRef(args));
@@ -272,6 +332,18 @@ namespace net.sf.jni4net.jni
         public float CallStaticFloatMethod(java.lang.Class clazz, net.sf.jni4net.jni.MethodId methodIdNative, Value arg0, Value arg1, Value arg2, Value arg3, Value arg4, Value arg5)
 		{
             var args = new VarArgs6(arg0, arg1, arg2, arg3, arg4, arg5);
+		    return CallStaticFloatMethod(clazz, methodIdNative, ref args.Arg0);
+        }
+        
+        public float CallStaticFloatMethod(java.lang.Class clazz, net.sf.jni4net.jni.MethodId methodIdNative, Value arg0, Value arg1, Value arg2, Value arg3, Value arg4, Value arg5, Value arg6)
+		{
+            var args = new VarArgs7(arg0, arg1, arg2, arg3, arg4, arg5, arg6);
+		    return CallStaticFloatMethod(clazz, methodIdNative, ref args.Arg0);
+        }
+        
+        public float CallStaticFloatMethod(java.lang.Class clazz, net.sf.jni4net.jni.MethodId methodIdNative, Value arg0, Value arg1, Value arg2, Value arg3, Value arg4, Value arg5, Value arg6, Value arg7)
+		{
+            var args = new VarArgs8(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7);
 		    return CallStaticFloatMethod(clazz, methodIdNative, ref args.Arg0);
         }
         
@@ -321,6 +393,18 @@ namespace net.sf.jni4net.jni
 		    return CallStaticShortMethod(clazz, methodIdNative, ref args.Arg0);
         }
         
+        public short CallStaticShortMethod(java.lang.Class clazz, net.sf.jni4net.jni.MethodId methodIdNative, Value arg0, Value arg1, Value arg2, Value arg3, Value arg4, Value arg5, Value arg6)
+		{
+            var args = new VarArgs7(arg0, arg1, arg2, arg3, arg4, arg5, arg6);
+		    return CallStaticShortMethod(clazz, methodIdNative, ref args.Arg0);
+        }
+        
+        public short CallStaticShortMethod(java.lang.Class clazz, net.sf.jni4net.jni.MethodId methodIdNative, Value arg0, Value arg1, Value arg2, Value arg3, Value arg4, Value arg5, Value arg6, Value arg7)
+		{
+            var args = new VarArgs8(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7);
+		    return CallStaticShortMethod(clazz, methodIdNative, ref args.Arg0);
+        }
+        
         public short CallStaticShortMethod(java.lang.Class clazz, net.sf.jni4net.jni.MethodId methodIdNative, params Value[] args)
 		{
 		    return CallStaticShortMethod(clazz, methodIdNative, ref AsRef(args));
@@ -364,6 +448,18 @@ namespace net.sf.jni4net.jni
         public char CallStaticCharMethod(java.lang.Class clazz, net.sf.jni4net.jni.MethodId methodIdNative, Value arg0, Value arg1, Value arg2, Value arg3, Value arg4, Value arg5)
 		{
             var args = new VarArgs6(arg0, arg1, arg2, arg3, arg4, arg5);
+		    return CallStaticCharMethod(clazz, methodIdNative, ref args.Arg0);
+        }
+        
+        public char CallStaticCharMethod(java.lang.Class clazz, net.sf.jni4net.jni.MethodId methodIdNative, Value arg0, Value arg1, Value arg2, Value arg3, Value arg4, Value arg5, Value arg6)
+		{
+            var args = new VarArgs7(arg0, arg1, arg2, arg3, arg4, arg5, arg6);
+		    return CallStaticCharMethod(clazz, methodIdNative, ref args.Arg0);
+        }
+        
+        public char CallStaticCharMethod(java.lang.Class clazz, net.sf.jni4net.jni.MethodId methodIdNative, Value arg0, Value arg1, Value arg2, Value arg3, Value arg4, Value arg5, Value arg6, Value arg7)
+		{
+            var args = new VarArgs8(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7);
 		    return CallStaticCharMethod(clazz, methodIdNative, ref args.Arg0);
         }
         
@@ -413,6 +509,18 @@ namespace net.sf.jni4net.jni
 		    return CallStaticBooleanMethod(clazz, methodIdNative, ref args.Arg0);
         }
         
+        public bool CallStaticBooleanMethod(java.lang.Class clazz, net.sf.jni4net.jni.MethodId methodIdNative, Value arg0, Value arg1, Value arg2, Value arg3, Value arg4, Value arg5, Value arg6)
+		{
+            var args = new VarArgs7(arg0, arg1, arg2, arg3, arg4, arg5, arg6);
+		    return CallStaticBooleanMethod(clazz, methodIdNative, ref args.Arg0);
+        }
+        
+        public bool CallStaticBooleanMethod(java.lang.Class clazz, net.sf.jni4net.jni.MethodId methodIdNative, Value arg0, Value arg1, Value arg2, Value arg3, Value arg4, Value arg5, Value arg6, Value arg7)
+		{
+            var args = new VarArgs8(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7);
+		    return CallStaticBooleanMethod(clazz, methodIdNative, ref args.Arg0);
+        }
+        
         public bool CallStaticBooleanMethod(java.lang.Class clazz, net.sf.jni4net.jni.MethodId methodIdNative, params Value[] args)
 		{
 		    return CallStaticBooleanMethod(clazz, methodIdNative, ref AsRef(args));
@@ -456,6 +564,18 @@ namespace net.sf.jni4net.jni
         public byte CallStaticByteMethod(java.lang.Class clazz, net.sf.jni4net.jni.MethodId methodIdNative, Value arg0, Value arg1, Value arg2, Value arg3, Value arg4, Value arg5)
 		{
             var args = new VarArgs6(arg0, arg1, arg2, arg3, arg4, arg5);
+		    return CallStaticByteMethod(clazz, methodIdNative, ref args.Arg0);
+        }
+        
+        public byte CallStaticByteMethod(java.lang.Class clazz, net.sf.jni4net.jni.MethodId methodIdNative, Value arg0, Value arg1, Value arg2, Value arg3, Value arg4, Value arg5, Value arg6)
+		{
+            var args = new VarArgs7(arg0, arg1, arg2, arg3, arg4, arg5, arg6);
+		    return CallStaticByteMethod(clazz, methodIdNative, ref args.Arg0);
+        }
+        
+        public byte CallStaticByteMethod(java.lang.Class clazz, net.sf.jni4net.jni.MethodId methodIdNative, Value arg0, Value arg1, Value arg2, Value arg3, Value arg4, Value arg5, Value arg6, Value arg7)
+		{
+            var args = new VarArgs8(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7);
 		    return CallStaticByteMethod(clazz, methodIdNative, ref args.Arg0);
         }
         
@@ -505,6 +625,18 @@ namespace net.sf.jni4net.jni
 		    CallStaticVoidMethod(clazz, method, sig, ref args.Arg0);
         }
         
+        internal void CallStaticVoidMethod(java.lang.Class clazz, string method, string sig, Value arg0, Value arg1, Value arg2, Value arg3, Value arg4, Value arg5, Value arg6)
+		{
+            var args = new VarArgs7(arg0, arg1, arg2, arg3, arg4, arg5, arg6);
+		    CallStaticVoidMethod(clazz, method, sig, ref args.Arg0);
+        }
+        
+        internal void CallStaticVoidMethod(java.lang.Class clazz, string method, string sig, Value arg0, Value arg1, Value arg2, Value arg3, Value arg4, Value arg5, Value arg6, Value arg7)
+		{
+            var args = new VarArgs8(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7);
+		    CallStaticVoidMethod(clazz, method, sig, ref args.Arg0);
+        }
+        
         internal void CallStaticVoidMethod(java.lang.Class clazz, string method, string sig, params Value[] args)
 		{
 		    CallStaticVoidMethod(clazz, method, sig, ref AsRef(args));
@@ -548,6 +680,18 @@ namespace net.sf.jni4net.jni
         private TRes CallStaticMethod<TRes>(java.lang.Class clazz, string method, string sig, Value arg0, Value arg1, Value arg2, Value arg3, Value arg4, Value arg5)
 		{
             var args = new VarArgs6(arg0, arg1, arg2, arg3, arg4, arg5);
+		    return CallStaticMethod<TRes>(clazz, method, sig, ref args.Arg0);
+        }
+        
+        private TRes CallStaticMethod<TRes>(java.lang.Class clazz, string method, string sig, Value arg0, Value arg1, Value arg2, Value arg3, Value arg4, Value arg5, Value arg6)
+		{
+            var args = new VarArgs7(arg0, arg1, arg2, arg3, arg4, arg5, arg6);
+		    return CallStaticMethod<TRes>(clazz, method, sig, ref args.Arg0);
+        }
+        
+        private TRes CallStaticMethod<TRes>(java.lang.Class clazz, string method, string sig, Value arg0, Value arg1, Value arg2, Value arg3, Value arg4, Value arg5, Value arg6, Value arg7)
+		{
+            var args = new VarArgs8(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7);
 		    return CallStaticMethod<TRes>(clazz, method, sig, ref args.Arg0);
         }
         
@@ -597,6 +741,18 @@ namespace net.sf.jni4net.jni
 		    CallVoidMethod(obj, methodId, ref args.Arg0);
         }
         
+        public void CallVoidMethod(net.sf.jni4net.utils.JniHandle obj, net.sf.jni4net.jni.MethodId methodId, Value arg0, Value arg1, Value arg2, Value arg3, Value arg4, Value arg5, Value arg6)
+		{
+            var args = new VarArgs7(arg0, arg1, arg2, arg3, arg4, arg5, arg6);
+		    CallVoidMethod(obj, methodId, ref args.Arg0);
+        }
+        
+        public void CallVoidMethod(net.sf.jni4net.utils.JniHandle obj, net.sf.jni4net.jni.MethodId methodId, Value arg0, Value arg1, Value arg2, Value arg3, Value arg4, Value arg5, Value arg6, Value arg7)
+		{
+            var args = new VarArgs8(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7);
+		    CallVoidMethod(obj, methodId, ref args.Arg0);
+        }
+        
         public void CallVoidMethod(net.sf.jni4net.utils.JniHandle obj, net.sf.jni4net.jni.MethodId methodId, params Value[] args)
 		{
 		    CallVoidMethod(obj, methodId, ref AsRef(args));
@@ -640,6 +796,18 @@ namespace net.sf.jni4net.jni
         public void CallVoidMethod(net.sf.jni4net.jni.IJvmProxy obj, net.sf.jni4net.jni.MethodId methodId, Value arg0, Value arg1, Value arg2, Value arg3, Value arg4, Value arg5)
 		{
             var args = new VarArgs6(arg0, arg1, arg2, arg3, arg4, arg5);
+		    CallVoidMethod(obj, methodId, ref args.Arg0);
+        }
+        
+        public void CallVoidMethod(net.sf.jni4net.jni.IJvmProxy obj, net.sf.jni4net.jni.MethodId methodId, Value arg0, Value arg1, Value arg2, Value arg3, Value arg4, Value arg5, Value arg6)
+		{
+            var args = new VarArgs7(arg0, arg1, arg2, arg3, arg4, arg5, arg6);
+		    CallVoidMethod(obj, methodId, ref args.Arg0);
+        }
+        
+        public void CallVoidMethod(net.sf.jni4net.jni.IJvmProxy obj, net.sf.jni4net.jni.MethodId methodId, Value arg0, Value arg1, Value arg2, Value arg3, Value arg4, Value arg5, Value arg6, Value arg7)
+		{
+            var args = new VarArgs8(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7);
 		    CallVoidMethod(obj, methodId, ref args.Arg0);
         }
         
@@ -689,6 +857,18 @@ namespace net.sf.jni4net.jni
 		    return CallObjectMethod<TRes>(obj, methodIdNative, ref args.Arg0);
         }
         
+        public TRes CallObjectMethod<TRes>(net.sf.jni4net.jni.IJvmProxy obj, net.sf.jni4net.jni.MethodId methodIdNative, Value arg0, Value arg1, Value arg2, Value arg3, Value arg4, Value arg5, Value arg6)
+		{
+            var args = new VarArgs7(arg0, arg1, arg2, arg3, arg4, arg5, arg6);
+		    return CallObjectMethod<TRes>(obj, methodIdNative, ref args.Arg0);
+        }
+        
+        public TRes CallObjectMethod<TRes>(net.sf.jni4net.jni.IJvmProxy obj, net.sf.jni4net.jni.MethodId methodIdNative, Value arg0, Value arg1, Value arg2, Value arg3, Value arg4, Value arg5, Value arg6, Value arg7)
+		{
+            var args = new VarArgs8(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7);
+		    return CallObjectMethod<TRes>(obj, methodIdNative, ref args.Arg0);
+        }
+        
         public TRes CallObjectMethod<TRes>(net.sf.jni4net.jni.IJvmProxy obj, net.sf.jni4net.jni.MethodId methodIdNative, params Value[] args)
 		{
 		    return CallObjectMethod<TRes>(obj, methodIdNative, ref AsRef(args));
@@ -732,6 +912,18 @@ namespace net.sf.jni4net.jni
         public bool CallBooleanMethod(net.sf.jni4net.jni.IJvmProxy obj, net.sf.jni4net.jni.MethodId methodIdNative, Value arg0, Value arg1, Value arg2, Value arg3, Value arg4, Value arg5)
 		{
             var args = new VarArgs6(arg0, arg1, arg2, arg3, arg4, arg5);
+		    return CallBooleanMethod(obj, methodIdNative, ref args.Arg0);
+        }
+        
+        public bool CallBooleanMethod(net.sf.jni4net.jni.IJvmProxy obj, net.sf.jni4net.jni.MethodId methodIdNative, Value arg0, Value arg1, Value arg2, Value arg3, Value arg4, Value arg5, Value arg6)
+		{
+            var args = new VarArgs7(arg0, arg1, arg2, arg3, arg4, arg5, arg6);
+		    return CallBooleanMethod(obj, methodIdNative, ref args.Arg0);
+        }
+        
+        public bool CallBooleanMethod(net.sf.jni4net.jni.IJvmProxy obj, net.sf.jni4net.jni.MethodId methodIdNative, Value arg0, Value arg1, Value arg2, Value arg3, Value arg4, Value arg5, Value arg6, Value arg7)
+		{
+            var args = new VarArgs8(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7);
 		    return CallBooleanMethod(obj, methodIdNative, ref args.Arg0);
         }
         
@@ -781,6 +973,18 @@ namespace net.sf.jni4net.jni
 		    return CallBooleanMethod(obj, methodIdNative, ref args.Arg0);
         }
         
+        public bool CallBooleanMethod(net.sf.jni4net.utils.JniHandle obj, net.sf.jni4net.jni.MethodId methodIdNative, Value arg0, Value arg1, Value arg2, Value arg3, Value arg4, Value arg5, Value arg6)
+		{
+            var args = new VarArgs7(arg0, arg1, arg2, arg3, arg4, arg5, arg6);
+		    return CallBooleanMethod(obj, methodIdNative, ref args.Arg0);
+        }
+        
+        public bool CallBooleanMethod(net.sf.jni4net.utils.JniHandle obj, net.sf.jni4net.jni.MethodId methodIdNative, Value arg0, Value arg1, Value arg2, Value arg3, Value arg4, Value arg5, Value arg6, Value arg7)
+		{
+            var args = new VarArgs8(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7);
+		    return CallBooleanMethod(obj, methodIdNative, ref args.Arg0);
+        }
+        
         public bool CallBooleanMethod(net.sf.jni4net.utils.JniHandle obj, net.sf.jni4net.jni.MethodId methodIdNative, params Value[] args)
 		{
 		    return CallBooleanMethod(obj, methodIdNative, ref AsRef(args));
@@ -824,6 +1028,18 @@ namespace net.sf.jni4net.jni
         public int CallIntMethod(net.sf.jni4net.jni.IJvmProxy obj, net.sf.jni4net.jni.MethodId methodIdNative, Value arg0, Value arg1, Value arg2, Value arg3, Value arg4, Value arg5)
 		{
             var args = new VarArgs6(arg0, arg1, arg2, arg3, arg4, arg5);
+		    return CallIntMethod(obj, methodIdNative, ref args.Arg0);
+        }
+        
+        public int CallIntMethod(net.sf.jni4net.jni.IJvmProxy obj, net.sf.jni4net.jni.MethodId methodIdNative, Value arg0, Value arg1, Value arg2, Value arg3, Value arg4, Value arg5, Value arg6)
+		{
+            var args = new VarArgs7(arg0, arg1, arg2, arg3, arg4, arg5, arg6);
+		    return CallIntMethod(obj, methodIdNative, ref args.Arg0);
+        }
+        
+        public int CallIntMethod(net.sf.jni4net.jni.IJvmProxy obj, net.sf.jni4net.jni.MethodId methodIdNative, Value arg0, Value arg1, Value arg2, Value arg3, Value arg4, Value arg5, Value arg6, Value arg7)
+		{
+            var args = new VarArgs8(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7);
 		    return CallIntMethod(obj, methodIdNative, ref args.Arg0);
         }
         
@@ -873,6 +1089,18 @@ namespace net.sf.jni4net.jni
 		    return CallIntMethod(obj, methodIdNative, ref args.Arg0);
         }
         
+        public int CallIntMethod(net.sf.jni4net.utils.JniHandle obj, net.sf.jni4net.jni.MethodId methodIdNative, Value arg0, Value arg1, Value arg2, Value arg3, Value arg4, Value arg5, Value arg6)
+		{
+            var args = new VarArgs7(arg0, arg1, arg2, arg3, arg4, arg5, arg6);
+		    return CallIntMethod(obj, methodIdNative, ref args.Arg0);
+        }
+        
+        public int CallIntMethod(net.sf.jni4net.utils.JniHandle obj, net.sf.jni4net.jni.MethodId methodIdNative, Value arg0, Value arg1, Value arg2, Value arg3, Value arg4, Value arg5, Value arg6, Value arg7)
+		{
+            var args = new VarArgs8(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7);
+		    return CallIntMethod(obj, methodIdNative, ref args.Arg0);
+        }
+        
         public int CallIntMethod(net.sf.jni4net.utils.JniHandle obj, net.sf.jni4net.jni.MethodId methodIdNative, params Value[] args)
 		{
 		    return CallIntMethod(obj, methodIdNative, ref AsRef(args));
@@ -916,6 +1144,18 @@ namespace net.sf.jni4net.jni
         public short CallShortMethod(net.sf.jni4net.jni.IJvmProxy obj, net.sf.jni4net.jni.MethodId methodIdNative, Value arg0, Value arg1, Value arg2, Value arg3, Value arg4, Value arg5)
 		{
             var args = new VarArgs6(arg0, arg1, arg2, arg3, arg4, arg5);
+		    return CallShortMethod(obj, methodIdNative, ref args.Arg0);
+        }
+        
+        public short CallShortMethod(net.sf.jni4net.jni.IJvmProxy obj, net.sf.jni4net.jni.MethodId methodIdNative, Value arg0, Value arg1, Value arg2, Value arg3, Value arg4, Value arg5, Value arg6)
+		{
+            var args = new VarArgs7(arg0, arg1, arg2, arg3, arg4, arg5, arg6);
+		    return CallShortMethod(obj, methodIdNative, ref args.Arg0);
+        }
+        
+        public short CallShortMethod(net.sf.jni4net.jni.IJvmProxy obj, net.sf.jni4net.jni.MethodId methodIdNative, Value arg0, Value arg1, Value arg2, Value arg3, Value arg4, Value arg5, Value arg6, Value arg7)
+		{
+            var args = new VarArgs8(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7);
 		    return CallShortMethod(obj, methodIdNative, ref args.Arg0);
         }
         
@@ -965,6 +1205,18 @@ namespace net.sf.jni4net.jni
 		    return CallShortMethod(obj, methodIdNative, ref args.Arg0);
         }
         
+        public short CallShortMethod(net.sf.jni4net.utils.JniHandle obj, net.sf.jni4net.jni.MethodId methodIdNative, Value arg0, Value arg1, Value arg2, Value arg3, Value arg4, Value arg5, Value arg6)
+		{
+            var args = new VarArgs7(arg0, arg1, arg2, arg3, arg4, arg5, arg6);
+		    return CallShortMethod(obj, methodIdNative, ref args.Arg0);
+        }
+        
+        public short CallShortMethod(net.sf.jni4net.utils.JniHandle obj, net.sf.jni4net.jni.MethodId methodIdNative, Value arg0, Value arg1, Value arg2, Value arg3, Value arg4, Value arg5, Value arg6, Value arg7)
+		{
+            var args = new VarArgs8(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7);
+		    return CallShortMethod(obj, methodIdNative, ref args.Arg0);
+        }
+        
         public short CallShortMethod(net.sf.jni4net.utils.JniHandle obj, net.sf.jni4net.jni.MethodId methodIdNative, params Value[] args)
 		{
 		    return CallShortMethod(obj, methodIdNative, ref AsRef(args));
@@ -1008,6 +1260,18 @@ namespace net.sf.jni4net.jni
         public long CallLongMethod(net.sf.jni4net.jni.IJvmProxy obj, net.sf.jni4net.jni.MethodId methodIdNative, Value arg0, Value arg1, Value arg2, Value arg3, Value arg4, Value arg5)
 		{
             var args = new VarArgs6(arg0, arg1, arg2, arg3, arg4, arg5);
+		    return CallLongMethod(obj, methodIdNative, ref args.Arg0);
+        }
+        
+        public long CallLongMethod(net.sf.jni4net.jni.IJvmProxy obj, net.sf.jni4net.jni.MethodId methodIdNative, Value arg0, Value arg1, Value arg2, Value arg3, Value arg4, Value arg5, Value arg6)
+		{
+            var args = new VarArgs7(arg0, arg1, arg2, arg3, arg4, arg5, arg6);
+		    return CallLongMethod(obj, methodIdNative, ref args.Arg0);
+        }
+        
+        public long CallLongMethod(net.sf.jni4net.jni.IJvmProxy obj, net.sf.jni4net.jni.MethodId methodIdNative, Value arg0, Value arg1, Value arg2, Value arg3, Value arg4, Value arg5, Value arg6, Value arg7)
+		{
+            var args = new VarArgs8(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7);
 		    return CallLongMethod(obj, methodIdNative, ref args.Arg0);
         }
         
@@ -1057,6 +1321,18 @@ namespace net.sf.jni4net.jni
 		    return CallLongMethod(obj, methodIdNative, ref args.Arg0);
         }
         
+        public long CallLongMethod(net.sf.jni4net.utils.JniHandle obj, net.sf.jni4net.jni.MethodId methodIdNative, Value arg0, Value arg1, Value arg2, Value arg3, Value arg4, Value arg5, Value arg6)
+		{
+            var args = new VarArgs7(arg0, arg1, arg2, arg3, arg4, arg5, arg6);
+		    return CallLongMethod(obj, methodIdNative, ref args.Arg0);
+        }
+        
+        public long CallLongMethod(net.sf.jni4net.utils.JniHandle obj, net.sf.jni4net.jni.MethodId methodIdNative, Value arg0, Value arg1, Value arg2, Value arg3, Value arg4, Value arg5, Value arg6, Value arg7)
+		{
+            var args = new VarArgs8(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7);
+		    return CallLongMethod(obj, methodIdNative, ref args.Arg0);
+        }
+        
         public long CallLongMethod(net.sf.jni4net.utils.JniHandle obj, net.sf.jni4net.jni.MethodId methodIdNative, params Value[] args)
 		{
 		    return CallLongMethod(obj, methodIdNative, ref AsRef(args));
@@ -1100,6 +1376,18 @@ namespace net.sf.jni4net.jni
         public byte CallByteMethod(net.sf.jni4net.jni.IJvmProxy obj, net.sf.jni4net.jni.MethodId methodIdNative, Value arg0, Value arg1, Value arg2, Value arg3, Value arg4, Value arg5)
 		{
             var args = new VarArgs6(arg0, arg1, arg2, arg3, arg4, arg5);
+		    return CallByteMethod(obj, methodIdNative, ref args.Arg0);
+        }
+        
+        public byte CallByteMethod(net.sf.jni4net.jni.IJvmProxy obj, net.sf.jni4net.jni.MethodId methodIdNative, Value arg0, Value arg1, Value arg2, Value arg3, Value arg4, Value arg5, Value arg6)
+		{
+            var args = new VarArgs7(arg0, arg1, arg2, arg3, arg4, arg5, arg6);
+		    return CallByteMethod(obj, methodIdNative, ref args.Arg0);
+        }
+        
+        public byte CallByteMethod(net.sf.jni4net.jni.IJvmProxy obj, net.sf.jni4net.jni.MethodId methodIdNative, Value arg0, Value arg1, Value arg2, Value arg3, Value arg4, Value arg5, Value arg6, Value arg7)
+		{
+            var args = new VarArgs8(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7);
 		    return CallByteMethod(obj, methodIdNative, ref args.Arg0);
         }
         
@@ -1149,6 +1437,18 @@ namespace net.sf.jni4net.jni
 		    return CallByteMethod(obj, methodIdNative, ref args.Arg0);
         }
         
+        public byte CallByteMethod(net.sf.jni4net.utils.JniHandle obj, net.sf.jni4net.jni.MethodId methodIdNative, Value arg0, Value arg1, Value arg2, Value arg3, Value arg4, Value arg5, Value arg6)
+		{
+            var args = new VarArgs7(arg0, arg1, arg2, arg3, arg4, arg5, arg6);
+		    return CallByteMethod(obj, methodIdNative, ref args.Arg0);
+        }
+        
+        public byte CallByteMethod(net.sf.jni4net.utils.JniHandle obj, net.sf.jni4net.jni.MethodId methodIdNative, Value arg0, Value arg1, Value arg2, Value arg3, Value arg4, Value arg5, Value arg6, Value arg7)
+		{
+            var args = new VarArgs8(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7);
+		    return CallByteMethod(obj, methodIdNative, ref args.Arg0);
+        }
+        
         public byte CallByteMethod(net.sf.jni4net.utils.JniHandle obj, net.sf.jni4net.jni.MethodId methodIdNative, params Value[] args)
 		{
 		    return CallByteMethod(obj, methodIdNative, ref AsRef(args));
@@ -1192,6 +1492,18 @@ namespace net.sf.jni4net.jni
         public double CallDoubleMethod(net.sf.jni4net.jni.IJvmProxy obj, net.sf.jni4net.jni.MethodId methodIdNative, Value arg0, Value arg1, Value arg2, Value arg3, Value arg4, Value arg5)
 		{
             var args = new VarArgs6(arg0, arg1, arg2, arg3, arg4, arg5);
+		    return CallDoubleMethod(obj, methodIdNative, ref args.Arg0);
+        }
+        
+        public double CallDoubleMethod(net.sf.jni4net.jni.IJvmProxy obj, net.sf.jni4net.jni.MethodId methodIdNative, Value arg0, Value arg1, Value arg2, Value arg3, Value arg4, Value arg5, Value arg6)
+		{
+            var args = new VarArgs7(arg0, arg1, arg2, arg3, arg4, arg5, arg6);
+		    return CallDoubleMethod(obj, methodIdNative, ref args.Arg0);
+        }
+        
+        public double CallDoubleMethod(net.sf.jni4net.jni.IJvmProxy obj, net.sf.jni4net.jni.MethodId methodIdNative, Value arg0, Value arg1, Value arg2, Value arg3, Value arg4, Value arg5, Value arg6, Value arg7)
+		{
+            var args = new VarArgs8(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7);
 		    return CallDoubleMethod(obj, methodIdNative, ref args.Arg0);
         }
         
@@ -1241,6 +1553,18 @@ namespace net.sf.jni4net.jni
 		    return CallDoubleMethod(obj, methodIdNative, ref args.Arg0);
         }
         
+        public double CallDoubleMethod(net.sf.jni4net.utils.JniHandle obj, net.sf.jni4net.jni.MethodId methodIdNative, Value arg0, Value arg1, Value arg2, Value arg3, Value arg4, Value arg5, Value arg6)
+		{
+            var args = new VarArgs7(arg0, arg1, arg2, arg3, arg4, arg5, arg6);
+		    return CallDoubleMethod(obj, methodIdNative, ref args.Arg0);
+        }
+        
+        public double CallDoubleMethod(net.sf.jni4net.utils.JniHandle obj, net.sf.jni4net.jni.MethodId methodIdNative, Value arg0, Value arg1, Value arg2, Value arg3, Value arg4, Value arg5, Value arg6, Value arg7)
+		{
+            var args = new VarArgs8(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7);
+		    return CallDoubleMethod(obj, methodIdNative, ref args.Arg0);
+        }
+        
         public double CallDoubleMethod(net.sf.jni4net.utils.JniHandle obj, net.sf.jni4net.jni.MethodId methodIdNative, params Value[] args)
 		{
 		    return CallDoubleMethod(obj, methodIdNative, ref AsRef(args));
@@ -1284,6 +1608,18 @@ namespace net.sf.jni4net.jni
         public float CallFloatMethod(net.sf.jni4net.jni.IJvmProxy obj, net.sf.jni4net.jni.MethodId methodIdNative, Value arg0, Value arg1, Value arg2, Value arg3, Value arg4, Value arg5)
 		{
             var args = new VarArgs6(arg0, arg1, arg2, arg3, arg4, arg5);
+		    return CallFloatMethod(obj, methodIdNative, ref args.Arg0);
+        }
+        
+        public float CallFloatMethod(net.sf.jni4net.jni.IJvmProxy obj, net.sf.jni4net.jni.MethodId methodIdNative, Value arg0, Value arg1, Value arg2, Value arg3, Value arg4, Value arg5, Value arg6)
+		{
+            var args = new VarArgs7(arg0, arg1, arg2, arg3, arg4, arg5, arg6);
+		    return CallFloatMethod(obj, methodIdNative, ref args.Arg0);
+        }
+        
+        public float CallFloatMethod(net.sf.jni4net.jni.IJvmProxy obj, net.sf.jni4net.jni.MethodId methodIdNative, Value arg0, Value arg1, Value arg2, Value arg3, Value arg4, Value arg5, Value arg6, Value arg7)
+		{
+            var args = new VarArgs8(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7);
 		    return CallFloatMethod(obj, methodIdNative, ref args.Arg0);
         }
         
@@ -1333,6 +1669,18 @@ namespace net.sf.jni4net.jni
 		    return CallFloatMethod(obj, methodIdNative, ref args.Arg0);
         }
         
+        public float CallFloatMethod(net.sf.jni4net.utils.JniHandle obj, net.sf.jni4net.jni.MethodId methodIdNative, Value arg0, Value arg1, Value arg2, Value arg3, Value arg4, Value arg5, Value arg6)
+		{
+            var args = new VarArgs7(arg0, arg1, arg2, arg3, arg4, arg5, arg6);
+		    return CallFloatMethod(obj, methodIdNative, ref args.Arg0);
+        }
+        
+        public float CallFloatMethod(net.sf.jni4net.utils.JniHandle obj, net.sf.jni4net.jni.MethodId methodIdNative, Value arg0, Value arg1, Value arg2, Value arg3, Value arg4, Value arg5, Value arg6, Value arg7)
+		{
+            var args = new VarArgs8(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7);
+		    return CallFloatMethod(obj, methodIdNative, ref args.Arg0);
+        }
+        
         public float CallFloatMethod(net.sf.jni4net.utils.JniHandle obj, net.sf.jni4net.jni.MethodId methodIdNative, params Value[] args)
 		{
 		    return CallFloatMethod(obj, methodIdNative, ref AsRef(args));
@@ -1376,6 +1724,18 @@ namespace net.sf.jni4net.jni
         public char CallCharMethod(net.sf.jni4net.jni.IJvmProxy obj, net.sf.jni4net.jni.MethodId methodIdNative, Value arg0, Value arg1, Value arg2, Value arg3, Value arg4, Value arg5)
 		{
             var args = new VarArgs6(arg0, arg1, arg2, arg3, arg4, arg5);
+		    return CallCharMethod(obj, methodIdNative, ref args.Arg0);
+        }
+        
+        public char CallCharMethod(net.sf.jni4net.jni.IJvmProxy obj, net.sf.jni4net.jni.MethodId methodIdNative, Value arg0, Value arg1, Value arg2, Value arg3, Value arg4, Value arg5, Value arg6)
+		{
+            var args = new VarArgs7(arg0, arg1, arg2, arg3, arg4, arg5, arg6);
+		    return CallCharMethod(obj, methodIdNative, ref args.Arg0);
+        }
+        
+        public char CallCharMethod(net.sf.jni4net.jni.IJvmProxy obj, net.sf.jni4net.jni.MethodId methodIdNative, Value arg0, Value arg1, Value arg2, Value arg3, Value arg4, Value arg5, Value arg6, Value arg7)
+		{
+            var args = new VarArgs8(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7);
 		    return CallCharMethod(obj, methodIdNative, ref args.Arg0);
         }
         
@@ -1425,6 +1785,18 @@ namespace net.sf.jni4net.jni
 		    return CallCharMethod(obj, methodIdNative, ref args.Arg0);
         }
         
+        public char CallCharMethod(net.sf.jni4net.utils.JniHandle obj, net.sf.jni4net.jni.MethodId methodIdNative, Value arg0, Value arg1, Value arg2, Value arg3, Value arg4, Value arg5, Value arg6)
+		{
+            var args = new VarArgs7(arg0, arg1, arg2, arg3, arg4, arg5, arg6);
+		    return CallCharMethod(obj, methodIdNative, ref args.Arg0);
+        }
+        
+        public char CallCharMethod(net.sf.jni4net.utils.JniHandle obj, net.sf.jni4net.jni.MethodId methodIdNative, Value arg0, Value arg1, Value arg2, Value arg3, Value arg4, Value arg5, Value arg6, Value arg7)
+		{
+            var args = new VarArgs8(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7);
+		    return CallCharMethod(obj, methodIdNative, ref args.Arg0);
+        }
+        
         public char CallCharMethod(net.sf.jni4net.utils.JniHandle obj, net.sf.jni4net.jni.MethodId methodIdNative, params Value[] args)
 		{
 		    return CallCharMethod(obj, methodIdNative, ref AsRef(args));
@@ -1468,6 +1840,18 @@ namespace net.sf.jni4net.jni
         private void CallVoidMethod(net.sf.jni4net.jni.IJvmProxy obj, string method, string sig, Value arg0, Value arg1, Value arg2, Value arg3, Value arg4, Value arg5)
 		{
             var args = new VarArgs6(arg0, arg1, arg2, arg3, arg4, arg5);
+		    CallVoidMethod(obj, method, sig, ref args.Arg0);
+        }
+        
+        private void CallVoidMethod(net.sf.jni4net.jni.IJvmProxy obj, string method, string sig, Value arg0, Value arg1, Value arg2, Value arg3, Value arg4, Value arg5, Value arg6)
+		{
+            var args = new VarArgs7(arg0, arg1, arg2, arg3, arg4, arg5, arg6);
+		    CallVoidMethod(obj, method, sig, ref args.Arg0);
+        }
+        
+        private void CallVoidMethod(net.sf.jni4net.jni.IJvmProxy obj, string method, string sig, Value arg0, Value arg1, Value arg2, Value arg3, Value arg4, Value arg5, Value arg6, Value arg7)
+		{
+            var args = new VarArgs8(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7);
 		    CallVoidMethod(obj, method, sig, ref args.Arg0);
         }
         
@@ -1517,6 +1901,18 @@ namespace net.sf.jni4net.jni
 		    return CallBooleanMethod(obj, method, sig, ref args.Arg0);
         }
         
+        public bool CallBooleanMethod(net.sf.jni4net.jni.IJvmProxy obj, string method, string sig, Value arg0, Value arg1, Value arg2, Value arg3, Value arg4, Value arg5, Value arg6)
+		{
+            var args = new VarArgs7(arg0, arg1, arg2, arg3, arg4, arg5, arg6);
+		    return CallBooleanMethod(obj, method, sig, ref args.Arg0);
+        }
+        
+        public bool CallBooleanMethod(net.sf.jni4net.jni.IJvmProxy obj, string method, string sig, Value arg0, Value arg1, Value arg2, Value arg3, Value arg4, Value arg5, Value arg6, Value arg7)
+		{
+            var args = new VarArgs8(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7);
+		    return CallBooleanMethod(obj, method, sig, ref args.Arg0);
+        }
+        
         public bool CallBooleanMethod(net.sf.jni4net.jni.IJvmProxy obj, string method, string sig, params Value[] args)
 		{
 		    return CallBooleanMethod(obj, method, sig, ref AsRef(args));
@@ -1560,6 +1956,18 @@ namespace net.sf.jni4net.jni
         private int CallIntMethod(net.sf.jni4net.jni.IJvmProxy obj, string method, string sig, Value arg0, Value arg1, Value arg2, Value arg3, Value arg4, Value arg5)
 		{
             var args = new VarArgs6(arg0, arg1, arg2, arg3, arg4, arg5);
+		    return CallIntMethod(obj, method, sig, ref args.Arg0);
+        }
+        
+        private int CallIntMethod(net.sf.jni4net.jni.IJvmProxy obj, string method, string sig, Value arg0, Value arg1, Value arg2, Value arg3, Value arg4, Value arg5, Value arg6)
+		{
+            var args = new VarArgs7(arg0, arg1, arg2, arg3, arg4, arg5, arg6);
+		    return CallIntMethod(obj, method, sig, ref args.Arg0);
+        }
+        
+        private int CallIntMethod(net.sf.jni4net.jni.IJvmProxy obj, string method, string sig, Value arg0, Value arg1, Value arg2, Value arg3, Value arg4, Value arg5, Value arg6, Value arg7)
+		{
+            var args = new VarArgs8(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7);
 		    return CallIntMethod(obj, method, sig, ref args.Arg0);
         }
         
@@ -1609,6 +2017,18 @@ namespace net.sf.jni4net.jni
 		    return CallMethod<TRes>(obj, method, sig, ref args.Arg0);
         }
         
+        private TRes CallMethod<TRes>(net.sf.jni4net.jni.IJvmProxy obj, string method, string sig, Value arg0, Value arg1, Value arg2, Value arg3, Value arg4, Value arg5, Value arg6)
+		{
+            var args = new VarArgs7(arg0, arg1, arg2, arg3, arg4, arg5, arg6);
+		    return CallMethod<TRes>(obj, method, sig, ref args.Arg0);
+        }
+        
+        private TRes CallMethod<TRes>(net.sf.jni4net.jni.IJvmProxy obj, string method, string sig, Value arg0, Value arg1, Value arg2, Value arg3, Value arg4, Value arg5, Value arg6, Value arg7)
+		{
+            var args = new VarArgs8(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7);
+		    return CallMethod<TRes>(obj, method, sig, ref args.Arg0);
+        }
+        
         private TRes CallMethod<TRes>(net.sf.jni4net.jni.IJvmProxy obj, string method, string sig, params Value[] args)
 		{
 		    return CallMethod<TRes>(obj, method, sig, ref AsRef(args));
@@ -1652,6 +2072,18 @@ namespace net.sf.jni4net.jni
         public net.sf.jni4net.utils.JniLocalHandle NewObjectPtr(net.sf.jni4net.utils.JniHandle clazz, net.sf.jni4net.jni.MethodId methodID, Value arg0, Value arg1, Value arg2, Value arg3, Value arg4, Value arg5)
 		{
             var args = new VarArgs6(arg0, arg1, arg2, arg3, arg4, arg5);
+		    return NewObjectPtr(clazz, methodID, ref args.Arg0);
+        }
+        
+        public net.sf.jni4net.utils.JniLocalHandle NewObjectPtr(net.sf.jni4net.utils.JniHandle clazz, net.sf.jni4net.jni.MethodId methodID, Value arg0, Value arg1, Value arg2, Value arg3, Value arg4, Value arg5, Value arg6)
+		{
+            var args = new VarArgs7(arg0, arg1, arg2, arg3, arg4, arg5, arg6);
+		    return NewObjectPtr(clazz, methodID, ref args.Arg0);
+        }
+        
+        public net.sf.jni4net.utils.JniLocalHandle NewObjectPtr(net.sf.jni4net.utils.JniHandle clazz, net.sf.jni4net.jni.MethodId methodID, Value arg0, Value arg1, Value arg2, Value arg3, Value arg4, Value arg5, Value arg6, Value arg7)
+		{
+            var args = new VarArgs8(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7);
 		    return NewObjectPtr(clazz, methodID, ref args.Arg0);
         }
         
@@ -1701,6 +2133,18 @@ namespace net.sf.jni4net.jni
 		    NewObject(clazz, methodID, obj, ref args.Arg0);
         }
         
+        public void NewObject(java.lang.Class clazz, net.sf.jni4net.jni.MethodId methodID, net.sf.jni4net.jni.IJvmProxy obj, Value arg0, Value arg1, Value arg2, Value arg3, Value arg4, Value arg5, Value arg6)
+		{
+            var args = new VarArgs7(arg0, arg1, arg2, arg3, arg4, arg5, arg6);
+		    NewObject(clazz, methodID, obj, ref args.Arg0);
+        }
+        
+        public void NewObject(java.lang.Class clazz, net.sf.jni4net.jni.MethodId methodID, net.sf.jni4net.jni.IJvmProxy obj, Value arg0, Value arg1, Value arg2, Value arg3, Value arg4, Value arg5, Value arg6, Value arg7)
+		{
+            var args = new VarArgs8(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7);
+		    NewObject(clazz, methodID, obj, ref args.Arg0);
+        }
+        
         public void NewObject(java.lang.Class clazz, net.sf.jni4net.jni.MethodId methodID, net.sf.jni4net.jni.IJvmProxy obj, params Value[] args)
 		{
 		    NewObject(clazz, methodID, obj, ref AsRef(args));
@@ -1744,6 +2188,18 @@ namespace net.sf.jni4net.jni
         public java_.lang.IObject NewObject(java.lang.Class clazz, net.sf.jni4net.jni.MethodId methodID, Value arg0, Value arg1, Value arg2, Value arg3, Value arg4, Value arg5)
 		{
             var args = new VarArgs6(arg0, arg1, arg2, arg3, arg4, arg5);
+		    return NewObject(clazz, methodID, ref args.Arg0);
+        }
+        
+        public java_.lang.IObject NewObject(java.lang.Class clazz, net.sf.jni4net.jni.MethodId methodID, Value arg0, Value arg1, Value arg2, Value arg3, Value arg4, Value arg5, Value arg6)
+		{
+            var args = new VarArgs7(arg0, arg1, arg2, arg3, arg4, arg5, arg6);
+		    return NewObject(clazz, methodID, ref args.Arg0);
+        }
+        
+        public java_.lang.IObject NewObject(java.lang.Class clazz, net.sf.jni4net.jni.MethodId methodID, Value arg0, Value arg1, Value arg2, Value arg3, Value arg4, Value arg5, Value arg6, Value arg7)
+		{
+            var args = new VarArgs8(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7);
 		    return NewObject(clazz, methodID, ref args.Arg0);
         }
         
@@ -1793,6 +2249,18 @@ namespace net.sf.jni4net.jni
 		    return CallObjectMethodPtr(obj, methodIdNative, ref args.Arg0);
         }
         
+        public net.sf.jni4net.utils.JniLocalHandle CallObjectMethodPtr(net.sf.jni4net.jni.IJvmProxy obj, net.sf.jni4net.jni.MethodId methodIdNative, Value arg0, Value arg1, Value arg2, Value arg3, Value arg4, Value arg5, Value arg6)
+		{
+            var args = new VarArgs7(arg0, arg1, arg2, arg3, arg4, arg5, arg6);
+		    return CallObjectMethodPtr(obj, methodIdNative, ref args.Arg0);
+        }
+        
+        public net.sf.jni4net.utils.JniLocalHandle CallObjectMethodPtr(net.sf.jni4net.jni.IJvmProxy obj, net.sf.jni4net.jni.MethodId methodIdNative, Value arg0, Value arg1, Value arg2, Value arg3, Value arg4, Value arg5, Value arg6, Value arg7)
+		{
+            var args = new VarArgs8(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7);
+		    return CallObjectMethodPtr(obj, methodIdNative, ref args.Arg0);
+        }
+        
         public net.sf.jni4net.utils.JniLocalHandle CallObjectMethodPtr(net.sf.jni4net.jni.IJvmProxy obj, net.sf.jni4net.jni.MethodId methodIdNative, params Value[] args)
 		{
 		    return CallObjectMethodPtr(obj, methodIdNative, ref AsRef(args));
@@ -1836,6 +2304,18 @@ namespace net.sf.jni4net.jni
         public net.sf.jni4net.utils.JniLocalHandle CallStaticObjectMethodPtr(java.lang.Class clazz, net.sf.jni4net.jni.MethodId methodIdNative, Value arg0, Value arg1, Value arg2, Value arg3, Value arg4, Value arg5)
 		{
             var args = new VarArgs6(arg0, arg1, arg2, arg3, arg4, arg5);
+		    return CallStaticObjectMethodPtr(clazz, methodIdNative, ref args.Arg0);
+        }
+        
+        public net.sf.jni4net.utils.JniLocalHandle CallStaticObjectMethodPtr(java.lang.Class clazz, net.sf.jni4net.jni.MethodId methodIdNative, Value arg0, Value arg1, Value arg2, Value arg3, Value arg4, Value arg5, Value arg6)
+		{
+            var args = new VarArgs7(arg0, arg1, arg2, arg3, arg4, arg5, arg6);
+		    return CallStaticObjectMethodPtr(clazz, methodIdNative, ref args.Arg0);
+        }
+        
+        public net.sf.jni4net.utils.JniLocalHandle CallStaticObjectMethodPtr(java.lang.Class clazz, net.sf.jni4net.jni.MethodId methodIdNative, Value arg0, Value arg1, Value arg2, Value arg3, Value arg4, Value arg5, Value arg6, Value arg7)
+		{
+            var args = new VarArgs8(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7);
 		    return CallStaticObjectMethodPtr(clazz, methodIdNative, ref args.Arg0);
         }
         
