@@ -12,6 +12,7 @@ This content is released under the (http://opensource.org/licenses/MIT) MIT Lice
 using System;
 using System.ComponentModel;
 using System.IO;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Security.Permissions;
 using DynamicInterop;
@@ -46,16 +47,15 @@ namespace net.sf.jni4net.jni
         {
             if (dll == null)
             {
-                string findJvmDir = FindJvmDir();
-//                AddEnvironmentPath(findJvmDir);
+                var javaHome = GetJavaHome();
+                var jvmLibFile = FindJvmLib(javaHome);
+                // AddEnvironmentPath(findJvmDir);
+
                 var args = new JavaVMInitArgs();
-                var curDir = Directory.GetCurrentDirectory();
                 try
                 {
-                    Directory.SetCurrentDirectory(findJvmDir);
-
                     //just load DLL
-                    var dll = new Dll(findJvmDir);
+                    var dll = new Dll(jvmLibFile);
                     try
                     {
                         dll.GetDefaultJavaVMInitArgs(&args);
@@ -66,6 +66,7 @@ namespace net.sf.jni4net.jni
                         throw;
                     }
 
+                    Bridge.Setup.JavaHome = javaHome;
                     JNI.dll = dll;
                 }
                 catch (BadImageFormatException ex)
@@ -74,12 +75,8 @@ namespace net.sf.jni4net.jni
                     throw new JNIException("Can't initialize jni4net. (32bit vs 64bit JVM vs CLR ?)"
                                            + "\nCLR architecture: " + ((IntPtr.Size == 8) ? "64bit" : "32bit")
                                            + "\nJAVA_HOME: " + (Bridge.Setup == null || Bridge.Setup.JavaHome == null
-                                               ? "null" : Path.GetFullPath(Bridge.Setup.JavaHome))
-                        , ex);
-                }
-                finally
-                {
-                    Directory.SetCurrentDirectory(curDir);
+                                               ? "null"
+                                               : Path.GetFullPath(Bridge.Setup.JavaHome)), ex);
                 }
             }
         }
@@ -90,84 +87,42 @@ namespace net.sf.jni4net.jni
             dll = null;
         }
 
-        private static string FindJvmDir()
+        private static string GetJavaHome()
         {
-            string directory = null;
-            if (string.IsNullOrEmpty(Bridge.Setup.JavaHome))
-            {
-                Bridge.Setup.JavaHome = Environment.GetEnvironmentVariable(JAVA_HOME_ENV);
+            var javaHome = Bridge.Setup.JavaHome;
 
-                if (string.IsNullOrEmpty(Bridge.Setup.JavaHome))
-                {
-                    Bridge.Setup.JavaHome = null;
-                }
-                else
-                {
-                    try
-                    {
-                        Bridge.Setup.JavaHome = Path.GetFullPath(Bridge.Setup.JavaHome.Replace("\"", ""));
-                    }
-                    catch (Exception ex)
-                    {
-                        throw new JNIException("JAVA_HOME environment variable is incorrect: " + Bridge.Setup.JavaHome, ex);
-                    }
-                }
+            if (string.IsNullOrEmpty(javaHome))
+            {
+                javaHome = Environment.GetEnvironmentVariable(JAVA_HOME_ENV);
             }
 
-            if (Bridge.Setup.JavaHome == null)
+            if (string.IsNullOrEmpty(javaHome))
             {
-                throw new JNIException("JAVA_HOME environment variable is not set");
+                throw new JNIException("JavaHome not set");
             }
 
-            if (!string.IsNullOrEmpty(directory) && Directory.Exists(directory))
-            {
-                return directory;
-            }
-            directory = Path.Combine(Bridge.Setup.JavaHome, @"bin\client\");
-
-            if (!string.IsNullOrEmpty(directory) && Directory.Exists(directory))
-            {
-                return directory;
-            }
-            directory = Path.Combine(Bridge.Setup.JavaHome, @"bin\server\");
-
-            if (!string.IsNullOrEmpty(directory) && Directory.Exists(directory))
-            {
-                return directory;
-            }
-            directory = Path.Combine(Bridge.Setup.JavaHome, @"jre\bin\client\");
-
-            if (!string.IsNullOrEmpty(directory) && Directory.Exists(directory))
-            {
-                return directory;
-            }
-            directory = Path.Combine(Bridge.Setup.JavaHome, @"jre\bin\server\");
-
-            if (!string.IsNullOrEmpty(directory) && Directory.Exists(directory))
-            {
-                return directory;
-            }
-            directory = Path.Combine(Bridge.Setup.JavaHome, @"jre\bin\classic\");
-
-            if (!string.IsNullOrEmpty(directory) && Directory.Exists(directory))
-            {
-                return directory;
-            }
-
-            directory = Bridge.Setup.JavaHome;
-            if (!string.IsNullOrEmpty(directory) && Directory.Exists(directory))
-            {
-                return directory;
-            }
-
-            throw new JNIException("JAVA_HOME environment variable points to an invalid location: " + Bridge.Setup.JavaHome);
+            return javaHome;
         }
 
-        private static bool IsRunningOnUnix()
+        private static string FindJvmLib(string javaHome)
         {
-            int p = (int)Environment.OSVersion.Platform;
-            return ((p == 4) || (p == 6) || (p == 128));
+            var javaBinPath = Path.Combine(javaHome, "jre");
+            if (!Directory.Exists(javaBinPath))
+            {
+                javaBinPath = Path.Combine(javaHome, "bin");
+            }
+
+            var libName = RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "jvm.dll" : "libjvm.so";
+
+            var libPath = Directory.EnumerateFiles(javaBinPath, libName, SearchOption.AllDirectories).FirstOrDefault();
+            if (libPath == null)
+            {
+                throw new JNIException($"{libName} not found in {javaBinPath}");
+            }
+
+            return libPath;
         }
+
 
         public static void CreateJavaVM(out JNIEnv env, params string[] options)
         {
@@ -249,23 +204,22 @@ namespace net.sf.jni4net.jni
 
             [UnmanagedFunctionPointer(CallingConvention.StdCall)]
             public delegate JNIResult JNI_GetDefaultJavaVMInitArgs(JavaVMInitArgs* args);
-            
+
             private readonly UnmanagedDll _libJvm;
 
             public readonly JNI_CreateJavaVM CreateJavaVM;
             public readonly JNI_GetCreatedJavaVMs GetCreatedJavaVMs;
             public readonly JNI_GetDefaultJavaVMInitArgs GetDefaultJavaVMInitArgs;
 
-            public Dll(string libPath)
+            public Dll(string libFIleName)
             {
-                var libFileName = RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "jvm.dll" : "libjvm.so";
-                _libJvm = new UnmanagedDll(Path.Combine(libPath, libFileName));
-                
+                _libJvm = new UnmanagedDll(libFIleName);
+
                 CreateJavaVM = _libJvm.GetFunction<JNI_CreateJavaVM>(nameof(JNI_CreateJavaVM));
                 GetCreatedJavaVMs = _libJvm.GetFunction<JNI_GetCreatedJavaVMs>(nameof(JNI_GetCreatedJavaVMs));
                 GetDefaultJavaVMInitArgs = _libJvm.GetFunction<JNI_GetDefaultJavaVMInitArgs>(nameof(JNI_GetDefaultJavaVMInitArgs));
             }
-            
+
             public void Dispose()
             {
                 _libJvm.Dispose();
