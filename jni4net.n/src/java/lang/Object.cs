@@ -25,10 +25,7 @@ namespace java.lang
         {
         }
 
-        protected JNIEnv Env
-        {
-            get { return JNIEnv.GetEnvForVm(jvmHandle.javaVM); }
-        }
+        protected JNIEnv Env => JNIEnv.GetEnvForVm(jvmHandle.javaVM);
 
         #region Reference handling
 

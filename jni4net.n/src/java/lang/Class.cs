@@ -25,10 +25,7 @@ namespace java.lang
     {
         private long hashCodeCache = long.MinValue;
 
-        public string FullName
-        {
-            get { return getName(); }
-        }
+        public string FullName => getName();
 
         public string ShortName
         {
@@ -58,10 +55,7 @@ namespace java.lang
             }
         }
 
-        public Class SuperClass
-        {
-            get { return getSuperclass(); }
-        }
+        public Class SuperClass => getSuperclass();
 
 #if !JNI4NET_MINI
         public bool IsAnnotationPresent(string search)

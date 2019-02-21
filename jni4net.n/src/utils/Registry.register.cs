@@ -12,6 +12,7 @@ This content is released under the (http://opensource.org/licenses/MIT) MIT Lice
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+using System.Threading;
 using java.io;
 using java.lang;
 using net.sf.jni4net.attributes;
@@ -27,6 +28,8 @@ namespace net.sf.jni4net.utils
 {
     partial class Registry
     {
+        private static readonly ReaderWriterLockSlim registryLock = new ReaderWriterLockSlim(LockRecursionPolicy.NoRecursion);
+
         private static readonly Dictionary<Type, RegistryRecord> knownCLR = new Dictionary<Type, RegistryRecord>();
 
         private static readonly Dictionary<Type, RegistryRecord> knownCLRInterfaces =
@@ -38,7 +41,7 @@ namespace net.sf.jni4net.utils
         private static readonly Dictionary<Type, RegistryRecord> knownCLRWrappers =
             new Dictionary<Type, RegistryRecord>();
 
-        private static readonly Dictionary<Class, RegistryRecord> knownJVM = new Dictionary<Class, RegistryRecord>();
+        private static readonly Dictionary<ClassKey, RegistryRecord> knownJVM = new Dictionary<ClassKey, RegistryRecord>();
 
         private static readonly Dictionary<Class, RegistryRecord> knownJVMInterfaces =
             new Dictionary<Class, RegistryRecord>();
@@ -116,7 +119,8 @@ namespace net.sf.jni4net.utils
 
         public static void Reset()
         {
-            lock (typeof(Registry))
+            registryLock.EnterWriteLock();
+            try
             {
                 initialized = false;
                 systemClassLoader = null;
@@ -129,11 +133,16 @@ namespace net.sf.jni4net.utils
                 knownJVMInterfaces.Clear();
                 knownJVMProxies.Clear();
             }
+            finally
+            {
+                registryLock.ExitWriteLock();
+            }
         }
 
         public static void RegisterAssembly(Assembly assembly, bool bindJVM, ClassLoader classLoader)
         {
-            lock (typeof(Registry))
+            registryLock.EnterWriteLock();
+            try
             {
                 JNIEnv env = JNIEnv.ThreadEnv;
                 try
@@ -159,11 +168,16 @@ namespace net.sf.jni4net.utils
                     throw;
                 }
             }
+            finally
+            {
+                registryLock.ExitWriteLock();
+            }
         }
 
         public static void RegisterAssembly(Assembly assembly, bool bindJVM)
         {
-            lock (typeof(Registry))
+            registryLock.EnterWriteLock();
+            try
             {
                 JNIEnv env = JNIEnv.ThreadEnv;
                 try
@@ -186,8 +200,13 @@ namespace net.sf.jni4net.utils
                             Console.WriteLine();
                         }
                     }
+
                     throw;
                 }
+            }
+            finally
+            {
+                registryLock.ExitWriteLock();
             }
         }
 
