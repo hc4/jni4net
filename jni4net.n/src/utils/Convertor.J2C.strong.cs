@@ -13,8 +13,8 @@ using System;
 using java.lang;
 using net.sf.jni4net.inj;
 using net.sf.jni4net.jni;
-using Object=java.lang.Object;
-using String=java.lang.String;
+using Object = java.lang.Object;
+using String = java.lang.String;
 
 namespace net.sf.jni4net.utils
 {
@@ -48,11 +48,11 @@ namespace net.sf.jni4net.utils
             if (res == null)
             {
                 //that's delegate implemented in Java
-                RegistryRecord delRecord = Registry.GetCLRRecord(typeof(TRes));
+                RegistryRecord delRecord = Registry.GetCLRRecord<TRes>();
                 IJvmProxy jvmProxy = delRecord.CreateCLRProxy(env, obj);
                 return (TRes)(object)Delegate.CreateDelegate(typeof(TRes), jvmProxy, delRecord.JVMDelegateInvoke);
             }
-            return (TRes) res;
+            return (TRes)res;
         }
 
         public static TRes StrongJ2Cp<TRes>(JNIEnv env, JniLocalHandle obj)
@@ -60,11 +60,18 @@ namespace net.sf.jni4net.utils
         {
             if (JniHandle.IsNull(obj))
             {
-                return default(TRes);
+                return default;
             }
-            Class clazz = env.GetObjectClass(obj);
-            RegistryRecord record = Registry.GetJVMRecord(clazz);
-            return (TRes) record.CreateCLRProxy(env, obj);
+
+            var record = Registry<TRes>.Record;
+            if (record == null)
+            {
+                var clazz = env.GetObjectClass(obj);
+                record = Registry.GetJVMRecord(clazz);
+                Registry<TRes>.Record = record;
+            }
+
+            return (TRes)record.CreateCLRProxy(env, obj);
         }
 
         #region Well known
@@ -86,7 +93,7 @@ namespace net.sf.jni4net.utils
                 return null;
             }
             object res = __IClrProxy.GetObject(env, obj);
-            return (string) res;
+            return (string)res;
         }
 
         public static String StrongJ2CpString(JNIEnv env, JniLocalHandle obj)
@@ -110,7 +117,7 @@ namespace net.sf.jni4net.utils
         public static Object StrongJ2CpObject(JNIEnv env, JniLocalHandle obj)
         {
             var res = new Object(env);
-            ((IJvmProxy) res).Init(env, obj);
+            ((IJvmProxy)res).Init(env, obj);
             return res;
         }
 

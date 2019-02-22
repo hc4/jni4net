@@ -24,7 +24,7 @@ namespace net.sf.jni4net.utils
                 return JniLocalHandle.Zero;
             }
             // ReSharper restore CompareNonConstrainedGenericWithNull
-            RegistryRecord record = Registry.GetCLRRecord(obj.GetType());
+            RegistryRecord record = Registry.GetCLRRecord<TBoth>();
             return record.CreateJVMProxy(env, obj);
         }
 
@@ -37,18 +37,20 @@ namespace net.sf.jni4net.utils
             return obj.JvmHandle;
         }
 
-        public static JniHandle StrongC2JDelegate(JNIEnv env, Delegate obj)
+        public static JniHandle StrongC2JDelegate<TDelegate>(JNIEnv env, TDelegate obj)
+            where TDelegate : Delegate
         {
             if (obj == null)
             {
                 return JniLocalHandle.Zero;
             }
-            IJvmProxy proxy = obj.Target as IJvmProxy;
-            if (proxy != null)
+
+            if (obj.Target is IJvmProxy proxy)
             {
                 return proxy.JvmHandle;
             }
-            RegistryRecord record = Registry.GetCLRRecord(obj.GetType());
+
+            var record = Registry.GetCLRRecord<TDelegate>();
             return record.CreateJVMProxy(env, obj);
         }
 

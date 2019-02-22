@@ -12,7 +12,7 @@ This content is released under the (http://opensource.org/licenses/MIT) MIT Lice
 using System;
 using java.lang;
 using net.sf.jni4net.jni;
-using String=java.lang.String;
+using String = java.lang.String;
 
 namespace net.sf.jni4net.utils
 {
@@ -35,10 +35,9 @@ namespace net.sf.jni4net.utils
                 throw new ArgumentException("Must be array of type" + typeof (TElem));
             }
 #endif
-            var array = (Array) (object) obj;
+            var array = (Array)(object)obj;
             int length = array.Length;
-            Type elementType = typeof (TBoth).GetElementType();
-            Class elemClazz = Registry.GetCLRRecord(elementType).JVMInterface;
+            Class elemClazz = Registry.GetCLRRecord<TElem>().JVMInterface;
 
             JniLocalHandle res = env.NewObjectArrayPtr(length, elemClazz.jvmHandle, null);
             for (int i = 0; i < length; i++)
@@ -67,10 +66,9 @@ namespace net.sf.jni4net.utils
                 throw new ArgumentException("Must be array of type" + typeof (TElem));
             }
 #endif
-            var array = (Array) (object) obj;
+            var array = (Array)(object)obj;
             int length = array.Length;
-            Type elementType = typeof (TBoth).GetElementType();
-            Class elemClazz = Registry.GetCLRRecord(elementType).JVMInterface;
+            Class elemClazz = Registry.GetCLRRecord<TElem>().JVMInterface;
 
             JniLocalHandle res = env.NewObjectArrayPtr(length, elemClazz.jvmHandle, null);
             for (int i = 0; i < length; i++)
@@ -95,9 +93,9 @@ namespace net.sf.jni4net.utils
                 throw new ArgumentException("Must be array type");
             }
 #endif
-            var array = (Array) (object) obj;
+            var array = (Array)(object)obj;
             int length = array.Length;
-            Type elementType = typeof (TBoth).GetElementType();
+            Type elementType = typeof(TBoth).GetElementType();
             Class elemClazz = Registry.GetCLRRecord(elementType).JVMInterface;
             JniLocalHandle res = env.NewObjectArrayPtr(length, elemClazz.jvmHandle, null);
             for (int i = 0; i < length; i++)

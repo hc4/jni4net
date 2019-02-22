@@ -17,13 +17,17 @@ using net.sf.jni4net.jni;
 
 namespace net.sf.jni4net.utils
 {
+    internal static class Registry<T>
+    {
+        public static RegistryRecord Record;
+    }
+
     [ReflectionPermission(SecurityAction.Assert, Unrestricted = true)]
     public partial class Registry
     {
         public static RegistryRecord GetRecord(JNIEnv env, JniHandle obj, Class iface)
         {
-            registryLock.EnterUpgradeableReadLock();
-            try
+            lock (registryLock)
             {
                 RegistryRecord res;
                 if (knownJVM.TryGetValue(iface, out res))
@@ -31,33 +35,18 @@ namespace net.sf.jni4net.utils
                     return res;
                 }
                 Type clr = IsCLR(iface, obj, env);
-
-
-                registryLock.EnterWriteLock();
-                try
+                if (clr != null)
                 {
-                    if (clr != null)
-                    {
-                        return ResolveNew(clr);
-                    }
-                    return ResolveNew(iface);
+                    return ResolveNew(clr);
                 }
-                finally
-                {
-                    registryLock.ExitWriteLock();
-                }
-            }
-            finally
-            {
-                registryLock.ExitUpgradeableReadLock();
+                return ResolveNew(iface);
             }
         }
 
         public static RegistryRecord GetRecord(object obj)
         {
             Type iface = obj.GetType();
-            registryLock.EnterUpgradeableReadLock();
-            try
+            lock (registryLock)
             {
                 RegistryRecord res;
                 if (knownCLR.TryGetValue(iface, out res))
@@ -65,106 +54,52 @@ namespace net.sf.jni4net.utils
                     return res;
                 }
 
-                registryLock.EnterWriteLock();
-                try
+                if (obj is IJvmProxy proxy)
                 {
-                    if (obj is IJvmProxy proxy)
-                    {
-                        return ResolveNew(proxy.getClass());
-                    }
+                    return ResolveNew(proxy.getClass());
+                }
 
-                    return ResolveNew(iface);
-                }
-                finally
-                {
-                    registryLock.ExitWriteLock();
-                }
+                return ResolveNew(iface);
             }
-            finally
+        }
+
+        internal static RegistryRecord GetCLRRecord<T>()
+        {
+            var record = Registry<T>.Record;
+            if (record != null)
             {
-                registryLock.ExitUpgradeableReadLock();
+                return record;
             }
+
+            record = GetCLRRecord(typeof(T));
+            Registry<T>.Record = record;
+            return record;
         }
 
         internal static RegistryRecord GetCLRRecord(Type iface)
         {
-            if (registryLock.IsWriteLockHeld)
-            {
-                return GetCLRRecordNoLock(iface);
-            }
-
-            registryLock.EnterReadLock();
-            try
+            lock (registryLock)
             {
                 if (knownCLR.TryGetValue(iface, out var res))
                 {
                     return res;
                 }
-            }
-            finally
-            {
-                registryLock.ExitReadLock();
-            }
 
-            registryLock.EnterWriteLock();
-            try
-            {
-                return GetCLRRecordNoLock(iface);
+                return ResolveNew(iface);
             }
-            finally
-            {
-                registryLock.ExitWriteLock();
-            }
-        }
-
-        private static RegistryRecord GetCLRRecordNoLock(Type iface)
-        {
-            if (knownCLR.TryGetValue(iface, out var res))
-            {
-                return res;
-            }
-
-            return ResolveNew(iface);
         }
 
         internal static RegistryRecord GetJVMRecord(Class iface)
         {
-            if (registryLock.IsWriteLockHeld)
-            {
-                return GetJVMRecordNoLock(iface);
-            }
-
-            registryLock.EnterReadLock();
-            try
+            lock (registryLock)
             {
                 if (knownJVM.TryGetValue(iface, out var res))
                 {
                     return res;
                 }
-            }
-            finally
-            {
-                registryLock.ExitReadLock();
-            }
 
-            registryLock.EnterWriteLock();
-            try
-            {
-                return GetJVMRecordNoLock(iface);
+                return ResolveNew(iface);
             }
-            finally
-            {
-                registryLock.ExitWriteLock();
-            }
-        }
-
-        private static RegistryRecord GetJVMRecordNoLock(Class iface)
-        {
-            if (knownJVM.TryGetValue(iface, out var res))
-            {
-                return res;
-            }
-            return ResolveNew(iface);
         }
 
         private static Type IsCLR(Class iface, JniHandle obj, JNIEnv env)

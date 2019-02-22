@@ -28,7 +28,7 @@ namespace net.sf.jni4net.utils
 {
     partial class Registry
     {
-        private static readonly ReaderWriterLockSlim registryLock = new ReaderWriterLockSlim(LockRecursionPolicy.NoRecursion);
+        private static readonly object registryLock = new object();
 
         private static readonly Dictionary<Type, RegistryRecord> knownCLR = new Dictionary<Type, RegistryRecord>();
 
@@ -119,8 +119,7 @@ namespace net.sf.jni4net.utils
 
         public static void Reset()
         {
-            registryLock.EnterWriteLock();
-            try
+            lock(registryLock)
             {
                 initialized = false;
                 systemClassLoader = null;
@@ -133,16 +132,11 @@ namespace net.sf.jni4net.utils
                 knownJVMInterfaces.Clear();
                 knownJVMProxies.Clear();
             }
-            finally
-            {
-                registryLock.ExitWriteLock();
-            }
         }
 
         public static void RegisterAssembly(Assembly assembly, bool bindJVM, ClassLoader classLoader)
         {
-            registryLock.EnterWriteLock();
-            try
+            lock (registryLock)
             {
                 JNIEnv env = JNIEnv.ThreadEnv;
                 try
@@ -168,17 +162,12 @@ namespace net.sf.jni4net.utils
                     throw;
                 }
             }
-            finally
-            {
-                registryLock.ExitWriteLock();
-            }
         }
 
         public static void RegisterAssembly(Assembly assembly, bool bindJVM)
         {
-            registryLock.EnterWriteLock();
-            try
-            {
+            lock (registryLock)
+            { 
                 JNIEnv env = JNIEnv.ThreadEnv;
                 try
                 {
@@ -203,10 +192,6 @@ namespace net.sf.jni4net.utils
 
                     throw;
                 }
-            }
-            finally
-            {
-                registryLock.ExitWriteLock();
             }
         }
 
