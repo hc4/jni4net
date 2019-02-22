@@ -86,7 +86,7 @@ namespace net.sf.jni4net.nio
                                                         new Value { _object = wrap.jvmHandle }
                                                         );
                 }
-                ((IJvmProxy)wrap).JvmHandle.HoldThisHandle();
+                //((IJvmProxy)wrap).JvmHandle.HoldThisHandle();
             }
             else
             {

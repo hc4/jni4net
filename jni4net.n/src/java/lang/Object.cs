@@ -9,48 +9,15 @@ This content is released under the (http://opensource.org/licenses/MIT) MIT Lice
 
 #endregion
 
-using System;
-using System.Reflection;
-using System.Runtime.CompilerServices;
 using net.sf.jni4net.jni;
-using net.sf.jni4net.utils;
 
 namespace java.lang
 {
-    public partial class Object : IJvmProxy
+    public partial class Object : JavaObjectBase, IJvmProxy
     {
-        internal JniGlobalHandle jvmHandle;
-
         protected internal Object(JNIEnv env)
         {
         }
-
-        protected JNIEnv Env => JNIEnv.GetEnvForVm(jvmHandle.javaVM);
-
-        #region Reference handling
-
-        #region IJvmProxy Members
-
-        JniGlobalHandle IJvmProxy.JvmHandle
-        {
-            get { return jvmHandle; }
-        }
-
-        void IJvmProxy.Init(JNIEnv env, JniLocalHandle obj)
-        {
-            jvmHandle = env.NewGlobalRef(obj);
-            env.DeleteLocalRef(obj);
-        }
-
-        void IJvmProxy.Copy(JNIEnv env, JniGlobalHandle obj)
-        {
-            jvmHandle = obj;
-        }
-
-
-        #endregion
-
-        #endregion
 
         public void Invoke(string method, string signature, params object[] args)
         {
@@ -89,18 +56,18 @@ namespace java.lang
 
         public static bool operator ==(Object a, Object b)
         {
-            if ((object) a == null && (object) b == null)
+            if ((object)a == null && (object)b == null)
                 return true;
-            if ((object) a == null || (object) b == null)
+            if ((object)a == null || (object)b == null)
                 return false;
             return a.Env.IsSameObject(a, b);
         }
 
         public static bool operator !=(Object a, Object b)
         {
-            if ((object) a == null && (object) b == null)
+            if ((object)a == null && (object)b == null)
                 return false;
-            if ((object) a == null || (object) b == null)
+            if ((object)a == null || (object)b == null)
                 return true;
             return !a.Env.IsSameObject(a, b);
         }

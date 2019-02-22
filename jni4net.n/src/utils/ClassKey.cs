@@ -25,7 +25,7 @@ namespace net.sf.jni4net.utils
 
         public bool Equals(ClassKey other)
         {
-            var env = JNIEnv.GetEnvForVm(cls.jvmHandle.javaVM);
+            var env = JNIEnv.GetEnvForVm(cls.jvmHandle.JavaVM);
             using (new LocalFrame(env, 12))
             {
                 return env.CallBooleanMethod(cls, java.lang.Object.j4n_equals3, new Value{_object=other.cls.jvmHandle});

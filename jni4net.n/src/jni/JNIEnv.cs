@@ -1257,9 +1257,9 @@ namespace net.sf.jni4net.jni
         #region references
 
         [SuppressUnmanagedCodeSecurity]
-        public JniGlobalHandle NewGlobalRef(JniLocalHandle lobj)
+        public JniGlobalHandle NewGlobalRef(JniHandle lobj)
         {
-            if (JniLocalHandle.IsNull(lobj))
+            if (JniHandle.IsNull(lobj))
             {
                 throw new ArgumentNullException("lobj");
             }
@@ -1317,7 +1317,7 @@ namespace net.sf.jni4net.jni
             deleteGlobalRef(envPtr, gref);
             //optimized away ExceptionTest();
         }
-
+        
         [SuppressUnmanagedCodeSecurity]
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         public void DeleteLocalRef(JniLocalHandle lref)

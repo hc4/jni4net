@@ -25,59 +25,36 @@ namespace net.sf.jni4net.utils
         internal readonly IntPtr handle;
     }
 
-    [Serializable]
-    public sealed class JniGlobalHandle : SafeHandle
+    public struct JniGlobalHandle
     {
-        public static bool IsNull(JniGlobalHandle handle)
+        public static readonly JniGlobalHandle Zero = new JniGlobalHandle(IntPtr.Zero, null);
+
+        private IntPtr handle;
+        private JavaVM javaVM;
+
+        public IntPtr Handle => handle;
+        public JavaVM JavaVM => javaVM;
+
+        public JniGlobalHandle(IntPtr handle, JavaVM javaVm)
         {
-            return handle == null || handle.IsInvalid;
+            this.handle = handle;
+            this.javaVM = javaVm;
         }
 
-        internal readonly JavaVM javaVM;
-
-        private static readonly JniGlobalHandle zero = new JniGlobalHandle(IntPtr.Zero, null);
-
-        public new JniHandle DangerousGetHandle()
+        internal void CheckNotInitialized()
         {
-            return new JniHandle(base.DangerousGetHandle());
+            if (handle != IntPtr.Zero)
+            {
+                throw new InvalidOperationException("Handle already initialized");
+            }
         }
 
-        public static JniGlobalHandle Zero
+        public static bool IsNull(JniGlobalHandle gref)
         {
-            [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
-            get { return zero; }
+            return gref.Handle == IntPtr.Zero;
         }
-
-        [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
-        public JniGlobalHandle(IntPtr handleValue, JavaVM javaVM)
-            : base(IntPtr.Zero, true)
-        {
-            this.javaVM = javaVM;
-            SetHandle(handleValue);
-        }
-
-        [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
-        public JniGlobalHandle(JniGlobalHandleNs handleValue, JavaVM javaVM)
-            : base(IntPtr.Zero, true)
-        {
-            this.javaVM = javaVM;
-            SetHandle(handleValue.handle);
-        }
-
-        [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
-        private JniGlobalHandle()
-            : base(IntPtr.Zero, true)
-        {
-        }
-
-        public override bool IsInvalid
-        {
-            [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
-            get { return handle == IntPtr.Zero; }
-        }
-
-        [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
-        protected override bool ReleaseHandle()
+        
+        internal bool Release()
         {
             try
             {
@@ -96,16 +73,6 @@ namespace net.sf.jni4net.utils
             {
                 handle = IntPtr.Zero;
             }
-        }
-
-        /// <summary>
-        /// empty operation
-        /// trick to retain JVM handle till this point, protect from gc
-        /// </summary>
-        [MethodImpl(MethodImplOptions.NoInlining)]
-        public void HoldThisHandle()
-        {
-            //empty operation
         }
     }
 }

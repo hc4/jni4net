@@ -49,7 +49,7 @@ namespace net.sf.jni4net.utils
 
         public static implicit operator JniHandle(JniGlobalHandle safe)
         {
-            return safe.DangerousGetHandle();
+            return new JniHandle(safe.Handle);
         }
 
         public static JniHandle Zero;

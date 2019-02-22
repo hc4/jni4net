@@ -16,12 +16,18 @@ using net.sf.jni4net.utils;
 
 namespace net.sf.jni4net.jni
 {
-    public interface IJvmProxy : IObject
+    public interface IJvmHandle
     {
         JniGlobalHandle JvmHandle { get; }
 
         void Init(JNIEnv env, JniLocalHandle obj);
 
         void Copy(JNIEnv env, JniGlobalHandle obj);
+
+        void Release();
+    }
+
+    public interface IJvmProxy : IJvmHandle, IObject
+    {
     }
 }

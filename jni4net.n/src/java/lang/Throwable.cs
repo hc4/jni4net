@@ -11,7 +11,6 @@ This content is released under the (http://opensource.org/licenses/MIT) MIT Lice
 
 using System;
 using System.Diagnostics;
-using System.Runtime.CompilerServices;
 using System.Runtime.Serialization;
 using java.io;
 using net.sf.jni4net;
@@ -58,7 +57,7 @@ namespace java.lang
 
         protected JNIEnv Env
         {
-            get { return JNIEnv.GetEnvForVm(jvmHandle.javaVM); }
+            get { return JNIEnv.GetEnvForVm(jvmHandle.JavaVM); }
         }
 
         internal string NetStackTrace
@@ -103,20 +102,32 @@ namespace java.lang
 
         #region IJvmProxy Members
 
-        JniGlobalHandle IJvmProxy.JvmHandle
-        {
-            get { return jvmHandle; }
-        }
+        JniGlobalHandle IJvmHandle.JvmHandle => jvmHandle;
 
-        void IJvmProxy.Init(JNIEnv env, JniLocalHandle obj)
+        void IJvmHandle.Init(JNIEnv env, JniLocalHandle obj)
         {
+            jvmHandle.CheckNotInitialized();
             jvmHandle = env.NewGlobalRef(obj);
             env.DeleteLocalRef(obj);
         }
 
-        void IJvmProxy.Copy(JNIEnv env, JniGlobalHandle obj)
+        void IJvmHandle.Copy(JNIEnv env, JniGlobalHandle obj)
         {
-            jvmHandle = obj;
+            jvmHandle.CheckNotInitialized();
+            jvmHandle = env.NewGlobalRef(obj);
+        }
+
+        void IJvmHandle.Release()
+        {
+            if (jvmHandle.Release())
+            {
+                GC.SuppressFinalize(this);
+            }
+        }
+
+        ~Throwable()
+        {
+            jvmHandle.Release();
         }
 
         #endregion
