@@ -9,12 +9,16 @@ This content is released under the (http://opensource.org/licenses/MIT) MIT Lice
 
 #endregion
 
+using System;
 using net.sf.jni4net.jni;
+using net.sf.jni4net.utils;
 
 namespace java.lang
 {
-    public partial class Object : JavaObjectBase, IJvmProxy
+    public partial class Object : IJvmProxy
     {
+        internal JniGlobalHandle jvmHandle;
+
         protected internal Object(JNIEnv env)
         {
         }
@@ -76,5 +80,43 @@ namespace java.lang
         {
             return toString();
         }
+
+        #region Reference handling
+
+        #region IJvmProxy Members
+        
+        JniGlobalHandle IJvmProxy.JvmHandle => jvmHandle;
+
+        protected JNIEnv Env => JNIEnv.GetEnvForVm(jvmHandle.JavaVM);
+        
+        void IJvmProxy.Init(JNIEnv env, JniLocalHandle obj)
+        {
+            jvmHandle.CheckNotInitialized();
+            jvmHandle = env.NewGlobalRef(obj);
+            env.DeleteLocalRef(obj);
+        }
+
+        void IJvmProxy.Copy(JNIEnv env, JniGlobalHandle obj)
+        {
+            jvmHandle.CheckNotInitialized();
+            jvmHandle = env.NewGlobalRef(obj);
+        }
+
+        void IJvmProxy.Release()
+        {
+            if (jvmHandle.Release())
+            {
+                GC.SuppressFinalize(this);
+            }
+        }
+
+        ~Object()
+        {
+            jvmHandle.Release();
+        }
+
+        #endregion
+
+        #endregion
     }
 }

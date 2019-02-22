@@ -102,22 +102,22 @@ namespace java.lang
 
         #region IJvmProxy Members
 
-        JniGlobalHandle IJvmHandle.JvmHandle => jvmHandle;
+        JniGlobalHandle IJvmProxy.JvmHandle => jvmHandle;
 
-        void IJvmHandle.Init(JNIEnv env, JniLocalHandle obj)
+        void IJvmProxy.Init(JNIEnv env, JniLocalHandle obj)
         {
             jvmHandle.CheckNotInitialized();
             jvmHandle = env.NewGlobalRef(obj);
             env.DeleteLocalRef(obj);
         }
 
-        void IJvmHandle.Copy(JNIEnv env, JniGlobalHandle obj)
+        void IJvmProxy.Copy(JNIEnv env, JniGlobalHandle obj)
         {
             jvmHandle.CheckNotInitialized();
             jvmHandle = env.NewGlobalRef(obj);
         }
 
-        void IJvmHandle.Release()
+        void IJvmProxy.Release()
         {
             if (jvmHandle.Release())
             {

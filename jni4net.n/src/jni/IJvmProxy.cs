@@ -16,7 +16,7 @@ using net.sf.jni4net.utils;
 
 namespace net.sf.jni4net.jni
 {
-    public interface IJvmHandle
+    public interface IJvmProxy : IObject
     {
         JniGlobalHandle JvmHandle { get; }
 
@@ -25,9 +25,5 @@ namespace net.sf.jni4net.jni
         void Copy(JNIEnv env, JniGlobalHandle obj);
 
         void Release();
-    }
-
-    public interface IJvmProxy : IJvmHandle, IObject
-    {
     }
 }
