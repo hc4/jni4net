@@ -17,14 +17,14 @@ using net.sf.jni4net.jni;
 
 namespace net.sf.jni4net.utils
 {
-    internal static class Registry<T>
-    {
-        public static RegistryRecord Record;
-    }
-
     [ReflectionPermission(SecurityAction.Assert, Unrestricted = true)]
     public partial class Registry
     {
+        internal static class Cache<T>
+        {
+            public static RegistryRecord Record;
+        }
+
         public static RegistryRecord GetRecord(JNIEnv env, JniHandle obj, Class iface)
         {
             lock (registryLock)
@@ -65,14 +65,14 @@ namespace net.sf.jni4net.utils
 
         internal static RegistryRecord GetCLRRecord<T>()
         {
-            var record = Registry<T>.Record;
+            var record = Cache<T>.Record;
             if (record != null)
             {
                 return record;
             }
 
             record = GetCLRRecord(typeof(T));
-            Registry<T>.Record = record;
+            Cache<T>.Record = record;
             return record;
         }
 

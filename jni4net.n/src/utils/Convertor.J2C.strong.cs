@@ -63,12 +63,12 @@ namespace net.sf.jni4net.utils
                 return default;
             }
 
-            var record = Registry<TRes>.Record;
+            var record = Registry.Cache<TRes>.Record;
             if (record == null)
             {
                 var clazz = env.GetObjectClass(obj);
                 record = Registry.GetJVMRecord(clazz);
-                Registry<TRes>.Record = record;
+                Registry.Cache<TRes>.Record = record;
             }
 
             return (TRes)record.CreateCLRProxy(env, obj);
