@@ -11,6 +11,7 @@ This content is released under the (http://opensource.org/licenses/MIT) MIT Lice
 
 using System;
 using System.Diagnostics;
+using System.Runtime.CompilerServices;
 using System.Runtime.ConstrainedExecution;
 using System.Runtime.InteropServices;
 using System.Security;
@@ -1398,6 +1399,7 @@ namespace net.sf.jni4net.jni
             Marshal.FreeHGlobal(uni);
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public JniLocalHandle ExceptionOccurred()
         {
             return exceptionOccurred(envPtr);

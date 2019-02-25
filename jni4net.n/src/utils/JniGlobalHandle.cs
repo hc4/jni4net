@@ -41,6 +41,7 @@ namespace net.sf.jni4net.utils
             this.javaVM = javaVm;
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal void CheckNotInitialized()
         {
             if (handle != IntPtr.Zero)
