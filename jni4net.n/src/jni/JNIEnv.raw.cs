@@ -34,16 +34,19 @@ namespace net.sf.jni4net.jni
 
         internal JniLocalHandle NewStringPtr(string unicode)
         {
-            IntPtr uni = Marshal.StringToHGlobalUni(unicode);
-            JniLocalHandle res = newString(envPtr, uni, unicode.Length);
+            JniLocalHandle res;
+            fixed (char* p = unicode)
+            {
+                // Java and .Net both have unicode strings => can copy directly.
+                res = newString(envPtr, p, unicode.Length);
+            }
             ExceptionTest();
-            Marshal.FreeHGlobal(uni);
             return res;
         }
 
         internal IntPtr GetStringChars(JniHandle str, byte* isCopy)
         {
-            IntPtr res = getStringChars(envPtr, str, isCopy);
+            var res = getStringChars(envPtr, str, isCopy);
             ExceptionTest();
             return res;
         }
@@ -109,7 +112,7 @@ namespace net.sf.jni4net.jni
             ExceptionTest();
             return res;
         }
-        
+
         public JniLocalHandle CallObjectMethodPtr(IJvmProxy obj, MethodId methodIdNative, ref Value value)
         {
 #if DEBUG

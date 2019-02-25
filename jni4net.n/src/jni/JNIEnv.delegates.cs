@@ -885,7 +885,7 @@ namespace net.sf.jni4net.jni
             #region Nested type: NewString
 
             [UnmanagedFunctionPointer(CallingConvention.StdCall)]
-            internal delegate JniLocalHandle NewString(IntPtr thiz, IntPtr unicode, int len);
+            internal delegate JniLocalHandle NewString(IntPtr thiz, char* unicode, int len);
 
             #endregion
 
