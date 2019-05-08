@@ -34,6 +34,11 @@ namespace net.sf.jni4net.jni
 
         internal JniLocalHandle NewStringPtr(string unicode)
         {
+            if (unicode == null)
+            {
+                return JniLocalHandle.Zero;
+            }
+
             JniLocalHandle res;
             fixed (char* p = unicode)
             {
