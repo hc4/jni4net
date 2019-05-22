@@ -957,6 +957,12 @@ namespace net.sf.jni4net.jni
         #endregion
 
         #region setters static
+        
+        public void SetStaticObjectFieldPtr(Class clazz, FieldId fieldID, JniHandle value)
+        {
+            setStaticObjectField(envPtr, clazz.jvmHandle, fieldID.native, value);
+            ExceptionTest();
+        }
 
         public void SetStaticObjectField(Class clazz, FieldId fieldID, IJvmProxy value)
         {
