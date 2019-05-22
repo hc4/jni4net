@@ -25,7 +25,7 @@ namespace java.lang
     {
         internal JniGlobalHandle jvmHandle;
 
-        protected Throwable(SerializationInfo info, StreamingContext context) 
+        protected Throwable(SerializationInfo info, StreamingContext context)
         {
             byte[] data = (byte[])info.GetValue("exception", typeof(byte[]));
             using (var bai = Adapt.Disposable(new ByteArrayInputStream(data)))
@@ -50,7 +50,7 @@ namespace java.lang
                 }
             }
         }
-        
+
         protected internal Throwable(JNIEnv env)
         {
         }
@@ -60,13 +60,8 @@ namespace java.lang
             get { return JNIEnv.GetEnvForVm(jvmHandle.JavaVM); }
         }
 
-        internal string NetStackTrace
-        {
-            get { return base.StackTrace; }
-        }
-
 #if !JNI4NET_MINI
-        public override string StackTrace
+        public string JavaStackTrace
         {
             get
             {
@@ -74,20 +69,28 @@ namespace java.lang
                 StackTraceElement[] objects = getStackTrace();
                 foreach (StackTraceElement element in objects)
                 {
-                    sb.Append(' ');
-                    sb.Append(' ');
-                    sb.Append(' ');
-                    sb.Append(' ');
+                    sb.Append("   at ");
                     sb.Append(element.getClassName());
                     sb.Append('.');
                     sb.Append(element.getMethodName());
-                    sb.Append("() ");
-                    sb.Append(element.getFileName());
-                    sb.Append(':');
-                    sb.Append(element.getLineNumber());
-                    sb.Append('\n');
+                    sb.Append("()");
+
+                    var file = element.getFileName();
+                    if (file != default(String))
+                    {
+                        sb.Append(" in ");
+                        sb.Append(file);
+
+                        var line = element.getLineNumber();
+                        if (line >= 0)
+                        {
+                            sb.Append(':');
+                            sb.Append(line);
+                        }
+                    }
+
+                    sb.Append(Environment.NewLine);
                 }
-                sb.Append(base.StackTrace);
                 return sb.ToString();
             }
         }
@@ -95,10 +98,10 @@ namespace java.lang
         //TODO
 #endif
 
-        public override string Message
-        {
-            get { return getMessage(); }
-        }
+        public override string StackTrace
+            => JavaStackTrace + "--- End of Java stack trace ---" + Environment.NewLine + base.StackTrace;
+
+        public override string Message => getMessage();
 
         #region IJvmProxy Members
 
@@ -167,9 +170,9 @@ namespace java.lang
 
         public static bool operator ==(Throwable a, IJvmProxy b)
         {
-            if ((object) a == null && b == null)
+            if ((object)a == null && b == null)
                 return true;
-            if ((object) a == null || b == null)
+            if ((object)a == null || b == null)
                 return false;
             return a.Env.IsSameObject(a, b);
             //return a.jvmHandle == b.jvmHandle;
@@ -177,9 +180,9 @@ namespace java.lang
 
         public static bool operator !=(Throwable a, IJvmProxy b)
         {
-            if ((object) a == null && b == null)
+            if ((object)a == null && b == null)
                 return false;
-            if ((object) a == null || b == null)
+            if ((object)a == null || b == null)
                 return true;
             return !a.Env.IsSameObject(a, b);
             //return a.jvmHandle != b.jvmHandle;
@@ -192,7 +195,8 @@ namespace java.lang
             {
                 j4n_toString6 = env.GetMethodID(((IJvmProxy)this).getClass(), "toString", "()Ljava/lang/String;");
             }
-            return toString();
+
+            return toString() + Environment.NewLine + StackTrace;
         }
 
 
