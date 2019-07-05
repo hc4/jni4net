@@ -462,7 +462,7 @@ namespace net.sf.jni4net.jni
             ExceptionTest();
             return res;
         }
-        
+
         public int CallIntMethod(IJvmProxy obj, MethodId methodIdNative, ref Value args)
         {
 #if DEBUG
@@ -957,7 +957,7 @@ namespace net.sf.jni4net.jni
         #endregion
 
         #region setters static
-        
+
         public void SetStaticObjectFieldPtr(Class clazz, FieldId fieldID, JniHandle value)
         {
             setStaticObjectField(envPtr, clazz.jvmHandle, fieldID.native, value);
@@ -1330,7 +1330,7 @@ namespace net.sf.jni4net.jni
             deleteGlobalRef(envPtr, gref);
             //optimized away ExceptionTest();
         }
-        
+
         [SuppressUnmanagedCodeSecurity]
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         public void DeleteLocalRef(JniLocalHandle lref)
@@ -1361,7 +1361,7 @@ namespace net.sf.jni4net.jni
             ExceptionTest();
             return Convertor.FullJ2C<IJvmProxy>(this, res);
         }
-        
+
         public JniLocalHandle NewObjectPtr(JniHandle clazz, MethodId methodID, ref Value args)
         {
             JniLocalHandle res = newObject(envPtr, clazz, methodID.native, ref args);
@@ -1440,6 +1440,10 @@ namespace net.sf.jni4net.jni
                 //ExceptionDescribe();
                 ExceptionClear();
                 Exception exception = Convertor.FullJ2C<Exception>(this, occurred);
+                if (exception is Throwable t)
+                {
+	                t.Throw();
+                }
                 throw exception;
             }
         }

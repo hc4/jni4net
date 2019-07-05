@@ -10,7 +10,6 @@ This content is released under the (http://opensource.org/licenses/MIT) MIT Lice
 #endregion
 
 using System;
-using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -113,7 +112,7 @@ namespace net.sf.jni4net.jni
             }
 
             var libName = RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "jvm.dll" : "libjvm.so";
-
+            
             var libPath = Directory.EnumerateFiles(javaBinPath, libName, SearchOption.AllDirectories).FirstOrDefault();
             if (libPath == null)
             {

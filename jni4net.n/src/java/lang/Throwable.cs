@@ -11,6 +11,8 @@ This content is released under the (http://opensource.org/licenses/MIT) MIT Lice
 
 using System;
 using System.Diagnostics;
+using System.Reflection;
+using System.Runtime.ExceptionServices;
 using System.Runtime.Serialization;
 using java.io;
 using net.sf.jni4net;
@@ -23,6 +25,8 @@ namespace java.lang
     [Serializable]
     partial class Throwable : global::System.Exception, IJvmProxy
     {
+        private static readonly FieldInfo remoteStackField = GetRemoteStackField();
+
         internal JniGlobalHandle jvmHandle;
 
         protected Throwable(SerializationInfo info, StreamingContext context)
@@ -55,10 +59,29 @@ namespace java.lang
         {
         }
 
-        protected JNIEnv Env
+        internal void Throw()
         {
-            get { return JNIEnv.GetEnvForVm(jvmHandle.JavaVM); }
+            if (remoteStackField != null)
+            {
+                var info = ExceptionDispatchInfo.Capture(this);
+                remoteStackField.SetValue(info, JavaStackTrace);
+                info.Throw();
+            }
         }
+
+        private static FieldInfo GetRemoteStackField()
+        {
+            try
+            {
+                return typeof(ExceptionDispatchInfo).GetField("m_remoteStackTrace", BindingFlags.Instance | BindingFlags.NonPublic);
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        protected JNIEnv Env => JNIEnv.GetEnvForVm(jvmHandle.JavaVM);
 
 #if !JNI4NET_MINI
         public string JavaStackTrace
@@ -98,10 +121,10 @@ namespace java.lang
         //TODO
 #endif
 
-        public override string StackTrace
-            => JavaStackTrace + "--- End of Java stack trace ---" + Environment.NewLine + base.StackTrace;
-
-        public override string Message => getMessage();
+	    public override string Message => getMessage();
+        public override string StackTrace => remoteStackField == null
+            ? base.StackTrace
+            : JavaStackTrace + "--- End of Java stack trace ---" + Environment.NewLine + base.StackTrace;
 
         #region IJvmProxy Members
 
@@ -190,6 +213,11 @@ namespace java.lang
 
         public override string ToString()
         {
+            if (remoteStackField != null)
+            {
+                return base.ToString();
+            }
+
             JNIEnv env = Env;
             if ((j4n_toString6 == null))
             {
